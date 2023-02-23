@@ -9,6 +9,8 @@ A product vision describes the essential of the product and sets the direction t
 
 **Bringing movie lovers together, one watchlist at a time.**
 
+CineScope provides movie suggestions and endless forums to share opinions for movie and entertainment industry lovers who seek a greater variety on their entertainment enjoyer experience.
+
 We suggest you use the product vision template described in the following link:
 * [How To Create A Convincing Product Vision To Guide Your Team, by uxstudioteam.com](https://uxstudioteam.com/ux-blog/product-vision/)
 
