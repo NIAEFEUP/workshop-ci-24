@@ -7,7 +7,7 @@ Start by defining a clear and concise vision for your app, to help members of th
 
 A product vision describes the essential of the product and sets the direction to where a product is headed, and what the product will deliver in the future. 
 
-**We favor a catchy and concise statement, ideally one sentence.**
+**Bringing movie lovers together, one watchlist at a time.**
 
 We suggest you use the product vision template described in the following link:
 * [How To Create A Convincing Product Vision To Guide Your Team, by uxstudioteam.com](https://uxstudioteam.com/ux-blog/product-vision/)
@@ -21,12 +21,14 @@ To learn more about how to write a good product vision, please see also:
 
 ### Main Features
 Indicate an  initial/tentative list of high-level features - high-level capabilities or desired services of the system that are necessary to deliver benefits to the users (cf. RUP).
- - Feature 1 - Short description
- - Feature 2 - Short description
+ - Follow Friends - Follow your friend to keep an eye of what movies they are watching!
+ - Create Watchlists - Create watchlists so you can organize the movies you want to see or have already seen!
+ - Share your opinion - Share your opinion on a specific movie's/actor's forum.
+ - Movie Suggestions - Have some movies suggested to keep your evenings entertaining!
 ...
 
 ### Assumptions and dependencies
 Indicate an  initial/tentative list of assumptions and dependencies 
 
-- Student timetable from sigarra
+- Movie details from IMDB
 - 
