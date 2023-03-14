@@ -1,6 +1,6 @@
-_[your product name]_ Development Report
+CineScope Development Report
 
-Welcome to the documentation pages of the _[your product name]_!
+Welcome to the documentation pages of the CineScope!
 
 You can find here details about the product (or mini-app or module), from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by discipline (as of Rational Unified Process): 
 
@@ -26,7 +26,9 @@ Please contact us!
 
 Thank you!
 
-*team members names*
-
+Francisco da Ana (up202108762)
+Jerson Amone (up202109252)
+Luís Duarte (up202108734)
+Tomás Vicente (up202108717)
 ---
 
