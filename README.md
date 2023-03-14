@@ -26,9 +26,14 @@ Please contact us!
 
 Thank you!
 
+
 Francisco da Ana (up202108762)
+
 Jerson Amone (up202109252)
+
 Luís Duarte (up202108734)
+
 Tomás Vicente (up202108717)
+
 ---
 
