@@ -1,4 +1,4 @@
-import 'package:cinescope/view/main_page.dart';
+import 'package:cinescope/view/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

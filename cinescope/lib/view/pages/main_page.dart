@@ -12,15 +12,19 @@ class MainPageState extends GeneralPageState {
   @override
   Widget getBody(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(0, 26, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: const [
             Text(
-              "Welcome!",
+              "Welcome to CineScope!",
               textAlign: TextAlign.left,
-              textScaleFactor: 2.5,
+              textScaleFactor: 2,
             ),
             //hardcoded page starts here, 
+            Padding(padding: EdgeInsets.all(20)),
+            Text("Your last watched movies:", textAlign: TextAlign.left, textScaleFactor: 1.5,)
           ],
         ));
   }

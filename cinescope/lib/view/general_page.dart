@@ -10,6 +10,7 @@ abstract class GeneralPage extends StatefulWidget {
 
 abstract class GeneralPageState extends State<GeneralPage> {
 
+
   Widget getBody(BuildContext context);
   @override
   Widget build(BuildContext context) {
