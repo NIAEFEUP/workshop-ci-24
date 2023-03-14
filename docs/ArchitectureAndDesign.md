@@ -6,7 +6,12 @@ A well written architecture document is brief but reduces the amount of time it 
 
 To document the architecture requires describing the decomposition of the system in their parts (high-level components) and the key behaviors and collaborations between them. 
 
-In this section you should start by briefly describing the overall components of the project and their interrelations. You should also describe how you solved typical problems you may have encountered, pointing to well-known architectural and design patterns, if applicable.
+
+### Domain model
+
+The image below represents the entire Domain Model of this application:
+
+![DomainModel](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC13T5/blob/main/images/DomainModel.png)
 
 ### Logical architecture
 The purpose of this subsection is to document the high-level logical structure of the code (Logical View), using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
@@ -15,7 +20,7 @@ It can be beneficial to present the system both in a horizontal or vertical deco
 * horizontal decomposition may define layers and implementation concepts, such as the user interface, business logic and concepts; 
 * vertical decomposition can define a hierarchy of subsystems that cover all layers of implementation.
 
-Example of _UML package diagram_ showing a _logical view_ of the Eletronic Ticketing System (to be accompanied by a short description of each package):
+The image below represents the Logical View of CineScope and all layers that we must implement on this application.
 
 ![LogicalView](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC13T5/blob/main/images/LogicalArchitecture.png)
 
@@ -24,7 +29,7 @@ The goal of this subsection is to document the high-level physical structure of 
 
 It should describe also the technologies considered and justify the selections made. Examples of technologies relevant for uni4all are, for example, frameworks for mobile applications (such as Flutter).
 
-Example of _UML deployment diagram_ showing a _deployment view_ of the Eletronic Ticketing System (please notice that, instead of software components, one should represent their physical/executable manifestations for deployment, called artifacts in UML; the diagram should be accompanied by a short description of each node and artifact):
+The image below represents the Physical architecture of the CineScope app.
 
 ![DeploymentView](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC13T5/blob/main/images/PhysicalArchitecture.jpeg)
 
