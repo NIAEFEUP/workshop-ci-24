@@ -16,7 +16,10 @@ abstract class GeneralPageState extends State<GeneralPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
-      Expanded(child: getBody(context)),
+      Expanded(
+          child: Container(
+            color: const Color(0XFF07393C),
+              child:getBody(context))),
       const BottomBar()
     ]));
   }
