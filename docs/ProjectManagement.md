@@ -1,15 +1,39 @@
 
-## Project management
-Software project management is the art and science of planning and leading software projects, in which software projects are planned, implemented, monitored and controlled.
+# Project management
 
-In the context of ESOF, we recommend each team to adopt a set of project management practices and tools capable of registering tasks, assigning tasks to team members, adding estimations to tasks, monitor tasks progress, and therefore being able to track their projects.
 
-Common practices of managing iterative software development are: backlog management, release management, estimation, iteration planning, iteration development, acceptance tests, and retrospectives.
+# Iteration 0
 
-You can find below information and references related with the project management in our team: 
+## Retroscpetive
 
-* Backlog management: Product backlog and Iteration backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2022-23/projects/1);
-* Release management: [v0](#), v1, v2, v3, v...;
-* Iteration planning and retrospectives: 
-  * plans: screenshots of Github Projects board at begin and end of each iteration;
-  * retrospectives: meeting notes in a document in the repository
+Overall, all work needed to be done in iteration 0 was achieved, but with some issues on some tasks:
+
+"Try to be more on point. A large part of the vision statement is just adding entropy."
+ - It was fixed to make the vision more clear by clearing out the clutter in the phrase
+
+"nothing should be ambiguous "about actors, episodes, and other things.". 
+user stories should be more granular "As an user, I want to share my experience about the film/series and let other users comment about my experience""
+ - We fixed the ambiguitity on the user stores
+
+"mockups should be in the description, not as comments. they should be concrete, and not use placeholder text
+the user interaction should be clear - where does the user click?"
+ - We understand that user interaction was not clear, and it requrires more screenshots to reflect it, and will fix on the next iterations.
+
+"these tests are not explicit enough to be automated. "and the comment should be shared" - how do we test this?"
+ - Gherkin tests will be refactored altogether by making the syntax more clear, with explicit inputs, in order to make the tests runnable. This will be fixed while implementing said user story.
+ 
+ "while you can use the table view, we expect a column based board available with issues sorted there.
+moscow e priorities not shown"
+ - We have already made those changes but we forgot to save them, and now it's fixed :)
+
+"will there be a local database schema? if not, business logic can interact with firebase directly."
+ - We are expecting to have some "caching" locally and maybe we will have a small database locally, in order to see the watchlist and other features offline.
+
+On the other side, the vertical prototype worked flawlessly, but with some problems on the flutter's implementation on material 3
+that required custom widgets to solve it.
+
+
+# Iteration 1
+
+## Planning
+![Planning of iteration 1](https://user-images.githubusercontent.com/24589619/225722688-095093be-3616-4793-a0c6-d78624d414ba.png)

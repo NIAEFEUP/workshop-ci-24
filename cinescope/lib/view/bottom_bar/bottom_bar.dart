@@ -38,9 +38,7 @@ class BottomBarState extends State<BottomBar> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: IconButton(
+                  IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const MainPage()));
@@ -49,10 +47,8 @@ class BottomBarState extends State<BottomBar> {
                           FontAwesomeIcons.house,
                           color: Colors.black,
                         ),
-                      )),
-                  Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: IconButton(
+                      ),
+                  IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const ProfilePage()));
@@ -61,10 +57,8 @@ class BottomBarState extends State<BottomBar> {
                           FontAwesomeIcons.solidUser,
                           color: Colors.black,
                         ),
-                      )),
-                  Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: IconButton(
+                      ),
+                  IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const WatchlistPage()));
@@ -73,10 +67,8 @@ class BottomBarState extends State<BottomBar> {
                           FontAwesomeIcons.solidHeart,
                           color: Colors.black,
                         ),
-                      )),
-                  Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: IconButton(
+                      ),
+                  IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const InboxPage()));
@@ -85,10 +77,8 @@ class BottomBarState extends State<BottomBar> {
                           FontAwesomeIcons.inbox,
                           color: Colors.black,
                         ),
-                      )),
-                  Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Container(
+                      ),
+                  Container(
                           color: const Color(0xFFD7CCCF),
                           child: ElevatedButton(
                               onPressed: () {
@@ -103,7 +93,7 @@ class BottomBarState extends State<BottomBar> {
                                           Radius.circular(8)))),
                               child: const FaIcon(
                                   FontAwesomeIcons.magnifyingGlass,
-                                  color: Colors.black))))
+                                  color: Colors.black)))
                 ]))
         : Container();
   }
