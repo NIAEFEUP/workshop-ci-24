@@ -13,7 +13,7 @@ class SearchPage extends GeneralPage{
 
 }
 
-class SearchPageState extends GeneralPageState{
+class SearchPageState extends GeneralPageState<SearchPage>{
   @override
   Widget getBody(BuildContext context) {
     return Column(children: const [

@@ -9,7 +9,7 @@ class WatchlistPage extends GeneralPage {
   State<StatefulWidget> createState() => WatchlistPageState();
 }
 
-class WatchlistPageState extends GeneralPageState {
+class WatchlistPageState extends GeneralPageState<WatchlistPage> {
   @override
   Widget getBody(BuildContext context) {
     return Container(

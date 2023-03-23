@@ -8,7 +8,7 @@ class InboxPage extends GeneralPage {
   State<StatefulWidget> createState() => InboxPageState();
 }
 
-class InboxPageState extends GeneralPageState {
+class InboxPageState extends GeneralPageState<InboxPage> {
   @override
   Widget getBody(BuildContext context) {
     return Container(

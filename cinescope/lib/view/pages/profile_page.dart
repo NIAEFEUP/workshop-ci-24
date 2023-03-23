@@ -8,7 +8,7 @@ class ProfilePage extends GeneralPage {
   State<StatefulWidget> createState() => ProfilePageState();
 }
 
-class ProfilePageState extends GeneralPageState {
+class ProfilePageState extends GeneralPageState<ProfilePage> {
   @override
   Widget getBody(BuildContext context) {
     return Container(
