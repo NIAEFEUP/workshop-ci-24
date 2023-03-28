@@ -32,17 +32,23 @@ class MainPageState extends GeneralPageState<MainPage> {
               textScaleFactor: 1.5,
             ),
             TextButton(
-              child: const Text("Titanic"),
-              onPressed: (() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FilmPage("https://www.imdb.com/title/tt0120338/")));
-              })),
+                child: const Text("Titanic"),
+                onPressed: (() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FilmPage(
+                              "https://www.imdb.com/title/tt0120338/")));
+                })),
             TextButton(
-              child: const Text("La La land"),
-              onPressed: (() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FilmPage("https://www.imdb.com/title/tt3783958/")));
-              }))
+                child: const Text("La La land"),
+                onPressed: (() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FilmPage(
+                              "https://www.imdb.com/title/tt3783958/")));
+                }))
           ],
         ));
   }

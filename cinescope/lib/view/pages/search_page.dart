@@ -1,6 +1,3 @@
-
-
-
 import 'package:cinescope/view/general_page.dart';
 import 'package:cinescope/view/search_bar/search_bar.dart';
 import 'package:flutter/widgets.dart';

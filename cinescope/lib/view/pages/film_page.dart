@@ -15,9 +15,12 @@ class FilmPageState extends GeneralPageState<FilmPage> {
   @override
   Widget getBody(BuildContext context) {
     return FutureBuilder(
-        future: FilmDetailsScraper.getFilmDetails(widget.url),
-        builder: ((context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+      future: FilmDetailsScraper.getFilmDetails(widget.url),
+      builder: ((BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.data == null || snapshot.hasError) {
+            return const Text('Error: Failed to load film data');
+          } else {
             final Film film = snapshot.data!;
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -25,23 +28,25 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
-                  const Text(
-                    'Film Page:',
+                  Text(
+                    film.title,
                     textAlign: TextAlign.left,
                     textScaleFactor: 2.2,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Film URL: ${film.url}',
+                    'Release Year: ${film.year}',
                     textAlign: TextAlign.left,
                     textScaleFactor: 1.2,
                   ),
                 ],
               ),
             );
-          } else {
-            return const Center(child: CircularProgressIndicator());
           }
-        }));
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      }),
+    );
   }
 }
