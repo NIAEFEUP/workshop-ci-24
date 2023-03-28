@@ -19,3 +19,11 @@ Future<UserCredential> signInWithGoogle() async {
   return await FirebaseAuth.instance.signInWithCredential(credential);
 }
 
+Future<UserCredential> signInWithGitHub() async {
+  // Create a new provider
+  GithubAuthProvider githubProvider = GithubAuthProvider();
+
+  return await FirebaseAuth.instance.signInWithProvider(githubProvider);
+}
+
+

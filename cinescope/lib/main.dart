@@ -1,4 +1,4 @@
-import 'package:cinescope/view/pages/main_page.dart';
+import 'package:cinescope/view/pages/main_login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: const ColorScheme(
               brightness: Brightness.dark,
-              primary: Color(0xFF2C666E),
+              primary: Color(0xFFF0EDEE),
               secondary: Color(0xFF90DDF0),
               surface: Color(0XFF2C666E),
               background: Color(0XFF07393C),
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               onSecondary: Color(0xFFF0EDEE),
               onSurface: Color(0xFFF0EDEE),
               onError: Color(0xFF0A090C))),
-      home: const MainPage(),
+      home: const MainLoginPage(),
     );
   }
 }
