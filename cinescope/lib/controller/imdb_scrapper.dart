@@ -24,6 +24,10 @@ class ImdbScraper {
             ["text"],
         'year': data["props"]["pageProps"]["aboveTheFoldData"]["releaseYear"]
             ["year"],
+        'imgUrl': data["props"]["pageProps"]["aboveTheFoldData"]["primaryImage"]["url"],
+        'duration': data["props"]["pageProps"]["aboveTheFoldData"]["runtime"]["displayableProperty"]["value"]["plainText"],
+        'description': data["props"]["pageProps"]["aboveTheFoldData"]["primaryVideos"]["edges"][0]["node"]["description"]["value"],
+        'rating': data["props"]["pageProps"]["aboveTheFoldData"]["ratingsSummary"]["aggregateRating"],
       };
       return filmData;
     } else {

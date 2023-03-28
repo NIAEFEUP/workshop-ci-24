@@ -27,18 +27,61 @@ class FilmPageState extends GeneralPageState<FilmPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
-                  Text(
-                    film.title,
-                    textAlign: TextAlign.left,
-                    textScaleFactor: 2.2,
+                  Row(children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () => Navigator.pop(context),
+                      iconSize: 40,
+                    ),
+                    const Text(
+                      "Film Details",
+                      textAlign: TextAlign.left,
+                      textScaleFactor: 2.2,
+                    ),
+                  ]),
+                  Row(
+                    children: [
+                      Image.network(
+                        film.imgUrl,
+                        width: 200,
+                        height: 300,
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            film.title,
+                            textAlign: TextAlign.left,
+                            textScaleFactor: 2.2,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Release Year: ${film.year}',
+                            textAlign: TextAlign.left,
+                            textScaleFactor: 1.2,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Duration: ${film.duration}',
+                            textAlign: TextAlign.left,
+                            textScaleFactor: 1.2,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Rating: ${film.rating}',
+                            textAlign: TextAlign.left,
+                            textScaleFactor: 1.2,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
                   Text(
-                    'Release Year: ${film.year}',
-                    textAlign: TextAlign.left,
+                    film.description,
+                    textAlign: TextAlign.justify,
                     textScaleFactor: 1.2,
-                  ),
+                  )
                 ],
               ),
             );
@@ -50,3 +93,19 @@ class FilmPageState extends GeneralPageState<FilmPage> {
     );
   }
 }
+
+
+/*
+const Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
+                  Text(
+                    film.title,
+                    textAlign: TextAlign.left,
+                    textScaleFactor: 2.2,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Release Year: ${film.year}',
+                    textAlign: TextAlign.left,
+                    textScaleFactor: 1.2,
+                  ),
+ */

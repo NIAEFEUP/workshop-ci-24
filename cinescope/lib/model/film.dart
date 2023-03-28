@@ -1,11 +1,13 @@
 class Film {
-  final String url, title;
+  final String url, title, imgUrl, duration, description;
   int year;
+  double rating;
 
-  Film(this.url, this.title, this.year);
+  Film(this.url, this.title, this.year, this.imgUrl, this.duration,
+      this.description, this.rating);
 
   @override
   String toString() {
-    return 'Film{url: $url, title: $title, year: $year}';
+    return 'Film{title: $title, year: $year}';
   }
 }
