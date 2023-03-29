@@ -1,5 +1,5 @@
 import 'package:cinescope/model/film.dart';
-import 'package:cinescope/controller/IMDB_scrapper.dart';
+import 'package:cinescope/controller/imdb_scrapper.dart';
 
 class FilmDetailsScraper {
   static Future<Film> getFilmDetails(String url) async {
