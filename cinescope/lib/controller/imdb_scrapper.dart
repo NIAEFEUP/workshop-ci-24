@@ -19,15 +19,38 @@ class ImdbScraper {
       final String jsonData = element.text;
       final dynamic data = jsonDecode(jsonData);
 
+      final Map<String, dynamic> base = data["props"]["pageProps"];
+      final Map<String, Map<String, List<String>>> cast = {};
+      final List<dynamic> castJSon = base['mainColumnData']['cast']['edges'];
+
+      for (int i = 0; i < castJSon.length; i++) {
+        final String actorName =
+            castJSon[i]['node']['name']['nameText']['text'];
+        final List<String> characters = [];
+        final List<dynamic> charactersJSon = castJSon[i]['node']['characters'];
+        for (int j = 0; j < charactersJSon.length; j++) {
+          characters.add(charactersJSon[j]['name']);
+        }
+        String defaultImgUrl =
+            'https://digimedia.web.ua.pt/wp-content/uploads/2017/05/default-user-image.png';
+        String actorImgUrl = castJSon[i]['node']['name']['primaryImage']
+                ?['url'] ??
+            defaultImgUrl;
+        Map<String, List<String>> actorValue = {};
+        actorValue[actorName] = characters;
+        cast[actorImgUrl] = actorValue;
+      }
+
       final Map<String, dynamic> filmData = {
-        'title': data["props"]["pageProps"]["aboveTheFoldData"]["titleText"]
-            ["text"],
-        'year': data["props"]["pageProps"]["aboveTheFoldData"]["releaseYear"]
-            ["year"],
-        'imgUrl': data["props"]["pageProps"]["aboveTheFoldData"]["primaryImage"]["url"],
-        'duration': data["props"]["pageProps"]["aboveTheFoldData"]["runtime"]["displayableProperty"]["value"]["plainText"],
-        'description': data["props"]["pageProps"]["aboveTheFoldData"]["primaryVideos"]["edges"][0]["node"]["description"]["value"],
-        'rating': data["props"]["pageProps"]["aboveTheFoldData"]["ratingsSummary"]["aggregateRating"],
+        'title': base["aboveTheFoldData"]["titleText"]["text"],
+        'year': base["aboveTheFoldData"]["releaseYear"]["year"],
+        'imgUrl': base["aboveTheFoldData"]["primaryImage"]["url"],
+        'duration': base["aboveTheFoldData"]["runtime"]["displayableProperty"]
+            ["value"]["plainText"],
+        'description': base["aboveTheFoldData"]["primaryVideos"]["edges"][0]
+            ["node"]["description"]["value"],
+        'rating': base["aboveTheFoldData"]["ratingsSummary"]["aggregateRating"],
+        'cast': cast,
       };
       return filmData;
     } else {

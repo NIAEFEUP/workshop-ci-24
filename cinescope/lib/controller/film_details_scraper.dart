@@ -6,15 +6,15 @@ class FilmDetailsScraper {
     final filmData = await ImdbScraper.getFilmData(url);
     String title = filmData['title'];
     int year = filmData['year'];
-    print('imgURL: ${filmData['imgUrl'].runtimeType}');
-    print('Duration: ${filmData['duration'].runtimeType}');
-    print('description: ${filmData['description'].runtimeType}');
-    print('rating: ${filmData['rating'].runtimeType}');
     String imgUrl = filmData['imgUrl'];
     String duration = filmData['duration'];
     String description = filmData['description'];
     double rating = filmData['rating'].toDouble();
-    final film = Film(url, title, year, imgUrl, duration, description, rating);
+    Map<String, Map<String, List<String>>> cast = filmData['cast'];
+
+    print(cast);
+    final film =
+        Film(url, title, year, imgUrl, duration, description, rating, cast);
     return film;
   }
 }

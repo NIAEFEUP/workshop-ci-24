@@ -12,6 +12,43 @@ class FilmPage extends GeneralPage {
 }
 
 class FilmPageState extends GeneralPageState<FilmPage> {
+  List<Widget> buildCast(Film film) {
+    List<Widget> cast = [];
+
+    film.cast.forEach((actorImg, characterNames) {
+      String actorName = characterNames.keys.first;
+      List<String> characters = characterNames[actorName]!;
+      cast.add(
+        Card(
+          child: Container(
+            width: 160,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  actorName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(characters.join(", ")),
+                const SizedBox(height: 15),
+                Image.network(
+                  actorImg,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+
+    return cast;
+  }
+
   @override
   Widget getBody(BuildContext context) {
     return FutureBuilder(
@@ -23,7 +60,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
           } else {
             final Film film = snapshot.data!;
             return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 13),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -33,27 +70,33 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                       onPressed: () => Navigator.pop(context),
                       iconSize: 40,
                     ),
+                    const SizedBox(width: 10),
                     const Text(
                       "Film Details",
                       textAlign: TextAlign.left,
                       textScaleFactor: 2.2,
                     ),
                   ]),
+                  const Padding(padding: EdgeInsets.all(10)),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.network(
-                        film.imgUrl,
-                        width: 200,
-                        height: 300,
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
+                      Expanded(
+                          child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
                             film.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              // fontFamily:
+                            ),
                             textAlign: TextAlign.left,
-                            textScaleFactor: 2.2,
+                            softWrap: true,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 10),
                           Text(
@@ -74,14 +117,30 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             textScaleFactor: 1.2,
                           ),
                         ],
-                      ),
+                      )),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5)),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.network(
+                          film.imgUrl,
+                          width: 150,
+                        ),
+                      )
                     ],
                   ),
+                  const Padding(padding: EdgeInsets.all(10)),
                   Text(
                     film.description,
                     textAlign: TextAlign.justify,
                     textScaleFactor: 1.2,
-                  )
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                      child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: buildCast(film),
+                  )),
                 ],
               ),
             );
@@ -93,19 +152,3 @@ class FilmPageState extends GeneralPageState<FilmPage> {
     );
   }
 }
-
-
-/*
-const Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
-                  Text(
-                    film.title,
-                    textAlign: TextAlign.left,
-                    textScaleFactor: 2.2,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Release Year: ${film.year}',
-                    textAlign: TextAlign.left,
-                    textScaleFactor: 1.2,
-                  ),
- */
