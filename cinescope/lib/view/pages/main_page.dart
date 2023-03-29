@@ -1,7 +1,9 @@
 import 'package:cinescope/view/general_page.dart';
 import 'package:cinescope/view/pages/film_page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:logger/logger.dart';
 
 class MainPage extends GeneralPage {
   const MainPage({super.key});
@@ -13,6 +15,7 @@ class MainPage extends GeneralPage {
 class MainPageState extends GeneralPageState<MainPage> {
   @override
   Widget getBody(BuildContext context) {
+    Logger().d(FirebaseAuth.instance.currentUser!.email ?? "pog");
     return Container(
         padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
         margin: const EdgeInsets.symmetric(horizontal: 10),
