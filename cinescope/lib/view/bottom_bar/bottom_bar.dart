@@ -18,7 +18,7 @@ class BottomBarState extends State<BottomBar> {
   bool _isVisible = true;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     final keyboardVisibilityController = KeyboardVisibilityController();
 
@@ -26,7 +26,7 @@ class BottomBarState extends State<BottomBar> {
       setState(() {
         _isVisible = !visible;
       });
-     });
+    });
   }
 
   @override
@@ -39,61 +39,60 @@ class BottomBarState extends State<BottomBar> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const MainPage()));
-                        },
-                        icon: const FaIcon(
-                          FontAwesomeIcons.house,
-                          color: Colors.black,
-                        ),
-                      ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const MainPage()));
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.house,
+                      color: Colors.black,
+                    ),
+                  ),
                   IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const ProfilePage()));
-                        },
-                        icon: const FaIcon(
-                          FontAwesomeIcons.solidUser,
-                          color: Colors.black,
-                        ),
-                      ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ProfilePage()));
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.solidUser,
+                      color: Colors.black,
+                    ),
+                  ),
                   IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const WatchlistPage()));
-                        },
-                        icon: const FaIcon(
-                          FontAwesomeIcons.solidHeart,
-                          color: Colors.black,
-                        ),
-                      ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const WatchlistPage()));
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.solidHeart,
+                      color: Colors.black,
+                    ),
+                  ),
                   IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const InboxPage()));
-                        },
-                        icon: const FaIcon(
-                          FontAwesomeIcons.inbox,
-                          color: Colors.black,
-                        ),
-                      ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const InboxPage()));
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.inbox,
+                      color: Colors.black,
+                    ),
+                  ),
                   Container(
-                          color: const Color(0xFFD7CCCF),
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => const SearchPage()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0x00000000),
-                                  fixedSize: const Size.square(60),
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(8)))),
-                              child: const FaIcon(
-                                  FontAwesomeIcons.magnifyingGlass,
-                                  color: Colors.black)))
+                      color: const Color(0xFFD7CCCF),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const SearchPage()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0x00000000),
+                              fixedSize: const Size.square(60),
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)))),
+                          child: const FaIcon(FontAwesomeIcons.magnifyingGlass,
+                              color: Colors.black)))
                 ]))
         : Container();
   }

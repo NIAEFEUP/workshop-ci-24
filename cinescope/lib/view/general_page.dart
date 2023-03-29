@@ -8,7 +8,7 @@ abstract class GeneralPage extends StatefulWidget {
   State<StatefulWidget> createState();
 }
 
-abstract class GeneralPageState extends State<GeneralPage> {
+abstract class GeneralPageState<T extends StatefulWidget> extends State<T> {
 
 
   Widget getBody(BuildContext context);
