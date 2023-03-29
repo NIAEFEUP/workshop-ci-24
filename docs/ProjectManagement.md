@@ -37,3 +37,6 @@ that required custom widgets to solve it.
 
 ## Planning
 ![Planning of iteration 1](https://user-images.githubusercontent.com/24589619/225722688-095093be-3616-4793-a0c6-d78624d414ba.png)
+## Final board status
+![Planning of iteration 2](https://user-images.githubusercontent.com/24589619/228531558-0a6d0815-bfe1-476f-8434-637cb40b8fe8.png)
+## Retrospective
