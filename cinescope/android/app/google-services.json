@@ -29,6 +29,13 @@
             {
               "client_id": "95221063243-860on9i6vpdgi5s7l1dmhhmiokkcknb6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "95221063243-rlbhvp20bonson8op66efqgc33ssbv1s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cinescope"
+              }
             }
           ]
         }
