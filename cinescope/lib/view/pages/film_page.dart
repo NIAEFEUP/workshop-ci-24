@@ -2,6 +2,7 @@ import 'package:cinescope/controller/film_details_scraper.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/view/general_page.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FilmPage extends GeneralPage {
   final String url;
@@ -36,9 +37,17 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                 const SizedBox(height: 5),
                 Text(characters.join(", ")),
                 const SizedBox(height: 15),
-                Image.network(
-                  actorImg,
-                ),
+                ClipRect(
+                  child: SizedBox(
+                    height: 180, // Set the maximum height here
+                    child: Center(
+                        child: Image.network(
+                      actorImg,
+                      fit: BoxFit
+                          .cover, // Scale and crop the image to fit the container
+                    )),
+                  ),
+                )
               ],
             ),
           ),
@@ -84,13 +93,13 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                       Expanded(
                           child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
                             film.title,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: 25,
                               // fontFamily:
                             ),
                             textAlign: TextAlign.left,
@@ -116,6 +125,39 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             textAlign: TextAlign.left,
                             textScaleFactor: 1.2,
                           ),
+                          const SizedBox(height: 10),
+                          Row(
+                            // put row on the bottom
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            // 2 IconButtons
+
+                            children: [
+                              IconButton(
+                                icon: const FaIcon(FontAwesomeIcons.heart),
+                                onPressed: () {},
+                                iconSize: 30,
+                                color: Colors.black,
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.resolveWith(
+                                            (states) =>
+                                                const Color(0xffD7CCCF))),
+                              ),
+                              const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10)),
+                              IconButton(
+                                  icon: const FaIcon(FontAwesomeIcons.comment),
+                                  onPressed: () {},
+                                  iconSize: 30,
+                                  color: Colors.black,
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.resolveWith(
+                                              (states) =>
+                                                  const Color(0xffD7CCCF)))),
+                            ],
+                          )
                         ],
                       )),
                       const Padding(
@@ -135,12 +177,19 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                     textAlign: TextAlign.justify,
                     textScaleFactor: 1.2,
                   ),
-                  const SizedBox(height: 10),
-                  Expanded(
+                  const SizedBox(height: 15),
+                  const Text(
+                    'Cast',
+                    textAlign: TextAlign.left,
+                    textScaleFactor: 1.8,
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+                  ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 280),
                       child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: buildCast(film),
-                  )),
+                        scrollDirection: Axis.horizontal,
+                        children: buildCast(film),
+                      )),
                 ],
               ),
             );
