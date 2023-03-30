@@ -47,13 +47,14 @@ Application:
  - Federated login is a bit of a mess, because of google not accepting debug keystores while logging in on federated login providers.
  - IMDB JSON parsing from the pages is a bit difficult, but still better than using unofficial APIs.
 
-# Iteration 2
-
-##Planning
-![Planning of iteration 2](https://user-images.githubusercontent.com/24589619/228917288-76f135c5-cad8-47aa-8425-7415c11c5f8e.png)
-
-
 Documentation:
  - We still need to improve our user stories, to make them more clear.
  - We need to alter the domain model and logical model to be actually acturate this time.
  - Fix acceptance tests, doing it each user story.
+ - 
+# Iteration 2
+
+## Planning
+![Planning of iteration 2](https://user-images.githubusercontent.com/24589619/228917288-76f135c5-cad8-47aa-8425-7415c11c5f8e.png)
+
+
