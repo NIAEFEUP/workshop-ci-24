@@ -6,7 +6,7 @@
 
 **Bringing movie lovers together, one watchlist at a time.**
 
-CineScope provides film industry lovers with film suggestions and discussions to share their opinions. 
+CineScope provides film industry lovers with film suggestions and allows its users to discuss and to share their opinions. 
 
 
 
