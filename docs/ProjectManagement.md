@@ -38,5 +38,22 @@ that required custom widgets to solve it.
 ## Planning
 ![Planning of iteration 1](https://user-images.githubusercontent.com/24589619/225722688-095093be-3616-4793-a0c6-d78624d414ba.png)
 ## Final board status
-![Planning of iteration 2](https://user-images.githubusercontent.com/24589619/228531558-0a6d0815-bfe1-476f-8434-637cb40b8fe8.png)
+![Final board status of iteration 1](https://user-images.githubusercontent.com/24589619/228909556-be70df1b-87fa-4899-a9ff-80b56e7e3b0f.png)
+
 ## Retrospective
+
+Application:
+ - Overall for the first iteration we did a good job implementing them, but we still need to improve on user experience by adding more feedback to the user, when it's doing something wrong. Also we should hide UI that doesen't do anything right now to improve it.
+ - Federated login is a bit of a mess, because of google not accepting debug keystores while logging in on federated login providers.
+ - IMDB JSON parsing from the pages is a bit difficult, but still better than using unofficial APIs.
+
+# Iteration 2
+
+##Planning
+![Planning of iteration 2](https://user-images.githubusercontent.com/24589619/228917288-76f135c5-cad8-47aa-8425-7415c11c5f8e.png)
+
+
+Documentation:
+ - We still need to improve our user stories, to make them more clear.
+ - We need to alter the domain model and logical model to be actually acturate this time.
+ - Fix acceptance tests, doing it each user story.
