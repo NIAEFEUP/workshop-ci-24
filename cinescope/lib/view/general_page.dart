@@ -9,18 +9,22 @@ abstract class GeneralPage extends StatefulWidget {
 }
 
 abstract class GeneralPageState<T extends StatefulWidget> extends State<T> {
+  Widget getTitle(BuildContext context);
 
-
-  Widget getBody(BuildContext context);
+  List<Widget> getBody(BuildContext context);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
-      Expanded(
-          child: Container(
+        body: Container(
             color: const Color(0XFF07393C),
-              child:getBody(context))),
-      const BottomBar()
-    ]));
+            child: Column(children: [
+              const Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+              getTitle(context),
+              Expanded(
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: ListView(children: getBody(context)))),
+              const BottomBar()
+            ])));
   }
 }
