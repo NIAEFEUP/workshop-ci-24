@@ -12,10 +12,14 @@ class SearchPage extends GeneralPage{
 
 class SearchPageState extends GeneralPageState<SearchPage>{
   @override
-  Widget getBody(BuildContext context) {
-    return Column(children: const [
-      Padding(padding: EdgeInsets.fromLTRB(0, 36, 0, 0)),
-      SearchBar()
-    ],);
+  List<Widget> getBody(BuildContext context) {
+    return [
+
+    ];
+  }
+  
+  @override
+  Widget getTitle(BuildContext context) {
+    return const SearchBar(); 
   }
 }

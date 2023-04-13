@@ -14,45 +14,44 @@ class MainPage extends GeneralPage {
 
 class MainPageState extends GeneralPageState<MainPage> {
   @override
-  Widget getBody(BuildContext context) {
+  List<Widget> getBody(BuildContext context) {
     Logger().d(FirebaseAuth.instance.currentUser!.email ?? "pog");
-    return Container(
-        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              "Welcome to CineScope!",
-              textAlign: TextAlign.left,
-              textScaleFactor: 2,
-            ),
-            //hardcoded page starts here,
-            const Padding(padding: EdgeInsets.all(20)),
-            const Text(
-              "Your last watched movies:",
-              textAlign: TextAlign.left,
-              textScaleFactor: 1.5,
-            ),
-            TextButton(
-                child: const Text("Titanic"),
-                onPressed: (() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const FilmPage(
-                              "https://www.imdb.com/title/tt0120338/")));
-                })),
-            TextButton(
-                child: const Text("La La land"),
-                onPressed: (() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const FilmPage(
-                              "https://www.imdb.com/title/tt3783958/")));
-                }))
-          ],
-        ));
+    return [
+      const Text(
+        "Welcome to CineScope!",
+        textAlign: TextAlign.left,
+        textScaleFactor: 2,
+      ),
+      //hardcoded page starts here,
+      const Padding(padding: EdgeInsets.all(20)),
+      const Text(
+        "Your last watched movies:",
+        textAlign: TextAlign.left,
+        textScaleFactor: 1.5,
+      ),
+      TextButton(
+          onPressed: (() {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FilmPage(
+                        "https://www.imdb.com/title/tt0120338/")));
+          }),
+          child: const Text("Titanic")),
+      TextButton(
+          onPressed: (() {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FilmPage(
+                        "https://www.imdb.com/title/tt3783958/")));
+          }),
+          child: const Text("La La land"))
+    ];
+  }
+
+  @override
+  Widget getTitle(BuildContext context) {
+    return Container();
   }
 }

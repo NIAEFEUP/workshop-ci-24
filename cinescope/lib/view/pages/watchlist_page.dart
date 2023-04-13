@@ -11,19 +11,28 @@ class WatchlistPage extends GeneralPage {
 
 class WatchlistPageState extends GeneralPageState<WatchlistPage> {
   @override
-  Widget getBody(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const [
-            Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
-            Text(
-              "Watchlist:",
-              textAlign: TextAlign.left,
-              textScaleFactor: 2.2,
-            ),
-          ],
-        ));
+  List<Widget> getBody(BuildContext context) {
+    return [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: const [
+          Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
+          Text(
+            "Watchlist:",
+            textAlign: TextAlign.left,
+            textScaleFactor: 2.2,
+          ),
+        ],
+      )
+    ];
+  }
+
+  @override
+  Widget getTitle(BuildContext context) {
+    return const Text(
+      "Watchlist:",
+      textAlign: TextAlign.left,
+      textScaleFactor: 2.2,
+    );
   }
 }

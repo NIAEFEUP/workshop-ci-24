@@ -59,8 +59,8 @@ class FilmPageState extends GeneralPageState<FilmPage> {
   }
 
   @override
-  Widget getBody(BuildContext context) {
-    return FutureBuilder(
+  List<Widget> getBody(BuildContext context) {
+    return [FutureBuilder(
       future: FilmDetailsScraper.getFilmDetails(widget.url),
       builder: ((BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -73,19 +73,6 @@ class FilmPageState extends GeneralPageState<FilmPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () => Navigator.pop(context),
-                      iconSize: 40,
-                    ),
-                    const SizedBox(width: 10),
-                    const Text(
-                      "Film Details",
-                      textAlign: TextAlign.left,
-                      textScaleFactor: 2.2,
-                    ),
-                  ]),
                   const Padding(padding: EdgeInsets.all(10)),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,6 +174,8 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                   ConstrainedBox(
                       constraints: const BoxConstraints(maxHeight: 280),
                       child: ListView(
+                        physics: const ClampingScrollPhysics(),
+                        shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         children: buildCast(film),
                       )),
@@ -198,6 +187,23 @@ class FilmPageState extends GeneralPageState<FilmPage> {
           return const Center(child: CircularProgressIndicator());
         }
       }),
-    );
+    )];
+  }
+
+  @override
+  Widget getTitle(BuildContext context) {
+    return Row(children: [
+      IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () => Navigator.pop(context),
+        iconSize: 40,
+      ),
+      const SizedBox(width: 10),
+      const Text(
+        "Film Details",
+        textAlign: TextAlign.left,
+        textScaleFactor: 2.2,
+      ),
+    ]);
   }
 }
