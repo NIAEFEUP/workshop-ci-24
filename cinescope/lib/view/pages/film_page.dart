@@ -16,7 +16,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
   List<Widget> buildCast(Film film) {
     List<Widget> cast = [];
 
-    film.cast.forEach((actorImg, characterNames) {
+    film.cast!.forEach((actorImg, characterNames) {
       String actorName = characterNames.keys.first;
       List<String> characters = characterNames[actorName]!;
       cast.add(
@@ -160,7 +160,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                   ),
                   const Padding(padding: EdgeInsets.all(10)),
                   Text(
-                    film.description,
+                    film.description!,
                     textAlign: TextAlign.justify,
                     textScaleFactor: 1.2,
                   ),

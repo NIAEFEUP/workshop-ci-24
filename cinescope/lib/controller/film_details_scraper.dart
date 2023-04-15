@@ -12,9 +12,11 @@ class FilmDetailsScraper {
     double rating = filmData['rating'].toDouble();
     Map<String, Map<String, List<String>>> cast = filmData['cast'];
 
-    print(cast);
-    final film =
-        Film(url, title, year, imgUrl, duration, description, rating, cast);
+    final film = Film(url, title, year, imgUrl, 
+          duration:duration, 
+          description:description, 
+          rating:rating, 
+          cast:cast);
     return film;
   }
 }
