@@ -4,7 +4,7 @@ import 'package:cinescope/model/film.dart';
 class FilmCard extends StatelessWidget {
   final Film film;
 
-  const FilmCard({required this.film});
+  const FilmCard(this.film);
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,13 @@
+import 'package:cinescope/view/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cinescope/controller/search_results_fetcher.dart';
+import 'package:cinescope/model/film.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+  final SearchPageState pageState;
+
+  const SearchBar({super.key, required this.pageState});
 
   @override
   State<StatefulWidget> createState() => SearchBarState();
@@ -30,6 +34,14 @@ class SearchBarState extends State<SearchBar> {
 
   void _submitEventButton() {
     _submitEvent(_textEditingController.text);
+  }
+
+  Future<void> _search(String value) async {
+    print("****** SEARCHING: $value");
+    var results = await SearchResultsFetcher.getSearchResults(value);
+    print("****** RESULTS: $results");
+    // set the state of the SearchPage to the results
+    widget.pageState.updateFilms(results);
   }
 
   @override
@@ -73,11 +85,5 @@ class SearchBarState extends State<SearchBar> {
             )
           ]),
     );
-  }
-
-  Future<void> _search(String value) async {
-    print("****** SEARCHING: $value");
-    var results = await SearchResultsFetcher.getSearchResults(value);
-    print("****** RESULTS: $results");
   }
 }
