@@ -51,6 +51,7 @@ class ImdbScraper {
             ["node"]["description"]["value"],
         'rating': base["aboveTheFoldData"]["ratingsSummary"]["aggregateRating"],
         'cast': cast,
+        'type': base["aboveTheFoldData"]["titleType"]["text"]
       };
       return filmData;
     } else {

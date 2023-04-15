@@ -5,6 +5,7 @@ class FilmDetailsScraper {
   static Future<Film> getFilmDetails(String url) async {
     final filmData = await ImdbScraper.getFilmData(url);
     String title = filmData['title'];
+    String type = filmData['type'];
     int year = filmData['year'];
     String imgUrl = filmData['imgUrl'];
     String duration = filmData['duration'];
@@ -12,10 +13,10 @@ class FilmDetailsScraper {
     double rating = filmData['rating'].toDouble();
     Map<String, Map<String, List<String>>> cast = filmData['cast'];
 
-    final film = Film(url, title, year, imgUrl, 
-          duration:duration, 
-          description:description, 
-          rating:rating, 
+    final film = Film(url, title, type, year, imgUrl, 
+          duration:duration,
+          description:description,
+          rating:rating,
           cast:cast);
     return film;
   }

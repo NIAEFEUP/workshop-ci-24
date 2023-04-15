@@ -1,13 +1,14 @@
 class Film {
-  final String url, title, imgUrl;
+  final String id, title, type, imgUrl;
   final String? duration, description;
   final int year;
   final double? rating;
   final Map<String, Map<String, List<String>>>? cast;
 
   Film(
-    this.url,
+    this.id,
     this.title,
+    this.type,
     this.year,
     this.imgUrl, {
     this.cast,
@@ -18,6 +19,6 @@ class Film {
 
   @override
   String toString() {
-    return 'Film{title: $title, year: $year}';
+    return 'Film{title: $title, type: $type, year: $year, id: $id)}';
   }
 }

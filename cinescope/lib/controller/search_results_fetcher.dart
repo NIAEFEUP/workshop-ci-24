@@ -11,7 +11,6 @@ class SearchResultsFetcher {
     final response = await http.get(Uri.parse(searchUrl));
 
     if (response.statusCode == 200) {
-      print("**** FOUND INFORMATION ABOUT $text ****");
 
       List<Film> films = [];
 
@@ -23,13 +22,13 @@ class SearchResultsFetcher {
         String id = current["id"];
         if (!id.contains("tt")) continue;
         
-        String filmUrl = "https://imdb.com/title/$id";
         String title = current["l"];
         int year = current["y"]?.toInt() ?? -1;
         String defaultFilmImgUrl =
             "https://media.comicbook.com/files/img/default-movie.png";
         String imgUrl = current["i"]?["imageUrl"] ?? defaultFilmImgUrl;
-        final film = Film(filmUrl, title, year, imgUrl);
+        String type = current["qid"];
+        final film = Film(id, title, type, year, imgUrl);
         films.add(film);
       }
       return films;

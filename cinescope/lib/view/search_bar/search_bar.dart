@@ -75,11 +75,9 @@ class SearchBarState extends State<SearchBar> {
     );
   }
 
-
   Future<void> _search(String value) async {
-    print("SEARCHING FOR: $value");
+    print("****** SEARCHING: $value");
     var results = await SearchResultsFetcher.getSearchResults(value);
-    print("RESULTS: ");
-    print(results);
+    print("****** RESULTS: $results");
   }
 }

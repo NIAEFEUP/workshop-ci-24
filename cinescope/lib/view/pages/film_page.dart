@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FilmPage extends GeneralPage {
-  final String url;
-  const FilmPage(this.url, {super.key});
+  String url = "";
+  FilmPage(String filmId, {super.key}) {
+    url = "https://www.imdb.com/title/$filmId/";
+  }
 
   @override
   State<StatefulWidget> createState() => FilmPageState();
@@ -35,7 +37,9 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                   ),
                 ),
                 const SizedBox(height: 5),
-                Text(characters.join(", ")),
+                Text(
+                  characters.join(", "),
+                ),
                 const SizedBox(height: 15),
                 ClipRect(
                   child: SizedBox(
@@ -60,81 +64,74 @@ class FilmPageState extends GeneralPageState<FilmPage> {
 
   @override
   List<Widget> getBody(BuildContext context) {
-    return [FutureBuilder(
-      future: FilmDetailsScraper.getFilmDetails(widget.url),
-      builder: ((BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data == null || snapshot.hasError) {
-            return const Text('Error: Failed to load film data');
-          } else {
-            final Film film = snapshot.data!;
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 13),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Padding(padding: EdgeInsets.all(10)),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            film.title,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              // fontFamily:
-                            ),
-                            textAlign: TextAlign.left,
-                            softWrap: true,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Release Year: ${film.year}',
-                            textAlign: TextAlign.left,
-                            textScaleFactor: 1.2,
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Duration: ${film.duration}',
-                            textAlign: TextAlign.left,
-                            textScaleFactor: 1.2,
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Rating: ${film.rating}',
-                            textAlign: TextAlign.left,
-                            textScaleFactor: 1.2,
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            // put row on the bottom
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            // 2 IconButtons
-
-                            children: [
-                              IconButton(
-                                icon: const FaIcon(FontAwesomeIcons.heart),
-                                onPressed: () {},
-                                iconSize: 30,
-                                color: Colors.black,
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.resolveWith(
-                                            (states) =>
-                                                const Color(0xffD7CCCF))),
+    return [
+      FutureBuilder(
+        future: FilmDetailsScraper.getFilmDetails(widget.url),
+        builder: ((BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data == null || snapshot.hasError) {
+              return const Text('Error: Failed to load film data');
+            } else {
+              final Film film = snapshot.data!;
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 13),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Padding(padding: EdgeInsets.all(10)),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              film.title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                // fontFamily:
                               ),
-                              const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 10)),
-                              IconButton(
-                                  icon: const FaIcon(FontAwesomeIcons.comment),
+                              textAlign: TextAlign.left,
+                              softWrap: true,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              film.type,
+                              textAlign: TextAlign.left,
+                              textScaleFactor: 1.2,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Release Year: ${film.year}',
+                              textAlign: TextAlign.left,
+                              textScaleFactor: 1.2,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Duration: ${film.duration}',
+                              textAlign: TextAlign.left,
+                              textScaleFactor: 1.2,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Rating: ${film.rating}',
+                              textAlign: TextAlign.left,
+                              textScaleFactor: 1.2,
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              // put row on the bottom
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              // 2 IconButtons
+
+                              children: [
+                                IconButton(
+                                  icon: const FaIcon(FontAwesomeIcons.heart),
                                   onPressed: () {},
                                   iconSize: 30,
                                   color: Colors.black,
@@ -142,52 +139,68 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                       backgroundColor:
                                           MaterialStateProperty.resolveWith(
                                               (states) =>
-                                                  const Color(0xffD7CCCF)))),
-                            ],
-                          )
-                        ],
-                      )),
-                      const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5)),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Image.network(
-                          film.imgUrl,
-                          width: 150,
-                        ),
-                      )
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.all(10)),
-                  Text(
-                    film.description!,
-                    textAlign: TextAlign.justify,
-                    textScaleFactor: 1.2,
-                  ),
-                  const SizedBox(height: 15),
-                  const Text(
-                    'Cast',
-                    textAlign: TextAlign.left,
-                    textScaleFactor: 1.8,
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-                  ConstrainedBox(
-                      constraints: const BoxConstraints(maxHeight: 280),
-                      child: ListView(
-                        physics: const ClampingScrollPhysics(),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        children: buildCast(film),
-                      )),
-                ],
-              ),
-            );
+                                                  const Color(0xffD7CCCF))),
+                                ),
+                                const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10)),
+                                IconButton(
+                                    icon:
+                                        const FaIcon(FontAwesomeIcons.comment),
+                                    onPressed: () {},
+                                    iconSize: 30,
+                                    color: Colors.black,
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.resolveWith(
+                                                (states) =>
+                                                    const Color(0xffD7CCCF)))),
+                              ],
+                            )
+                          ],
+                        )),
+                        const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5)),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Image.network(
+                            film.imgUrl,
+                            width: 150,
+                          ),
+                        )
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    Text(
+                      film.description!,
+                      textAlign: TextAlign.justify,
+                      textScaleFactor: 1.2,
+                    ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      'Cast',
+                      textAlign: TextAlign.left,
+                      textScaleFactor: 1.8,
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+                    ConstrainedBox(
+                        constraints: const BoxConstraints(maxHeight: 280),
+                        child: ListView(
+                          physics: const ClampingScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          children: buildCast(film),
+                        )),
+                  ],
+                ),
+              );
+            }
+          } else {
+            return const Center(child: CircularProgressIndicator());
           }
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      }),
-    )];
+        }),
+      )
+    ];
   }
 
   @override

@@ -34,8 +34,8 @@ class MainPageState extends GeneralPageState<MainPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const FilmPage(
-                        "https://www.imdb.com/title/tt0120338/")));
+                    builder: (context) => FilmPage(
+                        "tt0120338")));
           }),
           child: const Text("Titanic")),
       TextButton(
@@ -43,8 +43,8 @@ class MainPageState extends GeneralPageState<MainPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const FilmPage(
-                        "https://www.imdb.com/title/tt3783958/")));
+                    builder: (context) => FilmPage(
+                        "tt3783958")));
           }),
           child: const Text("La La land"))
     ];
