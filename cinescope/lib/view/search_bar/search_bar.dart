@@ -40,8 +40,9 @@ class SearchBarState extends State<SearchBar> {
     print("****** SEARCHING: $value");
     var results = await SearchResultsFetcher.getSearchResults(value);
     print("****** RESULTS: $results");
-    // set the state of the SearchPage to the results
-    widget.pageState.updateFilms(results);
+    widget.pageState.setState(() {
+      widget.pageState.films = Future.value(results);
+    });
   }
 
   @override
