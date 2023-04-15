@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cinescope/model/film.dart';
 
-class FilmCard extends StatelessWidget {
+class GenericFilmCard extends StatelessWidget {
   final Film film;
 
-  const FilmCard(this.film);
+  const GenericFilmCard(this.film);
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,11 @@ class FilmCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  film.type,
+                  style: const TextStyle(fontSize: 14),
                 ),
                 const SizedBox(height: 8),
                 Text(

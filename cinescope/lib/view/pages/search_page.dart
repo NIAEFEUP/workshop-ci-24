@@ -13,34 +13,17 @@ class SearchPage extends GeneralPage {
 }
 
 class SearchPageState extends GeneralPageState<SearchPage> {
-  Future<List<Film>> films = Future.value([]);
+  List<Film> films = [];
+
+  void setFilms(List<Film> results) {
+    setState(() {
+      films = results;
+    });
+  }
 
   @override
   List<Widget> getBody(BuildContext context) {
-    return [
-      FutureBuilder(
-        future: films,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<Film> films = snapshot.data as List<Film>;
-            return ListView.builder(
-              itemCount: films.length,
-              itemBuilder: (context, index) {
-                return FilmCard(films[index]);
-              },
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text("Error"),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      )
-    ];
+    return [for (Film film in films) GenericFilmCard(film)];
   }
 
   @override
