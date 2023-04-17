@@ -18,6 +18,8 @@ class RegisterPageState extends State<RegisterPage> {
       TextEditingController();
   final TextEditingController _textEditingControllerPass =
       TextEditingController();
+  final TextEditingController _textEditingControllerPassVerification =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   void Function() registerButtonHandler(BuildContext context) {
@@ -64,6 +66,13 @@ class RegisterPageState extends State<RegisterPage> {
         });
       }
     };
+  }
+
+  String? samePassword(String? data) {
+    if (data != null && data == _textEditingControllerPass.text) {
+      return null;
+    }
+    return "The passwords must match...";
   }
 
   @override
@@ -114,12 +123,25 @@ class RegisterPageState extends State<RegisterPage> {
                         validator: strongPasswordValidator,
                         obscureText: true,
                       ),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5)),
+                      TextFormField(
+                        controller: _textEditingControllerPassVerification,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          focusColor: Colors.white,
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                        ),
+                        validator: samePassword,
+                        obscureText: true,
+                      ),
                     ]),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
                       pressedFunction: registerButtonHandler(context),
-                      childWidget: const Text("Sign-up with email")),
+                      childWidget: const Text("Sign up")),
                 ]))));
   }
 }

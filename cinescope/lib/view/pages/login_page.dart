@@ -126,7 +126,7 @@ class LoginPageState extends State<LoginPage> {
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
                       pressedFunction: loginButtonHandler(context),
-                      childWidget: const Text("Sign-in with email")),
+                      childWidget: const Text("Sign in")),
                 ]))));
   }
 }
