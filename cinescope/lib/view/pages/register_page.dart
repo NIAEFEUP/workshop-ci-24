@@ -6,8 +6,7 @@ import 'package:logger/logger.dart';
 import '../button/login_button.dart';
 
 class RegisterPage extends StatefulWidget {
-  final String email;
-  const RegisterPage({super.key, required this.email});
+  const RegisterPage({super.key});
 
   @override
   State<StatefulWidget> createState() => RegisterPageState();
@@ -34,7 +33,6 @@ class RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    _textEditingControllerEmail.text = widget.email;
     return Scaffold(
         body: Container(
             padding: const EdgeInsets.all(20),
