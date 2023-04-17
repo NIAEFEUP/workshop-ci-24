@@ -127,7 +127,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                               textScaleFactor: 1.2,
                             ),
                             const SizedBox(height: 10),
-                            /*
+                            
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -142,6 +142,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                               (states) =>
                                                   const Color(0xffD7CCCF))),
                                 ),
+                                /*
                                 const Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 10)),
@@ -156,9 +157,9 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                             MaterialStateProperty.resolveWith(
                                                 (states) =>
                                                     const Color(0xffD7CCCF)))),
+                              */
                               ],
                             )
-                            */
                           ],
                         )),
                         const Padding(
