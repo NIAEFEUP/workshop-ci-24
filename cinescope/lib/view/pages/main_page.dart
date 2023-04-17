@@ -29,24 +29,6 @@ class MainPageState extends GeneralPageState<MainPage> {
         textAlign: TextAlign.left,
         textScaleFactor: 1.5,
       ),
-      TextButton(
-          onPressed: (() {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FilmPage(
-                        "tt0120338")));
-          }),
-          child: const Text("Titanic")),
-      TextButton(
-          onPressed: (() {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FilmPage(
-                        "tt3783958")));
-          }),
-          child: const Text("La La land"))
     ];
   }
 
