@@ -1,3 +1,4 @@
+import 'package:cinescope/utils/validators.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,28 +16,59 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _textEditingControllerEmail =
       TextEditingController();
-  final TextEditingController _textEditingControllerPass =
+  final TextEditingController _textEditingControllerPassword =
       TextEditingController();
 
   void Function() loginButtonHandler(BuildContext context) {
     return () {
-      FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: _textEditingControllerEmail.text,
-              password: _textEditingControllerPass.text)
-          .then((value) => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const MainPage())))
-          .onError((error, stackTrace) {
-            final FirebaseAuthException err = error as FirebaseAuthException;
-            if(err.code == "invalid-email" || err.code == "user-not-found"){
-              Logger().i("Email not found");
-            }
-            if(err.code == "wrong-password"){
-              Logger().i("Wrong password");
-            }
-          });
+      if (_formKey.currentState!.validate()) {
+        FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: _textEditingControllerEmail.text,
+                password: _textEditingControllerPassword.text)
+            .then((value) => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const MainPage())))
+            .onError((error, stackTrace) {
+          final FirebaseAuthException err = error as FirebaseAuthException;
+          if (err.code == "invalid-email" || err.code == "user-not-found") {
+            showDialog(
+                context: context,
+                builder: ((context) => AlertDialog(
+                      title: const Text("Login failed"),
+                      content: const Text("Invalid email or not found."),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Ok"))
+                      ],
+                    )));
+          }
+          if (err.code == "wrong-password") {
+            showDialog(
+                context: context,
+                builder: ((context) => AlertDialog(
+                      title: const Text("Login failed"),
+                      content: const Text(
+                        "Invalid password",
+                        textScaleFactor: 1.2,
+                      ),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Ok"))
+                      ],
+                    )));
+          }
+        });
+      }
     };
   }
 
@@ -52,6 +84,7 @@ class LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
                   Image.asset(
                     "assets/logo-no-background.png",
                     color: Colors.white,
@@ -63,25 +96,32 @@ class LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.white, fontSize: 35),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
-                  TextField(
-                    controller: _textEditingControllerEmail,
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      focusColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-                  TextField(
-                    controller: _textEditingControllerPass,
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      focusColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                    obscureText: true,
+                  Form(
+                    key: _formKey,
+                    child: Column(children: [
+                      TextFormField(
+                        controller: _textEditingControllerEmail,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          focusColor: Colors.white,
+                          border: OutlineInputBorder(),
+                          labelText: 'Email',
+                        ),
+                        validator: emailValidator,
+                      ),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10)),
+                      TextFormField(
+                        controller: _textEditingControllerPassword,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          focusColor: Colors.white,
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                        ),
+                        obscureText: true,
+                      ),
+                    ]),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
