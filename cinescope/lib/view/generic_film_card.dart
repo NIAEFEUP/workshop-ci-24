@@ -20,35 +20,34 @@ class GenericFilmCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              film.imgUrl,
-              width: 120,
-              height: 160,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.network(
+                film.imgUrl,
+                width: 100,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    film.title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      film.title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    film.type,
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    film.year.toString(),
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    Text(
+                      "${film.type}  •  ${film.year}",
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

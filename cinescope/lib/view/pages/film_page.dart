@@ -104,6 +104,9 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                               film.type,
                               textAlign: TextAlign.left,
                               textScaleFactor: 1.2,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(height: 10),
                             Text(
@@ -124,11 +127,9 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                               textScaleFactor: 1.2,
                             ),
                             const SizedBox(height: 10),
+                            /*
                             Row(
-                              // put row on the bottom
                               mainAxisAlignment: MainAxisAlignment.start,
-                              // 2 IconButtons
-
                               children: [
                                 IconButton(
                                   icon: const FaIcon(FontAwesomeIcons.heart),
@@ -157,6 +158,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                                     const Color(0xffD7CCCF)))),
                               ],
                             )
+                            */
                           ],
                         )),
                         const Padding(
