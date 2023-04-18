@@ -57,4 +57,8 @@ Documentation:
 ## Planning
 ![Planning of iteration 2](https://user-images.githubusercontent.com/24589619/228917288-76f135c5-cad8-47aa-8425-7415c11c5f8e.png)
 
+## Final board status
+![Final board status of iteration 2](https://user-images.githubusercontent.com/24589619/232922839-e12f0deb-9708-4fd3-9c3f-db852b1e7e95.png)
+
+
 
