@@ -60,31 +60,6 @@ class GenericFilmCard extends StatelessWidget {
                       ),
                     ],
                   ))),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            film.title,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "${film.type}  •  ${film.year}",
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                          const SizedBox(height: 8),
-                        ],
-                      ),
-                    ),
-                  ),
-              
               ],
             ),
           ),
