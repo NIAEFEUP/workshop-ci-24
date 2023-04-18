@@ -1,3 +1,4 @@
+import 'package:cinescope/controller/register_callback.dart';
 import 'package:cinescope/utils/validators.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,9 +30,11 @@ class RegisterPageState extends State<RegisterPage> {
             .createUserWithEmailAndPassword(
                 email: _textEditingControllerEmail.text,
                 password: _textEditingControllerPass.text)
-            .then((value) => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const MainPage())))
-            .onError((error, stackTrace) {
+            .then((value) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const MainPage()));
+          registerCallback();
+        }).onError((error, stackTrace) {
           final err = (error as FirebaseAuthException);
           if (err.code == "email-already-in-use") {
             showDialog(
@@ -123,8 +126,7 @@ class RegisterPageState extends State<RegisterPage> {
                         validator: strongPasswordValidator,
                         obscureText: true,
                       ),
-                      const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5)),
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
                       TextFormField(
                         controller: _textEditingControllerPassVerification,
                         decoration: const InputDecoration(
