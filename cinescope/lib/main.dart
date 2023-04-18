@@ -1,20 +1,25 @@
+import 'package:cinescope/controller/register_callback.dart';
 import 'package:cinescope/firebase_options.dart';
+import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/pages/main_login_page.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   Widget startingWidget = MainLoginPage();
-  if (FirebaseAuth.instance.currentUser != null){
+  if (FirebaseAuth.instance.currentUser != null) {
     startingWidget = const MainPage();
   }
-  
-  runApp(MyApp(startingWidget: startingWidget,));
+
+  runApp(MyApp(
+    startingWidget: startingWidget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +29,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+        providers: [
+          //list of providers to add
+          ChangeNotifierProvider(create: (context) => WatchlistProvider()),
+        ],
+        child: MaterialApp(
       title: 'CineScope',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -42,6 +52,6 @@ class MyApp extends StatelessWidget {
               onSurface: Color(0xFFF0EDEE),
               onError: Color(0xFF0A090C))),
       home: startingWidget,
-    );
+    ));
   }
 }

@@ -8,6 +8,7 @@ import 'steps/list_film_match.dart';
 import 'steps/not_found.dart';
 import 'steps/page_step.dart';
 import 'steps/search_for_film.dart';
+import 'steps/watchlist_tap_resemble.dart';
 
 Future<void> main() {
   final config = FlutterTestConfiguration()
@@ -21,7 +22,10 @@ Future<void> main() {
       GivenChangePageStep(),
       WhenSearchFilm(),
       ThenListFilmMatch(),
-      ThenNotFound()
+      ThenNotFound(),
+      WhenWatchlistButtonTapResemble(),
+      WhenChangePageStep(),
+      ThenListFilmDoesntMatch()
     ]
     ..restartAppBetweenScenarios = true
     ..targetAppPath = "test_driver/app.dart";

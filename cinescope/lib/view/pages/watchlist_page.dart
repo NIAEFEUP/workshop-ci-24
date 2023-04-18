@@ -1,6 +1,9 @@
+import 'package:cinescope/model/providers/watchlist_provider.dart';
+import 'package:cinescope/view/generic_film_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cinescope/view/general_page.dart';
+import 'package:provider/provider.dart';
 
 class WatchlistPage extends GeneralPage {
   const WatchlistPage({super.key});
@@ -13,16 +16,22 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
   @override
   List<Widget> getBody(BuildContext context) {
     return [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
-          Text(
-            "Watchlist:",
-            textAlign: TextAlign.left,
-            textScaleFactor: 2.2,
-          ),
-        ],
+      Consumer<WatchlistProvider>(
+        builder: (context, value, _) {
+          final List<Widget> cards = [];
+          if(value.getWatchlist().movies.isEmpty){
+            return const Text("Couldn't find any movies in the watchlist...");
+          }
+          int i = 0;
+          for(final film in value.getWatchlist().movies){
+            cards.add(GenericFilmCard(film, key: Key("genericFilmCard-$i")));
+            i++;
+          }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: cards,
+          );
+        },
       )
     ];
   }

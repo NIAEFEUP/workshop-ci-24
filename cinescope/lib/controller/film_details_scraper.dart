@@ -2,8 +2,8 @@ import 'package:cinescope/model/film.dart';
 import 'package:cinescope/controller/imdb_scrapper.dart';
 
 class FilmDetailsScraper {
-  static Future<Film> getFilmDetails(String url) async {
-    final filmData = await ImdbScraper.getFilmData(url);
+  static Future<Film> getFilmDetails(String filmId) async {
+    final filmData = await ImdbScraper.getFilmData("https://www.imdb.com/title/$filmId/");
     String title = filmData['title'];
     String type = filmData['type'];
     int year = filmData['year'];
@@ -13,7 +13,7 @@ class FilmDetailsScraper {
     double rating = filmData['rating'].toDouble();
     Map<String, Map<String, List<String>>> cast = filmData['cast'];
 
-    final film = Film(url, title, type, year, imgUrl, 
+    final film = Film(filmId, title, type, year, imgUrl, 
           duration:duration,
           description:description,
           rating:rating,

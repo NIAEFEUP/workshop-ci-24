@@ -21,3 +21,21 @@ class ThenListFilmMatch extends Then1WithWorld<String, FlutterWorld>{
 
 
 }
+
+
+class ThenListFilmDoesntMatch extends Then1WithWorld<String, FlutterWorld>{
+  @override
+  Pattern get pattern => RegExp(r"it should not be displayed a card that roughly matches {string}");
+
+  @override
+  Future<void> executeStep(String input1) async {
+    FlutterDriverUtils.waitForFlutter(world.driver);
+    final inputString = find.text(input1);
+    final inputStringCaps = find.text(input1.capitalize());
+    expect((await FlutterDriverUtils.isPresent(world.driver, inputString)) || (await FlutterDriverUtils.isPresent(world.driver, inputStringCaps)), 
+      false,
+      reason: "Found a card that has $input1 in it.");
+  }
+
+
+}
