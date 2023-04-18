@@ -22,9 +22,13 @@ class GenericFilmCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(
-                film.imgUrl,
+              child: FadeInImage(
+                placeholder: const AssetImage('assets/default-movie-image.png'),
                 width: 100,
+                image: Image.network(
+                  film.imgUrl,
+                  width: 100,
+                ).image,
               ),
             ),
             const SizedBox(width: 16),
@@ -43,7 +47,9 @@ class GenericFilmCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      (film.year == -1) ? film.type : "${film.type}  •  ${film.year}",
+                      (film.year == -1)
+                          ? film.type
+                          : "${film.type}  •  ${film.year}",
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],

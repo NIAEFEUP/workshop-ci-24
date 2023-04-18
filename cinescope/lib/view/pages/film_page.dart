@@ -127,7 +127,6 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                               textScaleFactor: 1.2,
                             ),
                             const SizedBox(height: 10),
-                            
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -166,11 +165,16 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             padding: EdgeInsets.symmetric(horizontal: 5)),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(
-                            film.imgUrl,
+                          child: FadeInImage(
+                            placeholder:
+                                const AssetImage('assets/default-movie-image.png'),
                             width: 150,
+                            image: Image.network(
+                              film.imgUrl,
+                              width: 150,
+                            ).image,
                           ),
-                        )
+                        ),
                       ],
                     ),
                     const Padding(padding: EdgeInsets.all(10)),

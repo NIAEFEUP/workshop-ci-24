@@ -7,7 +7,7 @@ class ImdbScraper {
   static String defaultActorImgUrl =
       'https://digimedia.web.ua.pt/wp-content/uploads/2017/05/default-user-image.png';
   static String defaultFilmImgUrl =
-      "https://media.comicbook.com/files/img/default-movie.png";
+      'assets/default-movie-image.png';
 
   static Future<dynamic> _getData(String imdbUrl) async {
     final response = await http.get(Uri.parse(imdbUrl));
