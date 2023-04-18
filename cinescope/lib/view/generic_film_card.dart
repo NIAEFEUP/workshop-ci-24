@@ -43,7 +43,7 @@ class GenericFilmCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "${film.type}  •  ${film.year}",
+                      (film.year == -1) ? film.type : "${film.type}  •  ${film.year}",
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],

@@ -5,41 +5,49 @@ import 'package:html/parser.dart' as parser;
 import 'dart:convert';
 
 class SearchResultsFetcher {
-  static Future<List<Film>> getSearchResults(String text) async {
+  static String defaultFilmImgUrl =
+      "https://media.comicbook.com/files/img/default-movie.png";
+
+  static Future<dynamic> _getSearchData(String text) async {
     final String searchUrl =
         "https://v3.sg.media-imdb.com/suggestion/x/$text.json";
     final response = await http.get(Uri.parse(searchUrl));
-
     if (response.statusCode == 200) {
-      List<Film> films = [];
-
       String jsonData = response.body;
       final dynamic data = jsonDecode(jsonData);
-
-      for (int i = 0; i < data["d"].length; i++) {
-        var current = data["d"][i];
-        String id = current["id"];
-        if (!id.contains("tt")) continue;
-
-        String title = current["l"];
-        int year = current["y"]?.toInt() ?? -1;
-        String defaultFilmImgUrl =
-            "https://media.comicbook.com/files/img/default-movie.png";
-        String imgUrl = current["i"]?["imageUrl"] ?? defaultFilmImgUrl;
-        String type = current["qid"];
-        if (type == "movie") {
-          type = "Movie";
-        } else if (type == "tvSeries") {
-          type = "TV Series";
-        } else {
-          continue;
-        }
-        final film = Film(id, title, type, year, imgUrl);
-        films.add(film);
-      }
-      return films;
+      return data;
     } else {
       throw Exception('Failed to load movie data');
     }
+  }
+
+  static List<Film> searchParser(dynamic data) {
+    List<Film> films = [];
+
+    for (int i = 0; i < data["d"].length; i++) {
+      var current = data["d"][i];
+      String id = current["id"];
+      if (!id.contains("tt")) continue;
+
+      String title = current["l"];
+      int year = current["y"]?.toInt() ?? -1;
+      String imgUrl = current["i"]?["imageUrl"] ?? defaultFilmImgUrl;
+      String type = current["qid"];
+      if (type.contains("movie") || type.contains("Movie")) {
+        type = "Movie";
+      } else if (type == "tvSeries") {
+        type = "TV Series";
+      } else {
+        continue;
+      }
+      final film = Film(id, title, type, year, imgUrl);
+      films.add(film);
+    }
+    return films;
+  }
+
+  static Future<List<Film>> getSearchResults(String text) async {
+    dynamic data = await _getSearchData(text);
+    return searchParser(data);
   }
 }
