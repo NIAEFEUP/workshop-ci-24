@@ -1,3 +1,4 @@
+import 'package:cinescope/utils/validators.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,7 @@ import 'package:logger/logger.dart';
 import '../button/login_button.dart';
 
 class RegisterPage extends StatefulWidget {
-  final String email;
-  const RegisterPage({super.key, required this.email});
+  const RegisterPage({super.key});
 
   @override
   State<StatefulWidget> createState() => RegisterPageState();
@@ -18,23 +18,65 @@ class RegisterPageState extends State<RegisterPage> {
       TextEditingController();
   final TextEditingController _textEditingControllerPass =
       TextEditingController();
+  final TextEditingController _textEditingControllerPassVerification =
+      TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   void Function() registerButtonHandler(BuildContext context) {
     return () {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _textEditingControllerEmail.text,
-              password: _textEditingControllerPass.text)
-          .then((value) => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const MainPage())))
-          .onError((error, stackTrace) =>
-              Logger().e((error as FirebaseAuthException).code));
+      if (_formKey.currentState!.validate()) {
+        FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: _textEditingControllerEmail.text,
+                password: _textEditingControllerPass.text)
+            .then((value) => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const MainPage())))
+            .onError((error, stackTrace) {
+          final err = (error as FirebaseAuthException);
+          if (err.code == "email-already-in-use") {
+            showDialog(
+                context: context,
+                builder: ((context) => AlertDialog(
+                      title: const Text("Register failed"),
+                      content: const Text("Email is already in use..."),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Ok"))
+                      ],
+                    )));
+          } else {
+            showDialog(
+                context: context,
+                builder: ((context) => AlertDialog(
+                      title: const Text("Register failed"),
+                      content: const Text(
+                          "Something went wrong while registring..."),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Ok"))
+                      ],
+                    )));
+          }
+        });
+      }
     };
+  }
+
+  String? samePassword(String? data) {
+    if (data != null && data == _textEditingControllerPass.text) {
+      return null;
+    }
+    return "The passwords must match...";
   }
 
   @override
   Widget build(BuildContext context) {
-    _textEditingControllerEmail.text = widget.email;
     return Scaffold(
         body: Container(
             padding: const EdgeInsets.all(20),
@@ -55,30 +97,51 @@ class RegisterPageState extends State<RegisterPage> {
                     style: TextStyle(color: Colors.white, fontSize: 35),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
-                  TextField(
-                    controller: _textEditingControllerEmail,
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      focusColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-                  TextField(
-                    controller: _textEditingControllerPass,
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      focusColor: Colors.white,
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                    obscureText: true,
+                  Form(
+                    key: _formKey,
+                    child: Column(children: [
+                      TextFormField(
+                        controller: _textEditingControllerEmail,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          focusColor: Colors.white,
+                          border: OutlineInputBorder(),
+                          labelText: 'Email',
+                        ),
+                        validator: emailValidator,
+                      ),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10)),
+                      TextFormField(
+                        controller: _textEditingControllerPass,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          focusColor: Colors.white,
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                        ),
+                        validator: strongPasswordValidator,
+                        obscureText: true,
+                      ),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5)),
+                      TextFormField(
+                        controller: _textEditingControllerPassVerification,
+                        decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          focusColor: Colors.white,
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                        ),
+                        validator: samePassword,
+                        obscureText: true,
+                      ),
+                    ]),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
                       pressedFunction: registerButtonHandler(context),
-                      childWidget: const Text("Sign-up with email")),
+                      childWidget: const Text("Sign up")),
                 ]))));
   }
 }

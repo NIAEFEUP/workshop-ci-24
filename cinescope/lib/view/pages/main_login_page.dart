@@ -41,27 +41,6 @@ class MainLoginPage extends StatelessWidget {
     };
   }
 
-  void Function() emailButtonHandler(BuildContext context) {
-    return () {
-      FirebaseAuth.instance
-          .fetchSignInMethodsForEmail(_textEditingController.text)
-          .then((value) {
-        if (value.isNotEmpty) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  LoginPage(email: _textEditingController.text)));
-        } else {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  RegisterPage(email: _textEditingController.text)));
-        }
-      }).onError((error, stackTrace) => Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (context) =>
-                      RegisterPage(email: _textEditingController.text))));
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,19 +63,24 @@ class MainLoginPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 35),
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
-                TextField(
-                  controller: _textEditingController,
-                  decoration: const InputDecoration(
-                    fillColor: Colors.white,
-                    focusColor: Colors.white,
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                LoginButton(
-                    pressedFunction: emailButtonHandler(context),
-                    childWidget: const Text("Sign-in with email")),
+                Row(children: [
+                  Expanded(
+                      child: LoginButton(
+                          pressedFunction: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                          },
+                          childWidget: const Text("Sign In"),
+                          relevant: false,)),
+                  const Padding(padding: EdgeInsets.symmetric(horizontal: 10),),
+                  Expanded(
+                      child: LoginButton(
+                          pressedFunction: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const RegisterPage()));
+                          },
+                          childWidget: const Text("Sign Up"))),
+                ]),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
                 const Text(
                   "or",
