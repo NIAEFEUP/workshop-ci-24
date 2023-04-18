@@ -14,6 +14,7 @@ class SearchPage extends GeneralPage {
 
 class SearchPageState extends GeneralPageState<SearchPage> {
   List<Film> films = [];
+  int searchTimes = 0;
 
   void setFilms(List<Film> results) {
     setState(() {
@@ -23,6 +24,11 @@ class SearchPageState extends GeneralPageState<SearchPage> {
 
   @override
   List<Widget> getBody(BuildContext context) {
+    
+    if(films.isEmpty && searchTimes != 0){
+      return [const Text("Couldn't find any movie or tv series...", key:Key("errorNotFound"))];
+    }
+    searchTimes++;
     return [for (Film film in films) GenericFilmCard(film)];
   }
 

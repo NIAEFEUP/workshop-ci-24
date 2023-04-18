@@ -77,6 +77,7 @@ class SearchBarState extends State<SearchBar> {
                 onSubmitted: _submitEvent,
                 style: const TextStyle(color: Colors.black, fontSize: 20),
                 onChanged: _search,
+                key: const Key("searchField"),
               ),
             ),
             const Padding(padding: EdgeInsets.symmetric(horizontal: 2.5)),
