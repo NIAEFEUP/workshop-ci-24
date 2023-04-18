@@ -1,5 +1,4 @@
 import 'package:cinescope/view/general_page.dart';
-import 'package:cinescope/view/pages/film_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
@@ -29,24 +28,6 @@ class MainPageState extends GeneralPageState<MainPage> {
         textAlign: TextAlign.left,
         textScaleFactor: 1.5,
       ),
-      TextButton(
-          onPressed: (() {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const FilmPage(
-                        "https://www.imdb.com/title/tt0120338/")));
-          }),
-          child: const Text("Titanic")),
-      TextButton(
-          onPressed: (() {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const FilmPage(
-                        "https://www.imdb.com/title/tt3783958/")));
-          }),
-          child: const Text("La La land"))
     ];
   }
 
