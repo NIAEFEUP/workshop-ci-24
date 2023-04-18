@@ -45,7 +45,6 @@ class WatchlistProvider extends ChangeNotifier {
 
   Future<void> addFilmToWatchlist(String filmId) async {
     if (_watchlist.movieIds.contains(filmId)) return;
-    Logger().i(_watchlist.movieIds);
     _watchlist.movieIds.add(filmId);
     final watchlistsRef = FirebaseFirestore.instance
         .collection("watchlists")

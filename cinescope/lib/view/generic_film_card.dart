@@ -14,6 +14,7 @@ class GenericFilmCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+        key: const Key("genericFilmCard"),
         onTap: () {
           Navigator.push(
             context,
@@ -64,7 +65,6 @@ class GenericFilmCard extends StatelessWidget {
             ),
           ),
           Consumer<WatchlistProvider>(builder: (context, provider, _) {
-            Logger().d(film.id);
             return Align(
               alignment: Alignment.topRight,
               child: IconButton(

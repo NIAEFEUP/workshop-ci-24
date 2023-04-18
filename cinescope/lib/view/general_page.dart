@@ -26,8 +26,10 @@ abstract class GeneralPageState<T extends StatefulWidget> extends State<T> {
                   child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: ListView(
+                        key: const Key("body-list"),
                         shrinkWrap: true,
-                        children: getBody(context)))),
+                        children: getBody(context)))
+                        ),
               const BottomBar()
             ])));
   }

@@ -20,10 +20,12 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
         builder: (context, value, _) {
           final List<Widget> cards = [];
           if(value.getWatchlist().movies.isEmpty){
-            return const Text("No films added to the watchlist yet...");
+            return const Text("Couldn't find any movies in the watchlist...");
           }
+          int i = 0;
           for(final film in value.getWatchlist().movies){
-            cards.add(GenericFilmCard(film));
+            cards.add(GenericFilmCard(film, key: Key("genericFilmCard-$i")));
+            i++;
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

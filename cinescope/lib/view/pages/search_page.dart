@@ -24,12 +24,17 @@ class SearchPageState extends GeneralPageState<SearchPage> {
 
   @override
   List<Widget> getBody(BuildContext context) {
-    
-    if(films.isEmpty && searchTimes != 0){
-      return [const Text("Couldn't find any movie or tv series...", key:Key("errorNotFound"))];
+    if (films.isEmpty && searchTimes != 0) {
+      return [
+        const Text("Couldn't find any movie or tv series...",
+            key: Key("errorNotFound"))
+      ];
     }
     searchTimes++;
-    return [for (Film film in films) GenericFilmCard(film)];
+    return [
+      for (var i = 0; i < films.length; i++)
+        GenericFilmCard(films[i], key: Key("genericFilmCard-$i"))
+    ];
   }
 
   @override
