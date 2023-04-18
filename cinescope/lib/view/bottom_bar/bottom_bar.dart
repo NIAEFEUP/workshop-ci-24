@@ -47,6 +47,7 @@ class BottomBarState extends State<BottomBar> {
                       FontAwesomeIcons.house,
                       color: Colors.black,
                     ),
+                    key: const Key("main"),
                   ),
                   IconButton(
                     onPressed: () {
@@ -57,6 +58,7 @@ class BottomBarState extends State<BottomBar> {
                       FontAwesomeIcons.solidUser,
                       color: Colors.black,
                     ),
+                    key: const Key("profile"),
                   ),
                   IconButton(
                     onPressed: () {
@@ -67,6 +69,7 @@ class BottomBarState extends State<BottomBar> {
                       FontAwesomeIcons.solidHeart,
                       color: Colors.black,
                     ),
+                    key: const Key("watchlists"),
                   ),
                   IconButton(
                     onPressed: () {
@@ -81,18 +84,20 @@ class BottomBarState extends State<BottomBar> {
                   Container(
                       color: const Color(0xFFD7CCCF),
                       child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const SearchPage()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0x00000000),
-                              fixedSize: const Size.square(60),
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)))),
-                          child: const FaIcon(FontAwesomeIcons.magnifyingGlass,
-                              color: Colors.black)))
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const SearchPage()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0x00000000),
+                            fixedSize: const Size.square(60),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)))),
+                        key: const Key("search"),
+                        child: const FaIcon(FontAwesomeIcons.magnifyingGlass,
+                            color: Colors.black),
+                      ))
                 ]))
         : Container();
   }

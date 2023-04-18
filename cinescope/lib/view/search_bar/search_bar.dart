@@ -37,6 +37,7 @@ class SearchBarState extends State<SearchBar> {
   }
 
   Future<void> _search(String value) async {
+    if (value.length < 3) return;
     print("****** SEARCHING: $value");
     var results = await SearchResultsFetcher.getSearchResults(value);
     print("****** RESULTS: $results");
@@ -76,6 +77,7 @@ class SearchBarState extends State<SearchBar> {
                 onSubmitted: _submitEvent,
                 style: const TextStyle(color: Colors.black, fontSize: 20),
                 onChanged: _search,
+                key: const Key("searchField"),
               ),
             ),
             const Padding(padding: EdgeInsets.symmetric(horizontal: 2.5)),

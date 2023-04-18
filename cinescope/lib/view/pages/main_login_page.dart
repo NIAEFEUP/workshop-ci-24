@@ -71,7 +71,8 @@ class MainLoginPage extends StatelessWidget {
                                 builder: (context) => const LoginPage()));
                           },
                           childWidget: const Text("Sign In"),
-                          relevant: false,)),
+                          relevant: false,
+                          key: const Key("signinButton"),)),
                   const Padding(padding: EdgeInsets.symmetric(horizontal: 10),),
                   Expanded(
                       child: LoginButton(

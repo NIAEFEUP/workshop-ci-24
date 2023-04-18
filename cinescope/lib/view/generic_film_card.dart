@@ -27,35 +27,64 @@ class GenericFilmCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.network(
-                    film.imgUrl,
+                  child: FadeInImage(
+                    placeholder:
+                        const AssetImage('assets/default-movie-image.png'),
                     width: 100,
+                    image: Image.network(
+                      film.imgUrl,
+                      width: 100,
+                    ).image,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          film.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        film.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        (film.year == -1)
+                            ? film.type
+                            : "${film.type}  •  ${film.year}",
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ))),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            film.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "${film.type}  •  ${film.year}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        const SizedBox(height: 8),
-                      ],
+                          const SizedBox(height: 8),
+                          Text(
+                            "${film.type}  •  ${film.year}",
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+              
               ],
             ),
           ),
@@ -68,10 +97,9 @@ class GenericFilmCard extends StatelessWidget {
                     ? FontAwesomeIcons.solidHeart
                     : FontAwesomeIcons.heart),
                 onPressed: () {
-                  if(provider.getWatchlist().movieIds.contains(film.id)){
+                  if (provider.getWatchlist().movieIds.contains(film.id)) {
                     provider.removeFilmFromWatchlist(film);
-                  } else{
-
+                  } else {
                     provider.addFilmToWatchlist(film.id);
                   }
                 },
