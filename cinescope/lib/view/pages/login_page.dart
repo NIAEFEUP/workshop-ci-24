@@ -108,6 +108,8 @@ class LoginPageState extends State<LoginPage> {
                           labelText: 'Email',
                         ),
                         validator: emailValidator,
+                        key: const Key("emailField"),
+
                       ),
                       const Padding(
                           padding: EdgeInsets.symmetric(vertical: 10)),
@@ -120,13 +122,15 @@ class LoginPageState extends State<LoginPage> {
                           labelText: 'Password',
                         ),
                         obscureText: true,
+                        key: const Key("passwordField"),
                       ),
                     ]),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
                       pressedFunction: loginButtonHandler(context),
-                      childWidget: const Text("Sign in")),
+                      childWidget: const Text("Sign in"), 
+                      key: const Key("loginButton")),
                 ]))));
   }
 }

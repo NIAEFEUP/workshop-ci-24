@@ -22,7 +22,7 @@ class MainPageState extends GeneralPageState<MainPage> {
         textScaleFactor: 2,
       ),
       //hardcoded page starts here,
-      const Padding(padding: EdgeInsets.all(20)),
+      const Padding(padding: EdgeInsets.all(20),),
       const Text(
         "Your last watched movies:",
         textAlign: TextAlign.left,
