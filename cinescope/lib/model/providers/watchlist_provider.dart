@@ -52,6 +52,7 @@ class WatchlistProvider extends ChangeNotifier {
             fromFirestore: (snapshot, options) =>
                 Watchlist.fromFirestore(snapshot, options),
             toFirestore: (film, _) => film.toFirestore());
+    notifyListeners();
     await watchlistsRef
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set(_watchlist);

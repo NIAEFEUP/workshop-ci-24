@@ -12,6 +12,7 @@ Feature: user watchlist
         When the user goes to the "watchlists" page
         Then it should be displayed a list of film/series cards that roughly match "titanic"
         When the user taps the watchlist button on a entry that resembles "titanic" on the card content
+        Then I pause for 5 seconds
         Then it should not be displayed a card that roughly matches "titanic"
         
 

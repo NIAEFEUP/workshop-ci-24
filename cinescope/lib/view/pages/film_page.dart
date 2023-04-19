@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FilmPage extends GeneralPage {
-  String url = "";
-  FilmPage(String filmId, {super.key}) {
-    url = "https://www.imdb.com/title/$filmId/";
-  }
+  final String id;
+  const FilmPage(this.id, {super.key});
 
   @override
   State<StatefulWidget> createState() => FilmPageState();
@@ -66,7 +64,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
   List<Widget> getBody(BuildContext context) {
     return [
       FutureBuilder(
-        future: FilmDetailsScraper.getFilmDetails(widget.url),
+        future: FilmDetailsScraper.getFilmDetails(widget.id),
         builder: ((BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null || snapshot.hasError) {
@@ -166,8 +164,8 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
                           child: FadeInImage(
-                            placeholder:
-                                const AssetImage('assets/default-movie-image.png'),
+                            placeholder: const AssetImage(
+                                'assets/default-movie-image.png'),
                             width: 150,
                             image: Image.network(
                               film.imgUrl,
