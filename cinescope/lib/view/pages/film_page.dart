@@ -105,18 +105,12 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              film.type,
+                              "${film.type}  •  ${film.year}",
                               textAlign: TextAlign.left,
                               textScaleFactor: 1.2,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              'Release Year: ${film.year}',
-                              textAlign: TextAlign.left,
-                              textScaleFactor: 1.2,
                             ),
                             const SizedBox(height: 10),
                             Text(

@@ -17,6 +17,7 @@ class GenericFilmCard extends StatelessWidget {
     return GestureDetector(
         key: const Key("genericFilmCard"),
         onTap: () {
+          print("OPEN FILM PAGE: ${film.id}");
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => FilmPage(film.id)),
