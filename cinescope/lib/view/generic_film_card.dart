@@ -36,32 +36,33 @@ class GenericFilmCard extends StatelessWidget {
                     image: Image.network(
                       film.imgUrl,
                       width: 100,
+                      fit: BoxFit.cover,
                     ).image,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                     child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        film.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        (film.year == -1)
-                            ? film.type
-                            : "${film.type}  •  ${film.year}",
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ))),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              film.title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              (film.year == -1)
+                                  ? film.type
+                                  : "${film.type}  •  ${film.year}",
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ))),
               ],
             ),
           ),
@@ -86,7 +87,7 @@ class GenericFilmCard extends StatelessWidget {
                         (states) => const Color(0xffD7CCCF))),
               ),
             );
-          })
+          }),
         ]));
   }
 }

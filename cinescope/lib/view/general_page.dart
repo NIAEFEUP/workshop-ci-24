@@ -17,19 +17,17 @@ abstract class GeneralPageState<T extends StatefulWidget> extends State<T> {
     return Scaffold(
         body: Container(
             color: const Color(0XFF07393C),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              const Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Padding(padding: EdgeInsets.fromLTRB(0, 30, 0, 0)),
               getTitle(context),
               Expanded(
                   child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: ListView(
-                        key: const Key("body-list"),
-                        shrinkWrap: true,
-                        children: getBody(context)))
-                        ),
+                          key: const Key("body-list"),
+                          shrinkWrap: true,
+                          children: getBody(context)))),
               const BottomBar()
             ])));
   }

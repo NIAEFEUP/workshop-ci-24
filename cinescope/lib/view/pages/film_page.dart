@@ -33,23 +33,29 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5),
                 Text(
                   characters.join(", "),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 15),
-                ClipRect(
-                  child: SizedBox(
-                    height: 180, // Set the maximum height here
-                    child: Center(
-                        child: Image.network(
-                      actorImg,
-                      fit: BoxFit
-                          .cover, // Scale and crop the image to fit the container
-                    )),
-                  ),
-                )
+                Center(
+                    child: ClipRect(
+                        child: FadeInImage(
+                  placeholder:
+                      const AssetImage('assets/default-actor-image.png'),
+                  height: 180,
+                  image: Image.network(
+                    actorImg,
+                    height: 180,
+                  ).image,
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                )))
               ],
             ),
           ),
@@ -72,11 +78,11 @@ class FilmPageState extends GeneralPageState<FilmPage> {
             } else {
               final Film film = snapshot.data!;
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 13),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Padding(padding: EdgeInsets.all(10)),
+                    const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10)),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -89,7 +95,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                               film.title,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 25,
+                                fontSize: 23,
                                 // fontFamily:
                               ),
                               textAlign: TextAlign.left,
