@@ -67,6 +67,7 @@ class WatchlistProvider extends ChangeNotifier {
     _watchlist.movieIds.remove(film.id);
     _watchlist.movies.remove(film);
 
+    notifyListeners();
     final watchlistsRef = FirebaseFirestore.instance
         .collection("watchlists")
         .withConverter(
@@ -78,6 +79,5 @@ class WatchlistProvider extends ChangeNotifier {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set(_watchlist);
 
-    notifyListeners();
   }
 }
