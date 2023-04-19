@@ -19,12 +19,15 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
       Consumer<WatchlistProvider>(
         builder: (context, value, _) {
           final List<Widget> cards = [];
-          if(value.getWatchlist().movies.isEmpty){
+          final Set<String> ids = {};
+          if (value.getWatchlist().movies.isEmpty) {
             return const Text("Couldn't find any movies in the watchlist...");
           }
           int i = 0;
-          for(final film in value.getWatchlist().movies){
+          for (final film in value.getWatchlist().movies) {
+            if (ids.contains(value.getWatchlist().movies[i].id)) continue;
             cards.add(GenericFilmCard(film, key: Key("genericFilmCard-$i")));
+            ids.add(film.id);
             i++;
           }
           return Column(

@@ -1,4 +1,5 @@
 import 'package:cinescope/model/providers/watchlist_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/view/pages/film_page.dart';
