@@ -1,8 +1,10 @@
 import 'package:cinescope/controller/film_details_scraper.dart';
 import 'package:cinescope/model/film.dart';
+import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/general_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class FilmPage extends GeneralPage {
   final String id;
@@ -128,17 +130,34 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                IconButton(
-                                  icon: const FaIcon(FontAwesomeIcons.heart),
-                                  onPressed: () {},
-                                  iconSize: 30,
-                                  color: Colors.black,
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.resolveWith(
-                                              (states) =>
-                                                  const Color(0xffD7CCCF))),
-                                ),
+                                Consumer<WatchlistProvider>(
+                                    builder: (context, provider, _) {
+                                  return IconButton(
+                                    icon: FaIcon(provider
+                                            .getWatchlist()
+                                            .movieIds
+                                            .contains(film.id)
+                                        ? FontAwesomeIcons.solidHeart
+                                        : FontAwesomeIcons.heart),
+                                    onPressed: () {
+                                      if (provider
+                                          .getWatchlist()
+                                          .movieIds
+                                          .contains(film.id)) {
+                                        provider.removeFilmFromWatchlist(film);
+                                      } else {
+                                        provider.addFilmToWatchlist(film.id);
+                                      }
+                                    },
+                                    iconSize: 30,
+                                    color: Colors.black,
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.resolveWith(
+                                                (states) =>
+                                                    const Color(0xffD7CCCF))),
+                                  );
+                                }),
                                 /*
                                 const Padding(
                                     padding:
