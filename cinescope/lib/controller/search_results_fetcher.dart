@@ -14,7 +14,7 @@ class SearchResultsFetcher {
     final response = await http.get(Uri.parse(searchUrl));
     if (response.statusCode == 200) {
       String jsonData = response.body;
-      final dynamic data = jsonDecode(jsonData);
+      final dynamic data = jsonDecode(utf8.decode(jsonData.codeUnits));
       return data;
     } else {
       throw Exception('Failed to load movie data');

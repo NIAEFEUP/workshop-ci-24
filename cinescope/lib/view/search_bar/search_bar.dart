@@ -38,7 +38,7 @@ class SearchBarState extends State<SearchBar> {
 
   Future<void> _search(String value) async {
     if (value.length < 3) return;
-    print("****** SEARCHING: $value");
+    print("****** SEARCHING FOR: $value");
     var results = await SearchResultsFetcher.getSearchResults(value);
     print("****** RESULTS: $results");
     widget.pageState.setState(() {
