@@ -60,5 +60,18 @@ Documentation:
 ## Final board status
 ![Final board status of iteration 2](https://user-images.githubusercontent.com/24589619/232922839-e12f0deb-9708-4fd3-9c3f-db852b1e7e95.png)
 
+## Retrospective
 
+Application:
+ - Overall this iteration went better related to fixing bugs and implementing new features efficiently
+ - Watchlists tests must be reworked to mock the application state better using firebase emulator
+ - We still need to fix some bugs related to IMDB JSON parsing
+Documentation:
+ - We need to dedicate time to correct the models
+ - Make the changelogs better
+
+# Iteration 3
+
+## Planning
+![Planning of iteration 3](https://user-images.githubusercontent.com/24589619/233449023-01feacd9-3a8c-43f9-a8cd-6e33c264d532.png)
 
