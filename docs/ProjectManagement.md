@@ -73,5 +73,5 @@ Documentation:
 # Iteration 3
 
 ## Planning
-![Planning of iteration 3](https://user-images.githubusercontent.com/24589619/233449023-01feacd9-3a8c-43f9-a8cd-6e33c264d532.png)
+![Planning of iteration 3](https://user-images.githubusercontent.com/24589619/233449278-16225b64-3557-4386-adb5-31d0718d4155.png)
 
