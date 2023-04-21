@@ -34,11 +34,13 @@ class GenericFilmCard extends StatelessWidget {
                     placeholder:
                         const AssetImage('assets/default-movie-image.png'),
                     width: 100,
-                    image: Image.network(
-                      film.imgUrl,
-                      width: 100,
-                      fit: BoxFit.cover,
-                    ).image,
+                    image: film.imgUrl.isEmpty
+                        ? const AssetImage('assets/default-movie-image.png')
+                        : Image.network(
+                            film.imgUrl,
+                            width: 100,
+                            fit: BoxFit.cover,
+                          ).image,
                   ),
                 ),
                 const SizedBox(width: 16),

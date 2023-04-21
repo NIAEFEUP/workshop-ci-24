@@ -4,10 +4,6 @@ import 'package:html/parser.dart' as parser;
 import 'dart:convert';
 
 class ImdbScraper {
-  static String defaultActorImgUrl =
-      'https://digimedia.web.ua.pt/wp-content/uploads/2017/05/default-user-image.png';
-  static String defaultFilmImgUrl =
-      'https://media.comicbook.com/files/img/default-movie.png';
 
   static Future<dynamic> _getData(String imdbUrl) async {
     final response = await http.get(Uri.parse(imdbUrl));
@@ -43,7 +39,7 @@ class ImdbScraper {
       }
       String actorImgUrl = castJSon[i]['node']['name']['primaryImage']
               ?['url'] ??
-          defaultActorImgUrl;
+          '';
       Map<String, List<String>> actorValue = {};
       actorValue[actorName] = characters;
       cast[actorImgUrl] = actorValue;
@@ -56,7 +52,7 @@ class ImdbScraper {
       'title': base["aboveTheFoldData"]["titleText"]["text"],
       'year': base["aboveTheFoldData"]["releaseYear"]["year"],
       'imgUrl':
-          base["aboveTheFoldData"]["primaryImage"]["url"] ?? defaultFilmImgUrl,
+          base["aboveTheFoldData"]["primaryImage"]["url"] ?? '',
       'duration': base["aboveTheFoldData"]["runtime"]["displayableProperty"]
           ["value"]["plainText"],
       'description': jsonDescription.length > 20 ? jsonDescription : "",

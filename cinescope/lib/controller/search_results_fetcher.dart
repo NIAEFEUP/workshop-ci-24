@@ -5,9 +5,6 @@ import 'package:html/parser.dart' as parser;
 import 'dart:convert';
 
 class SearchResultsFetcher {
-  static String defaultFilmImgUrl =
-      "https://media.comicbook.com/files/img/default-movie.png";
-
   static Future<dynamic> _getSearchData(String text) async {
     final String searchUrl =
         "https://v3.sg.media-imdb.com/suggestion/x/$text.json";
@@ -31,7 +28,7 @@ class SearchResultsFetcher {
 
       String title = current["l"];
       int year = current["y"]?.toInt() ?? -1;
-      String imgUrl = current["i"]?["imageUrl"] ?? defaultFilmImgUrl;
+      String imgUrl = current["i"]?["imageUrl"] ?? '';
       String type = current["qid"];
       if (type.contains("movie") || type.contains("Movie")) {
         type = "Movie";

@@ -74,10 +74,12 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                         placeholder:
                             const AssetImage('assets/default-actor-image.png'),
                         height: 180,
-                        image: Image.network(
-                          actorImg,
-                          height: 180,
-                        ).image,
+                        image: actorImg.isEmpty
+                            ? const AssetImage('assets/default-actor-image.png')
+                            : Image.network(
+                                actorImg,
+                                height: 180,
+                              ).image,
                         alignment: Alignment.center,
                         fit: BoxFit.cover,
                       )))
@@ -193,10 +195,13 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                           placeholder: const AssetImage(
                               'assets/default-movie-image.png'),
                           width: 150,
-                          image: Image.network(
-                            film.imgUrl,
-                            width: 150,
-                          ).image,
+                          image: film.imgUrl.isEmpty
+                              ? const AssetImage(
+                                  'assets/default-movie-image.png')
+                              : Image.network(
+                                  film.imgUrl,
+                                  width: 150,
+                                ).image,
                         ),
                       ),
                     ],
