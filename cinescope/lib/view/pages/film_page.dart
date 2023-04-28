@@ -18,9 +18,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
   List<Widget> buildCast(Film film) {
     List<Widget> cast = [];
 
-    film.cast!.forEach((actorImg, characterNames) {
-      String actorName = characterNames.keys.first;
-      List<String> characters = characterNames[actorName]!;
+    film.cast!.forEach((actor) {
       cast.add(
         Card(
           child: Container(
@@ -35,14 +33,14 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text(actorName),
-                          content: Text(characters.join(", ")),
+                          title: Text(actor['name']),
+                          content: Text(actor['characters'].join(', ')),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text("Close"),
+                              child: const Text('Close'),
                             ),
                           ],
                         );
@@ -53,7 +51,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        actorName,
+                        actor['name'],
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -63,7 +61,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        characters.join(", "),
+                        actor['characters'].join(', '),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -74,10 +72,10 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                         placeholder:
                             const AssetImage('assets/default-actor-image.png'),
                         height: 180,
-                        image: actorImg.isEmpty
+                        image: actor['imgUrl'].isEmpty
                             ? const AssetImage('assets/default-actor-image.png')
                             : Image.network(
-                                actorImg,
+                                actor['imgUrl'],
                                 height: 180,
                               ).image,
                         alignment: Alignment.center,
@@ -124,7 +122,6 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
-                              // fontFamily:
                             ),
                             textAlign: TextAlign.left,
                             softWrap: true,
@@ -141,17 +138,19 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Text(
-                            'Duration: ${film.duration}',
-                            textAlign: TextAlign.left,
-                            textScaleFactor: 1.2,
-                          ),
+                          if (film.duration!.isNotEmpty)
+                            Text(
+                              'Duration: ${film.duration}',
+                              textAlign: TextAlign.left,
+                              textScaleFactor: 1.2,
+                            ),
                           const SizedBox(height: 10),
-                          Text(
-                            'Rating: ${film.rating}',
-                            textAlign: TextAlign.left,
-                            textScaleFactor: 1.2,
-                          ),
+                          if (film.rating != -1)
+                            Text(
+                              'Rating: ${film.rating}',
+                              textAlign: TextAlign.left,
+                              textScaleFactor: 1.2,
+                            ),
                           const SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,

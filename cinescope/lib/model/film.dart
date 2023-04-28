@@ -3,7 +3,7 @@ class Film {
   final String? duration, description;
   final int year;
   final double? rating;
-  final Map<String, Map<String, List<String>>>? cast;
+  final List<dynamic>? cast;
 
   Film(
     this.id,
