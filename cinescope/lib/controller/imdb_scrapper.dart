@@ -25,13 +25,11 @@ class ImdbScraper {
   }
 
   static Map<String, dynamic> dataParser(dynamic data) {
-
     final Map<String, dynamic> base = data["props"]["pageProps"];
     final List<dynamic> castJSon = base['mainColumnData']['cast']['edges'];
     final List<dynamic> cast = [];
 
     for (int i = 0; i < castJSon.length; i++) {
-
       var current = castJSon[i];
       Map<dynamic, dynamic> result = {};
 
@@ -57,6 +55,7 @@ class ImdbScraper {
       cast.add(result);
     }
 
+
     String title = base["aboveTheFoldData"]["titleText"]["text"];
     int year = base["aboveTheFoldData"]["releaseYear"]["year"];
     String imgUrl = base["aboveTheFoldData"]["primaryImage"]["url"] ?? '';
@@ -65,7 +64,7 @@ class ImdbScraper {
         "";
     String description =
         base["aboveTheFoldData"]["plot"]["plotText"]["plainText"];
-    double rating =
+    dynamic rating =
         base["aboveTheFoldData"]["ratingsSummary"]["aggregateRating"] ?? -1;
     String type = base["aboveTheFoldData"]["titleType"]["text"] ?? "";
 
