@@ -4,11 +4,6 @@ import 'package:html/parser.dart' as parser;
 import 'dart:convert';
 
 class ImdbScraper {
-  static String defaultActorImgUrl =
-      'https://digimedia.web.ua.pt/wp-content/uploads/2017/05/default-user-image.png';
-  static String defaultFilmImgUrl =
-      'assets/default-movie-image.png';
-
   static Future<dynamic> _getData(String imdbUrl) async {
     final response = await http.get(Uri.parse(imdbUrl));
 
@@ -31,39 +26,59 @@ class ImdbScraper {
 
   static Map<String, dynamic> dataParser(dynamic data) {
     final Map<String, dynamic> base = data["props"]["pageProps"];
-    final Map<String, Map<String, List<String>>> cast = {};
     final List<dynamic> castJSon = base['mainColumnData']['cast']['edges'];
+    final List<dynamic> cast = [];
 
     for (int i = 0; i < castJSon.length; i++) {
-      final String actorName = castJSon[i]['node']['name']['nameText']['text'];
+      var current = castJSon[i];
+      Map<dynamic, dynamic> result = {};
+
+      final String id = current['node']['name']['id'];
+      final String name = current['node']['name']['nameText']['text'];
+      String actorImgUrl =
+          castJSon[i]['node']['name']['primaryImage']?['url'] ?? '';
+
       final List<String> characters = [];
-      final List<dynamic> charactersJSon = castJSon[i]['node']['characters'];
+
+      final List<dynamic> charactersJSon =
+          castJSon[i]['node']['characters'] ?? [];
+
       for (int j = 0; j < charactersJSon.length; j++) {
         characters.add(charactersJSon[j]['name']);
       }
-      String actorImgUrl = castJSon[i]['node']['name']['primaryImage']
-              ?['url'] ??
-          defaultActorImgUrl;
-      Map<String, List<String>> actorValue = {};
-      actorValue[actorName] = characters;
-      cast[actorImgUrl] = actorValue;
+
+      result['id'] = id;
+      result['name'] = name;
+      result['imgUrl'] = actorImgUrl;
+      result['characters'] = characters;
+
+      cast.add(result);
     }
 
-    String jsonDescription =
+
+    String title = base["aboveTheFoldData"]["titleText"]["text"];
+    int year = base["aboveTheFoldData"]["releaseYear"]["year"];
+    String imgUrl = base["aboveTheFoldData"]["primaryImage"]["url"] ?? '';
+    String duration = base["aboveTheFoldData"]["runtime"]
+            ?["displayableProperty"]["value"]["plainText"] ??
+        "";
+    String description =
         base["aboveTheFoldData"]["plot"]["plotText"]["plainText"];
+    dynamic rating =
+        base["aboveTheFoldData"]["ratingsSummary"]["aggregateRating"] ?? -1;
+    String type = base["aboveTheFoldData"]["titleType"]["text"] ?? "";
 
     final Map<String, dynamic> filmData = {
-      'title': base["aboveTheFoldData"]["titleText"]["text"],
-      'year': base["aboveTheFoldData"]["releaseYear"]["year"],
-      'imgUrl':
-          base["aboveTheFoldData"]["primaryImage"]["url"] ?? defaultFilmImgUrl,
-      'duration': base["aboveTheFoldData"]["runtime"]["displayableProperty"]
-          ["value"]["plainText"],
-      'description': jsonDescription.length > 20 ? jsonDescription : "",
-      'rating': base["aboveTheFoldData"]["ratingsSummary"]["aggregateRating"],
+      'title': title,
+      'year': year,
+      'imgUrl': imgUrl,
+      'duration': duration,
+      'description': description,
+      'rating': rating,
       'cast': cast,
-      'type': base["aboveTheFoldData"]["titleType"]["text"]
+      'type': type,
     };
+
     return filmData;
   }
 
