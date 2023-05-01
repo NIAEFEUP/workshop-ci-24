@@ -29,7 +29,7 @@ class Watchlist {
   Future<void> parseFilmsInWatchlist() async{
     movies.clear();
     for(String filmId in movieIds){
-      movies.add(await FilmDetailsScraper.getFilmDetails(filmId));
+      movies.add(await FilmDetailsScraper().getFilmDetails(filmId));
     }
   }
 }
