@@ -24,11 +24,7 @@ void main() {
     final film =
         Film("1", 'Inception', 'Movie', 2010, 'https://via.placeholder.com/150',
             description: "Very nice movie",
-            cast: {
-              'https://via.placeholder.com/150': {
-                "Robert Downey JR": ["Iron Man"]
-              }
-            },
+            cast: Map.identity(),
             duration: "200 hours",
             rating: 10);
     testWidgets("renders correctly", (tester) async {
