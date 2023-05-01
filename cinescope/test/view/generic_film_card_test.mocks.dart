@@ -3,7 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/src/widgets/navigator.dart' as _i2;
+import 'dart:async' as _i5;
+import 'dart:ui' as _i7;
+
+import 'package:cinescope/model/film.dart' as _i6;
+import 'package:cinescope/model/providers/watchlist_provider.dart' as _i4;
+import 'package:cinescope/model/watchlist.dart' as _i2;
+import 'package:flutter/material.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -17,14 +23,24 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeWatchlist_0 extends _i1.SmartFake implements _i2.Watchlist {
+  _FakeWatchlist_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
+class MockNavigatorObserver extends _i1.Mock implements _i3.NavigatorObserver {
   @override
   void didPush(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -38,8 +54,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didPop(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -53,8 +69,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didRemove(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -68,8 +84,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didReplace({
-    _i2.Route<dynamic>? newRoute,
-    _i2.Route<dynamic>? oldRoute,
+    _i3.Route<dynamic>? newRoute,
+    _i3.Route<dynamic>? oldRoute,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -84,8 +100,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didStartUserGesture(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -101,6 +117,90 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
   void didStopUserGesture() => super.noSuchMethod(
         Invocation.method(
           #didStopUserGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [WatchlistProvider].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockWatchlistProvider extends _i1.Mock implements _i4.WatchlistProvider {
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i2.Watchlist getWatchlist() => (super.noSuchMethod(
+        Invocation.method(
+          #getWatchlist,
+          [],
+        ),
+        returnValue: _FakeWatchlist_0(
+          this,
+          Invocation.method(
+            #getWatchlist,
+            [],
+          ),
+        ),
+        returnValueForMissingStub: _FakeWatchlist_0(
+          this,
+          Invocation.method(
+            #getWatchlist,
+            [],
+          ),
+        ),
+      ) as _i2.Watchlist);
+  @override
+  _i5.Future<void> addFilmToWatchlist(String? filmId) => (super.noSuchMethod(
+        Invocation.method(
+          #addFilmToWatchlist,
+          [filmId],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> removeFilmFromWatchlist(_i6.Film? film) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeFilmFromWatchlist,
+          [film],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
           [],
         ),
         returnValueForMissingStub: null,
