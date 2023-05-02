@@ -20,13 +20,13 @@ class Comment {
   Comment(this.content, this.creationTime, this.createdBy);
 
   factory Comment.fromMap(Map<String, dynamic> map){
-    return Comment(map["content"], DateTime.parse(map["creationTime"]), map["createdBy"]);
+    return Comment(map["content"], DateTime.parse(map["creationTime"]), Profile.fromMap(map["createdBy"]));
   }
 
   Map<String,dynamic> toMap() => {
     "content" : content,
     "creationTime": creationTime.toIso8601String(),
-    "createdBy": createdBy
+    "createdBy": createdBy.toMap()
   };
 
 }
@@ -51,11 +51,12 @@ class Discussion {
     if (data == null) {
       throw Exception("Something went wrong while building ");
     }
-    print(data);
     List<Comment> comments = []; 
     if(!data["comments"].isEmpty){
-      comments = data["comments"]
-        .map((element) => Comment.fromMap(element)).toList();
+      for(final element in data["comments"]){
+
+        comments.add(Comment.fromMap(element));
+      }
     }
 
     return Discussion(
@@ -64,7 +65,7 @@ class Discussion {
       data["title"], 
       data["description"], 
       Profile.fromMap(data["createdBy"]), 
-      data["creationDate"].toDate(), 
+      DateTime.parse(data["creationDate"]), 
       comments);
   }
 

@@ -67,7 +67,7 @@ class DiscussionAddPageState extends GeneralPageState<DiscussionAddPage> {
                         widget.filmId,
                         _titleController.text,
                         _bodyController.text,
-                        Profile(),
+                        const Profile(),
                         DateTime.now(), []))
                     .then((value) => Navigator.of(context).pop());
               },
