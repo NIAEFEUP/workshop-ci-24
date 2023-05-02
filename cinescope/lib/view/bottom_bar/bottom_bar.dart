@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cinescope/view/pages/inbox_page.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:cinescope/view/pages/profile_page.dart';
@@ -16,18 +18,28 @@ class BottomBar extends StatefulWidget {
 
 class BottomBarState extends State<BottomBar> {
   bool _isVisible = true;
+  late StreamSubscription<bool> keyboardVisibleSubscription;
 
   @override
   void initState() {
     super.initState();
     final keyboardVisibilityController = KeyboardVisibilityController();
 
-    keyboardVisibilityController.onChange.listen((bool visible) {
+    keyboardVisibleSubscription = keyboardVisibilityController.onChange.listen((bool visible) {
       setState(() {
         _isVisible = !visible;
       });
     });
   }
+
+  @override
+  void dispose(){
+    super.dispose();
+    keyboardVisibleSubscription.cancel();
+
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
