@@ -1,5 +1,6 @@
 import 'package:cinescope/controller/register_callback.dart';
 import 'package:cinescope/firebase_options.dart';
+import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/pages/main_login_page.dart';
 import 'package:cinescope/view/pages/main_page.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
         providers: [
           //list of providers to add
           ChangeNotifierProvider(create: (context) => WatchlistProvider()),
+          ChangeNotifierProvider(create: (context) => DiscussionProvider()),
+
         ],
         child: MaterialApp(
       title: 'CineScope',
