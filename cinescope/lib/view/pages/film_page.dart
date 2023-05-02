@@ -2,7 +2,7 @@ import 'package:cinescope/controller/film_details_scraper.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/general_page.dart';
-import 'package:cinescope/view/pages/discussion_list_page.dart';
+import 'package:cinescope/view/pages/discussions/discussion_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'package:cinescope/model/providers/watchlist_provider.dart';
-import 'package:cinescope/view/generic_film_card.dart';
+import 'package:cinescope/view/cards/generic_film_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cinescope/view/general_page.dart';

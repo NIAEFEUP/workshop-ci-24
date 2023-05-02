@@ -3,7 +3,7 @@ import 'package:cinescope/view/search_bar/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cinescope/model/film.dart';
-import 'package:cinescope/view/generic_film_card.dart';
+import 'package:cinescope/view/cards/generic_film_card.dart';
 
 class SearchPage extends GeneralPage {
   const SearchPage({super.key});

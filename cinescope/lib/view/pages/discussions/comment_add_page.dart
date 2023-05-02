@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-import '../simple_dialog.dart';
+import '../../simple_dialog.dart';
 
 class CommentAddPage extends GeneralPage {
   final Discussion _discussion;

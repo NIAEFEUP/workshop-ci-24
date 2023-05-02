@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/view/pages/film_page.dart';
-import 'package:cinescope/view/generic_film_card.dart';
+import 'package:cinescope/view/cards/generic_film_card.dart';
 import 'package:mockito/annotations.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:mockito/mockito.dart';

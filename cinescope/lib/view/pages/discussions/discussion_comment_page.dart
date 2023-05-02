@@ -1,6 +1,6 @@
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/view/general_page.dart';
-import 'package:cinescope/view/pages/comment_add_page.dart';
+import 'package:cinescope/view/pages/discussions/comment_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
