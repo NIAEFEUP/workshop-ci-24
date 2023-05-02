@@ -24,7 +24,7 @@ void main() {
     final film =
         Film("1", 'Inception', 'Movie', 2010, 'https://via.placeholder.com/150',
             description: "Very nice movie",
-            cast: Map.identity(),
+            cast: [],
             duration: "200 hours",
             rating: 10);
     testWidgets("renders correctly", (tester) async {
@@ -56,9 +56,7 @@ void main() {
       FlutterError.onError = prevOnError;
 
       expect(find.text(film.title), findsOneWidget);
-      expect(find.text("Release Year: ${film.year}"), findsOneWidget);
-      expect(find.text('Duration: ${film.duration}'), findsOneWidget);
-      expect(find.text('Rating: ${film.rating}'), findsOneWidget);
+      expect(find.text("${film.type}  •  ${film.year}"), findsOneWidget);
     });
   });
 }
