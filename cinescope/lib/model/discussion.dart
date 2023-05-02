@@ -1,7 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 //FIXME: remove this class when profile editing is done
-class Profile {}
+class Profile {
+
+  const Profile();
+
+  factory Profile.fromMap(Map<String, dynamic> map){
+    return const Profile();
+  }
+
+  Map<String, dynamic> toMap() => {};
+}
 
 class Comment {
   final String content;
@@ -42,16 +51,20 @@ class Discussion {
     if (data == null) {
       throw Exception("Something went wrong while building ");
     }
-    List<Comment> comments = (data["comments"] as List<Map<String, dynamic>>)
-      .map((element) => Comment.fromMap(element)).toList();
-    
+    print(data);
+    List<Comment> comments = []; 
+    if(!data["comments"].isEmpty){
+      comments = data["comments"]
+        .map((element) => Comment.fromMap(element)).toList();
+    }
+
     return Discussion(
       snapshot.id,
       data["filmId"],
       data["title"], 
       data["description"], 
-      data["createdBy"], 
-      data["creationDate"], 
+      Profile.fromMap(data["createdBy"]), 
+      data["creationDate"].toDate(), 
       comments);
   }
 
@@ -59,8 +72,8 @@ class Discussion {
     "filmId": filmId,
     "title": title,
     "description": description,
-    "createdBy": createdBy,
-    "creationDate": creationDate,
+    "createdBy": createdBy.toMap(),
+    "creationDate": creationDate.toIso8601String(),
     "comments": comments.map((e) => e.toMap()).toList()
   };
 

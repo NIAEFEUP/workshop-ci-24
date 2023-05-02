@@ -1,8 +1,10 @@
 import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/view/general_page.dart';
+import 'package:cinescope/view/pages/discussion_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:provider/provider.dart';
 
 class DiscussionListPage extends GeneralPage {
@@ -14,7 +16,7 @@ class DiscussionListPage extends GeneralPage {
                 child:FloatingActionButton(
                   backgroundColor: const Color(0xFFD7CCCF),
                   onPressed: () {
-                    print("siuuu");
+                    navService.push(MaterialPageRoute(builder: (context) => DiscussionAddPage(filmId)));
                   },
                   child: const FaIcon(FontAwesomeIcons.plus, color: Colors.black,),
                 )));
@@ -39,9 +41,12 @@ class DiscussionListPageState extends GeneralPageState<DiscussionListPage> {
                     return buildDiscussionCard(context);
                   } else if (!snapshot.hasError) {
                     return const Text("Loading...");
+                  } else {
+                    print(snapshot.error.toString());
+                    return const Text(
+                        "Something went wrong while loading discussions...");
                   }
-                  return const Text(
-                      "Something went wrong while loading discussions...");
+
                 }),
               )),
     ];

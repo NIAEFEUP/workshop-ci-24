@@ -7,6 +7,7 @@ import 'package:cinescope/view/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
       title: 'CineScope',
+      navigatorKey: NavigationService.navigationKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           useMaterial3: true,
