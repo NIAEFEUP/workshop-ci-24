@@ -11,7 +11,7 @@ class FilmDetailsScraper {
     String duration = filmData['duration'];
     String description = filmData['description'];
     double rating = filmData['rating'].toDouble();
-    Map<String, Map<String, List<String>>> cast = filmData['cast'];
+    List<dynamic> cast = filmData['cast'];
 
     final film = Film(filmId, title, type, year, imgUrl, 
           duration:duration,
