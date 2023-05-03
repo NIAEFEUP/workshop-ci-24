@@ -40,8 +40,10 @@ class ProfileProvider extends ChangeNotifier {
       profile.id ??= ownProfile ? uid : null;
     } else if (profile != null) {
       try {
+        print(profile.picPath);
         profile.imageData =
-            await FirebaseStorage.instance.ref(_profile.picPath).getData();
+            await FirebaseStorage.instance.ref(
+            profile.picPath).getData();
       } catch (e) {
         print(e.toString());
       }
