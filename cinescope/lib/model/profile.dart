@@ -1,23 +1,32 @@
+import 'dart:typed_data';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Profile {
-  final String userId, name, bio, pic;
+  final String name, bio;
+  String picPath;
+  String? id;
+  Uint8List? imageData;
 
+  Profile(this.name, this.bio, this.picPath, {this.id, this.imageData});
 
-  Profile(
-    this.userId,
-    this.name,
-    this.bio,
-    this.pic,
-    );
+  Profile.empty()
+      : //userId = '',
+        name = '',
+        bio = '',
+        picPath = '';
 
-  @override
-  String toString() {
-    return 'Profile{name: $name, bio: $bio, pic: $pic, userId: $userId)}';
+  factory Profile.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final data = snapshot.data();
+    if (data == null) {
+      throw Exception("Something went wrong while building ");
+    }
+    return Profile(data["name"], data["bio"], data["image"], id: snapshot.id);
   }
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Profile && other.userId == userId; //only need to check id, because it's unique
-  }
+  Map<String, dynamic> toFirestore() =>
+      {"name": name, "bio": bio, "image": picPath};
 }

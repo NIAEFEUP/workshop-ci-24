@@ -53,7 +53,7 @@ class BottomBarState extends State<BottomBar> {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ProfilePage(FirebaseAuth.instance.currentUser!.uid)));
+                          builder: (context) => const ProfilePage()));
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.solidUser,
