@@ -18,6 +18,7 @@ class DiscussionCard extends StatelessWidget{
               builder: (context) => DiscussionCommentPage(discussion)));
         },
         child: Card(
+            key: const Key("discussion-card"),
             child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
