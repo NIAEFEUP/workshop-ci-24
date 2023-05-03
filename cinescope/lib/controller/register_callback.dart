@@ -8,4 +8,5 @@ Future<void> registerCallback() async{
   final CollectionReference watchlists = FirebaseFirestore.instance.collection("watchlists");
   
   await watchlists.doc(userUid).set({"movies":[]});
+  await watchlists.doc(userUid).set({"discussions":[]});
 }
