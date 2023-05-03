@@ -9,9 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 class WatchlistProvider extends ChangeNotifier {
-  WatchlistProvider() {
+  late final FirebaseAuth _authInstance;
+  late final FirebaseFirestore _storeInstance;
+
+  WatchlistProvider({FirebaseAuth? auth, FirebaseFirestore? store}) 
+    : _authInstance = auth ?? FirebaseAuth.instance, 
+      _storeInstance = store ?? FirebaseFirestore.instance
+  {
     _getWatchlist();
-    FirebaseAuth.instance
+    _authInstance
         .authStateChanges()
         .asBroadcastStream(onListen: _authChange);
   }
@@ -27,15 +33,15 @@ class WatchlistProvider extends ChangeNotifier {
   }
 
   Future<void> _getWatchlist() async {
-    if (FirebaseAuth.instance.currentUser != null) {
-      final watchlistsRef = FirebaseFirestore.instance
+    if (_authInstance.currentUser != null) {
+      final watchlistsRef = _storeInstance
           .collection("watchlists")
           .withConverter(
               fromFirestore: (snapshot, options) =>
                   Watchlist.fromFirestore(snapshot, options),
               toFirestore: (film, _) => film.toFirestore());
       _watchlist = (await watchlistsRef
-              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .doc(_authInstance.currentUser!.uid)
               .get())
           .data()!;
       await _watchlist.parseFilmsInWatchlist();
@@ -46,7 +52,7 @@ class WatchlistProvider extends ChangeNotifier {
   Future<void> addFilmToWatchlist(String filmId) async {
     if (_watchlist.movieIds.contains(filmId)) return;
     _watchlist.movieIds.add(filmId);
-    final watchlistsRef = FirebaseFirestore.instance
+    final watchlistsRef = _storeInstance
         .collection("watchlists")
         .withConverter(
             fromFirestore: (snapshot, options) =>
@@ -54,7 +60,7 @@ class WatchlistProvider extends ChangeNotifier {
             toFirestore: (film, _) => film.toFirestore());
     notifyListeners();
     await watchlistsRef
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(_authInstance.currentUser!.uid)
         .set(_watchlist);
     FilmDetailsScraper.getFilmDetails(filmId).then((value) {
       _watchlist.movies.add(value);
@@ -68,7 +74,7 @@ class WatchlistProvider extends ChangeNotifier {
     _watchlist.movies.remove(film);
 
     notifyListeners();
-    final watchlistsRef = FirebaseFirestore.instance
+    final watchlistsRef = _storeInstance
         .collection("watchlists")
         .withConverter(
             fromFirestore: (snapshot, options) =>
@@ -76,8 +82,7 @@ class WatchlistProvider extends ChangeNotifier {
             toFirestore: (film, _) => film.toFirestore());
 
     await watchlistsRef
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(_authInstance.currentUser!.uid)
         .set(_watchlist);
-
   }
 }

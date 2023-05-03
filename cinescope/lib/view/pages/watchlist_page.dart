@@ -21,7 +21,7 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
           final List<Widget> cards = [];
           final Set<String> ids = {};
           if (value.getWatchlist().movies.isEmpty) {
-            return const Text("Couldn't find any movies in the watchlist...");
+            return const Text("Your watchlist is empty...");
           }
           int i = 0;
           for (final film in value.getWatchlist().movies) {
