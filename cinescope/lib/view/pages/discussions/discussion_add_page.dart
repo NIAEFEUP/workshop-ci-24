@@ -2,6 +2,8 @@ import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/view/general_page.dart';
 import 'package:cinescope/view/simple_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +69,7 @@ class DiscussionAddPageState extends GeneralPageState<DiscussionAddPage> {
                         widget.filmId,
                         _titleController.text,
                         _bodyController.text,
-                        "pog",
+                        FirebaseAuth.instance.currentUser!.uid,
                         DateTime.now(), []))
                     .then((value) => Navigator.of(context).pop());
               },

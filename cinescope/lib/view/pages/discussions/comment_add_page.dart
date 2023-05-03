@@ -1,6 +1,7 @@
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/view/general_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
                     .addCommentToDiscussion(
                         widget._discussion,
                         Comment(_editingController.text, DateTime.now(),
-                            "siuu"))
+                        FirebaseAuth.instance.currentUser!.uid))
                     .then((value) => Navigator.of(context).pop());
               },
               child: const Text("Send comment")))

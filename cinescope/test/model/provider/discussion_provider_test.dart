@@ -82,7 +82,7 @@ void main() {
 
       final profileMock = MockProfileProvider();
       final discussionProvider =
-          DiscussionProvider(profileMock,auth: authMock, store: storageMock);
+          DiscussionProvider(auth: authMock, store: storageMock);
       final set = await discussionProvider.getDiscussionsByFilmId("tt1234");
 
       expect(set.length, 2);
@@ -111,7 +111,7 @@ void main() {
       final profileMock = MockProfileProvider();
 
       final discussionProvider =
-          DiscussionProvider(profileMock,auth: authMock, store: storageMock);
+          DiscussionProvider(auth: authMock, store: storageMock);
       await discussionProvider.addNewDiscussion(discussion2);
 
       final count =

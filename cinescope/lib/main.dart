@@ -37,12 +37,9 @@ class MyApp extends StatelessWidget {
           //list of providers to add
           ChangeNotifierProvider(create: (context) => WatchlistProvider()),
           ChangeNotifierProvider(create: (context) => ProfileProvider()),
-          ChangeNotifierProxyProvider<ProfileProvider, DiscussionProvider>(
-            create: (context) => DiscussionProvider(Provider.of<ProfileProvider>(context)),
-            update: (context, value, previous) {
-              previous!.rerender();
-              return previous;
-            },
+          ChangeNotifierProvider<DiscussionProvider>(
+            create: (context) =>
+                DiscussionProvider(),
           ),
         ],
         child: MaterialApp(
