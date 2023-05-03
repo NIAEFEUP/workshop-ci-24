@@ -42,7 +42,7 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
   @override
   Widget getTitle(BuildContext context) {
     return const Text(
-      "Watchlist:",
+      "Your Watchlist",
       textAlign: TextAlign.left,
       textScaleFactor: 2.2,
     );

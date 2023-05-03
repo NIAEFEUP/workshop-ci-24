@@ -3,6 +3,7 @@ import 'package:cinescope/view/pages/main_page.dart';
 import 'package:cinescope/view/pages/profile_page.dart';
 import 'package:cinescope/view/pages/search_page.dart';
 import 'package:cinescope/view/pages/watchlist_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
