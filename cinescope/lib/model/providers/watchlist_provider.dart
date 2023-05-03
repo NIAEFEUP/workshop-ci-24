@@ -11,10 +11,12 @@ import 'package:logger/logger.dart';
 class WatchlistProvider extends ChangeNotifier {
   late final FirebaseAuth _authInstance;
   late final FirebaseFirestore _storeInstance;
+  late final FilmDetailsScraper _filmDetailsScraper;
 
-  WatchlistProvider({FirebaseAuth? auth, FirebaseFirestore? store}) 
+  WatchlistProvider({FirebaseAuth? auth, FirebaseFirestore? store, FilmDetailsScraper? filmDetailsScraper}) 
     : _authInstance = auth ?? FirebaseAuth.instance, 
-      _storeInstance = store ?? FirebaseFirestore.instance
+      _storeInstance = store ?? FirebaseFirestore.instance,
+      _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper()
   {
     _getWatchlist();
     _authInstance
@@ -62,7 +64,7 @@ class WatchlistProvider extends ChangeNotifier {
     await watchlistsRef
         .doc(_authInstance.currentUser!.uid)
         .set(_watchlist);
-    FilmDetailsScraper.getFilmDetails(filmId).then((value) {
+    _filmDetailsScraper.getFilmDetails(filmId).then((value) {
       _watchlist.movies.add(value);
       notifyListeners();
     });

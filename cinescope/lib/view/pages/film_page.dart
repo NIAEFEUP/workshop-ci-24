@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 
 class FilmPage extends GeneralPage {
   final String id;
-  const FilmPage(this.id, {super.key});
+  late final FilmDetailsScraper _filmDetailsScraper;
+  FilmPage(this.id, {super.key, FilmDetailsScraper? filmDetailsScraper})
+    : _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper();
 
   @override
   State<StatefulWidget> createState() => FilmPageState();
@@ -98,7 +100,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
   List<Widget> getBody(BuildContext context) {
     return [
       FutureBuilder(
-        future: FilmDetailsScraper.getFilmDetails(widget.id),
+        future: widget._filmDetailsScraper.getFilmDetails(widget.id),
         builder: ((BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null || snapshot.hasError) {
