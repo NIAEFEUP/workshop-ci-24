@@ -21,33 +21,33 @@ void main() {
       "tt1234",
       "Discussion Title",
       "Discussion Description",
-      const Profile(),
+      "siuuuuuuuuu",
       DateTime(
         2022,
       ),
-      [Comment("siuu", DateTime.now(), const Profile())]);
+      [Comment("siuu", DateTime.now(), "siuuuuuuuuu")]);
 
   final Discussion discussion2 = Discussion(
       "",
       "tt1234",
       "Discussion Title 2",
       "Discussion Description 2",
-      const Profile(),
+      "siuuuuuuuuu",
       DateTime(
         2022,
       ),
-      [Comment("siuu", DateTime.now(), const Profile())]);
+      [Comment("siuu", DateTime.now(), "siuuuuuuuuu")]);
 
   final Discussion discussion3 = Discussion(
       "",
       "not pog film id",
       "Discussion Title 2",
       "Discussion Description 2",
-      const Profile(),
+      "siuuuuuuuuu",
       DateTime(
         2022,
       ),
-      [Comment("siuu", DateTime.now(), const Profile())]);
+      [Comment("siuu", DateTime.now(), "siuuuuuuuuu")]);
 
   group('Discussion List Page', () {
     testWidgets("renders the correct ammount of cards", (widgetTester) async {

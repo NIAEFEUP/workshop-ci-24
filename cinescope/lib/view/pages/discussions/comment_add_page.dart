@@ -51,7 +51,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
                     .addCommentToDiscussion(
                         widget._discussion,
                         Comment(_editingController.text, DateTime.now(),
-                            const Profile()))
+                            "siuu"))
                     .then((value) => Navigator.of(context).pop());
               },
               child: const Text("Send comment")))

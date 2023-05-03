@@ -1,32 +1,23 @@
+import 'package:cinescope/model/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//FIXME: remove this class when profile editing is done
-class Profile {
-
-  const Profile();
-
-  factory Profile.fromMap(Map<String, dynamic> map){
-    return const Profile();
-  }
-
-  Map<String, dynamic> toMap() => {};
-}
 
 class Comment {
   final String content;
   final DateTime creationTime;
-  final Profile createdBy;
+  final String createdById;
+  late Profile? createdBy;
 
-  Comment(this.content, this.creationTime, this.createdBy);
+  Comment(this.content, this.creationTime, this.createdById);
 
   factory Comment.fromMap(Map<String, dynamic> map){
-    return Comment(map["content"], DateTime.parse(map["creationTime"]), Profile.fromMap(map["createdBy"]));
+    return Comment(map["content"], DateTime.parse(map["creationTime"]), map["createdBy"]);
   }
 
   Map<String,dynamic> toMap() => {
     "content" : content,
     "creationTime": creationTime.toIso8601String(),
-    "createdBy": createdBy.toMap()
+    "createdBy": createdById
   };
 
 }
@@ -36,11 +27,12 @@ class Discussion {
   final String filmId;
   final String title;
   final String description;
-  final Profile createdBy;
+  final String createdById;
+  late Profile? createdBy;
   final DateTime creationDate;
   final List<Comment> comments;
 
-  Discussion(this.id, this.filmId,this.title, this.description, this.createdBy, this.creationDate,
+  Discussion(this.id, this.filmId,this.title, this.description, this.createdById, this.creationDate,
       this.comments);
 
   factory Discussion.fromFirestore(
@@ -64,7 +56,7 @@ class Discussion {
       data["filmId"],
       data["title"], 
       data["description"], 
-      Profile.fromMap(data["createdBy"]), 
+      data["createdBy"], 
       DateTime.parse(data["creationDate"]), 
       comments);
   }
@@ -73,7 +65,7 @@ class Discussion {
     "filmId": filmId,
     "title": title,
     "description": description,
-    "createdBy": createdBy.toMap(),
+    "createdBy": createdById,
     "creationDate": creationDate.toIso8601String(),
     "comments": comments.map((e) => e.toMap()).toList()
   };

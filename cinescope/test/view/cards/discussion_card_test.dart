@@ -17,11 +17,11 @@ void main() {
       "tt1234",
       "Discussion Title",
       "Discussion Description",
-      const Profile(),
+      "siuuuuuuu",
       DateTime(
         2022,
       ),
-      [Comment("siuu", DateTime.now(), const Profile())]);
+      [Comment("siuu", DateTime.now(), "siuuuuuuu")]);
 
   group('Discussion card', () {
     testWidgets("renders correctly", (widgetTester) async {

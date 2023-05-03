@@ -36,28 +36,34 @@ class MyApp extends StatelessWidget {
         providers: [
           //list of providers to add
           ChangeNotifierProvider(create: (context) => WatchlistProvider()),
-          ChangeNotifierProvider(create: (context) => DiscussionProvider()),
-          ChangeNotifierProvider(create: (context) => ProfileProvider())
+          ChangeNotifierProvider(create: (context) => ProfileProvider()),
+          ChangeNotifierProxyProvider<ProfileProvider, DiscussionProvider>(
+            create: (context) => DiscussionProvider(Provider.of<ProfileProvider>(context)),
+            update: (context, value, previous) {
+              previous!.rerender();
+              return previous;
+            },
+          ),
         ],
         child: MaterialApp(
-      title: 'CineScope',
-      navigatorKey: NavigationService.navigationKey,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: const ColorScheme(
-              brightness: Brightness.dark,
-              primary: Color(0xFFF0EDEE),
-              secondary: Color(0xFF90DDF0),
-              surface: Color(0XFF2C666E),
-              background: Color(0XFF07393C),
-              error: Colors.redAccent,
-              onBackground: Color(0xFFF0EDEE),
-              onPrimary: Color(0xFFF0EDEE),
-              onSecondary: Color(0xFFF0EDEE),
-              onSurface: Color(0xFFF0EDEE),
-              onError: Color(0xFF0A090C))),
-      home: startingWidget,
-    ));
+          title: 'CineScope',
+          navigatorKey: NavigationService.navigationKey,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              useMaterial3: true,
+              colorScheme: const ColorScheme(
+                  brightness: Brightness.dark,
+                  primary: Color(0xFFF0EDEE),
+                  secondary: Color(0xFF90DDF0),
+                  surface: Color(0XFF2C666E),
+                  background: Color(0XFF07393C),
+                  error: Colors.redAccent,
+                  onBackground: Color(0xFFF0EDEE),
+                  onPrimary: Color(0xFFF0EDEE),
+                  onSecondary: Color(0xFFF0EDEE),
+                  onSurface: Color(0xFFF0EDEE),
+                  onError: Color(0xFF0A090C))),
+          home: startingWidget,
+        ));
   }
 }

@@ -1,11 +1,18 @@
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
+import 'package:cinescope/model/providers/profile_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'discussion_provider_test.mocks.dart';
+
+@GenerateMocks([], customMocks: [
+  MockSpec<ProfileProvider>(onMissingStub: OnMissingStub.returnDefault)
+])
 void main() {
   group("Discussion Provider", () {
     final Discussion discussion = Discussion(
@@ -13,33 +20,33 @@ void main() {
         "tt1234",
         "Discussion Title",
         "Discussion Description",
-        const Profile(),
+        "siuuuuuuu",
         DateTime(
           2022,
         ),
-        [Comment("siuu", DateTime.now(), const Profile())]);
+        [Comment("siuu", DateTime.now(), "siuuuuuuu")]);
 
     final Discussion discussion2 = Discussion(
         "",
         "tt1234",
         "Discussion Title 2",
         "Discussion Description 2",
-        const Profile(),
+        "siuuuuuuu",
         DateTime(
           2022,
         ),
-        [Comment("siuu", DateTime.now(), const Profile())]);
+        [Comment("siuu", DateTime.now(), "siuuuuuuu")]);
 
     final Discussion discussion3 = Discussion(
         "",
         "not pog film id",
         "Discussion Title 2",
         "Discussion Description 2",
-        const Profile(),
+        "siuuuuuuu",
         DateTime(
           2022,
         ),
-        [Comment("siuu", DateTime.now(), const Profile())]);
+        [Comment("siuu", DateTime.now(), "siuuuuuuu")]);
 
     testWidgets("generates discussions for film correctly",
         (widgetTester) async {
@@ -73,8 +80,9 @@ void main() {
           .doc("sus")
           .set(discussion3);
 
+      final profileMock = MockProfileProvider();
       final discussionProvider =
-          DiscussionProvider(auth: authMock, store: storageMock);
+          DiscussionProvider(profileMock,auth: authMock, store: storageMock);
       final set = await discussionProvider.getDiscussionsByFilmId("tt1234");
 
       expect(set.length, 2);
@@ -100,8 +108,10 @@ void main() {
           .doc("siuu")
           .set(discussion);
 
+      final profileMock = MockProfileProvider();
+
       final discussionProvider =
-          DiscussionProvider(auth: authMock, store: storageMock);
+          DiscussionProvider(profileMock,auth: authMock, store: storageMock);
       await discussionProvider.addNewDiscussion(discussion2);
 
       final count =
