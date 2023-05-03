@@ -24,16 +24,22 @@ class ProfilePageState extends GeneralPageState<ProfilePage> {
           final profile = value.getProfile();
           _nameController.text = profile.name;
           _bioController.text = profile.bio;
+          Widget avatar = profile.imageData != null
+              ? CircleAvatar(
+                  radius: 100,
+                  backgroundImage: MemoryImage(
+                    profile.imageData!,
+                  ))
+              : const CircleAvatar(
+                  radius: 100,
+                  backgroundImage: AssetImage(
+                    "assets/profile-placeholder.png",
+                  ));
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 16),
-              CircleAvatar(
-                radius: 64,
-                child: profile.imageData != null
-                    ? Image.memory(profile.imageData!)
-                    : Image.asset("assets/profile-placeholder.png"),
-              ),
+              avatar,
               const SizedBox(height: 16),
               TextField(
                   maxLines: 1,
