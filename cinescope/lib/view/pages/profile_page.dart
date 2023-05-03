@@ -64,12 +64,14 @@ class ProfilePageState extends GeneralPageState<ProfilePage> {
                     value.rerender();
                   },
                   child: const Text("Add image")),
-              const SizedBox(height: 8),
+              const SizedBox(height: 40),
               TextButton(
                   style: const ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll(Color(0XFF2C666E))),
                   onPressed: () async {
+                    profile.bio = _bioController.text;
+                    profile.name = _nameController.text;
                     value.saveProfile(profile);
                   },
                   child: const Text("Edit profile")),

@@ -25,38 +25,49 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> _getProfile() async {
-    if (FirebaseAuth.instance.currentUser != null) {
-      final watchlistsRef = FirebaseFirestore.instance
-          .collection("profiles")
-          .withConverter(
-              fromFirestore: (snapshot, options) =>
-                  Profile.fromFirestore(snapshot, options),
-              toFirestore: (film, _) => film.toFirestore());
-      _profile = (await watchlistsRef
-              .doc(FirebaseAuth.instance.currentUser!.uid)
-              .get())
-          .data()!;
-      notifyListeners();
-      _profile.imageData =
-          await FirebaseStorage.instance.ref(_profile.picPath).getData();
-      notifyListeners();
+  Future<void> _getProfile({String? uid}) async {
+    final ownProfile = uid == null;
+    uid ??= FirebaseAuth.instance.currentUser!.uid;
+    final watchlistsRef = FirebaseFirestore.instance
+        .collection("profiles")
+        .withConverter(
+            fromFirestore: (snapshot, options) =>
+                Profile.fromFirestore(snapshot, options),
+            toFirestore: (film, _) => film.toFirestore());
+    Profile? profile = (await watchlistsRef.doc(uid).get()).data();
+    if (profile == null && ownProfile) {
+      profile = Profile.empty();
+      profile.id ??= ownProfile ? uid : null;
+    } else if (profile != null) {
+      try {
+        profile.imageData =
+            await FirebaseStorage.instance.ref(_profile.picPath).getData();
+      } catch (e) {
+        print(e.toString());
+      }
     }
+
+    if (ownProfile) {
+      _profile = profile!;
+    }
+    notifyListeners();
   }
 
   Future<void> saveProfile(Profile profile) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    profile.picPath =
-        "images/profiles/${FirebaseAuth.instance.currentUser!.uid}.png";
+    profile.picPath = "images/profiles/${profile.id!}}.png";
     await firestore
         .collection('profiles')
         .withConverter(
             fromFirestore: (snapshot, options) =>
                 Profile.fromFirestore(snapshot, options),
             toFirestore: (film, _) => film.toFirestore())
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(profile.id)
         .set(profile);
+    if (profile.id == FirebaseAuth.instance.currentUser!.uid) {
+      _profile = profile;
+    }
     notifyListeners();
     await FirebaseStorage.instance
         .ref(profile.picPath)

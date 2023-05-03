@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Profile {
-  final String name, bio;
+  String name, bio;
   String picPath;
   String? id;
   Uint8List? imageData;
