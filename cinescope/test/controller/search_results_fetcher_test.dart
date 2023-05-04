@@ -122,8 +122,8 @@ void main() {
       List<Film> expectedFilms = [
         Film("tt0389790", "Bee Movie", "Movie", 2007, "https://m.media-amazon.com/images/M/MV5BMjE1MDYxOTA4MF5BMl5BanBnXkFtZTcwMDE0MDUzMw@@._V1_.jpg",),
         Film("tt3336368", "Maya the Bee Movie", "Movie", 2014, "https://m.media-amazon.com/images/M/MV5BMjE3NTYyMjQwMV5BMl5BanBnXkFtZTgwNzk5MjQxMzE@._V1_.jpg",),
-        Film("tt22461166", "Bee Movie: Repollinated", "Movie", -1, SearchResultsFetcher.defaultFilmImgUrl),
-        Film("tt3340430", "Bobbee Bee the Hater the Movie", "Movie", 2013, SearchResultsFetcher.defaultFilmImgUrl),
+        Film("tt22461166", "Bee Movie: Repollinated", "Movie", -1, ""),
+        Film("tt3340430", "Bobbee Bee the Hater the Movie", "Movie", 2013, ""),
         Film("tt15486810", "Teen Wolf: The Movie", "Movie", 2023, "https://m.media-amazon.com/images/M/MV5BYWYyZWU5NzctYjY4Zi00MzYyLTgxZTMtZjBmYWE2NGMwYTllXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg",),
         Film("tt4877122", "The Emoji Movie", "Movie", 2017, "https://m.media-amazon.com/images/M/MV5BMTkzMzM3OTM2Ml5BMl5BanBnXkFtZTgwMDM0NDU3MjI@._V1_.jpg",),
         Film("tt13186528", "Ben 10 vs. the Universe: The Movie", "Movie", 2020, "https://m.media-amazon.com/images/M/MV5BMTE5NmEyYjctNzNhMi00YjI2LTgwZTctZWZjODgwNjA4M2E4XkEyXkFqcGdeQXVyODcxOTE0Mzc@._V1_.jpg",),

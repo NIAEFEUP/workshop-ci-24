@@ -1,5 +1,6 @@
 import 'package:cinescope/controller/register_callback.dart';
 import 'package:cinescope/firebase_options.dart';
+import 'package:cinescope/model/providers/profile_provider.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/pages/main_login_page.dart';
 import 'package:cinescope/view/pages/main_page.dart';
@@ -33,25 +34,26 @@ class MyApp extends StatelessWidget {
         providers: [
           //list of providers to add
           ChangeNotifierProvider(create: (context) => WatchlistProvider()),
+          ChangeNotifierProvider(create: (context) => ProfileProvider())
         ],
         child: MaterialApp(
-      title: 'CineScope',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: const ColorScheme(
-              brightness: Brightness.dark,
-              primary: Color(0xFFF0EDEE),
-              secondary: Color(0xFF90DDF0),
-              surface: Color(0XFF2C666E),
-              background: Color(0XFF07393C),
-              error: Colors.redAccent,
-              onBackground: Color(0xFFF0EDEE),
-              onPrimary: Color(0xFFF0EDEE),
-              onSecondary: Color(0xFFF0EDEE),
-              onSurface: Color(0xFFF0EDEE),
-              onError: Color(0xFF0A090C))),
-      home: startingWidget,
-    ));
+          title: 'CineScope',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              useMaterial3: true,
+              colorScheme: const ColorScheme(
+                  brightness: Brightness.dark,
+                  primary: Color(0xFFF0EDEE),
+                  secondary: Color(0xFF90DDF0),
+                  surface: Color(0XFF2C666E),
+                  background: Color(0XFF07393C),
+                  error: Colors.redAccent,
+                  onBackground: Color(0xFFF0EDEE),
+                  onPrimary: Color(0xFFF0EDEE),
+                  onSecondary: Color(0xFFF0EDEE),
+                  onSurface: Color(0xFFF0EDEE),
+                  onError: Color(0xFF0A090C))),
+          home: startingWidget,
+        ));
   }
 }

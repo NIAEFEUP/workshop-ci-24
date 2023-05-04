@@ -3,6 +3,7 @@ import 'package:cinescope/view/pages/main_page.dart';
 import 'package:cinescope/view/pages/profile_page.dart';
 import 'package:cinescope/view/pages/search_page.dart';
 import 'package:cinescope/view/pages/watchlist_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -82,22 +83,25 @@ class BottomBarState extends State<BottomBar> {
                     ),
                   ),
                   Container(
-                      color: const Color(0xFFD7CCCF),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const SearchPage()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0x00000000),
-                            fixedSize: const Size.square(60),
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)))),
-                        key: const Key("search"),
-                        child: const FaIcon(FontAwesomeIcons.magnifyingGlass,
-                            color: Colors.black),
-                      ))
+                    //Color(0xFFD7CCCF)
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFD7CCCF),
+                        borderRadius: BorderRadius.circular(20)),
+                    height: 60,
+                    width: 60,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const SearchPage()));
+                      },
+                      icon: const FaIcon(
+                        FontAwesomeIcons.search,
+                        color: Colors.black,
+                        size: 25,
+                      ),
+                      key: const Key("search"),
+                    ),
+                  )
                 ]))
         : Container();
   }
