@@ -1,6 +1,5 @@
 on: pull_request
 
-
 jobs:
   tests:
     name: Run unit tests
