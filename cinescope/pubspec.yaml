@@ -39,7 +39,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.4.0
   http_parser: ^4.0.2
   http: ^0.13.4
-  flutter_html: ^2.2.1
+  flutter_html: ^3.0.0-alpha.6
   firebase_auth: ^4.3.0
   google_sign_in: ^6.0.2
   firebase_core: ^2.8.0
@@ -59,11 +59,6 @@ dev_dependencies:
   glob: ^2.1.1
   flutter_launcher_icons: "^0.13.1"
 
-flutter_launcher_icons:
-android: true #"launcher_icon" #ios: true
-image _path: "assets/splash- logo.png" 
-adaptive_icon_background: "#07393C"
-adaptive_icon_foreground: "assets/android/logo.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -73,6 +68,8 @@ adaptive_icon_foreground: "assets/android/logo.png"
   flutter_lints: ^2.0.0
   network_image_mock: ^2.0.1
   mockito: ^5.4.0
+
+
 
 
 
