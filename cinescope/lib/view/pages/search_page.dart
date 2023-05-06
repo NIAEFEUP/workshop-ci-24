@@ -26,8 +26,18 @@ class SearchPageState extends GeneralPageState<SearchPage> {
   List<Widget> getBody(BuildContext context) {
     if (films.isEmpty && searchTimes != 0) {
       return [
-        const Text("Couldn't find any movie or tv series...",
-            key: Key("errorNotFound"))
+        const SizedBox(
+            height: 500,
+            child: Center(
+              child: Text(
+                'No results found',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ))
       ];
     }
     searchTimes++;

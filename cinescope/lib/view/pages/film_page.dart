@@ -11,7 +11,7 @@ class FilmPage extends GeneralPage {
   final String id;
   late final FilmDetailsScraper _filmDetailsScraper;
   FilmPage(this.id, {super.key, FilmDetailsScraper? filmDetailsScraper})
-    : _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper();
+      : _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper();
 
   @override
   State<StatefulWidget> createState() => FilmPageState();
@@ -105,7 +105,18 @@ class FilmPageState extends GeneralPageState<FilmPage> {
         builder: ((BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null || snapshot.hasError) {
-              return const Text('Error: Failed to load film data');
+              return const SizedBox(
+                  height: 500,
+                  child: Center(
+                    child: Text(
+                      'This film has no available data',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ));
             } else {
               final Film film = snapshot.data!;
               return Column(
@@ -169,16 +180,15 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                             (states) =>
                                                 const Color(0xffD7CCCF))),
                               ),
-                              
                               const Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10)),
                               IconButton(
-                                  icon:
-                                      const FaIcon(FontAwesomeIcons.comment),
+                                  icon: const FaIcon(FontAwesomeIcons.comment),
                                   onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => DiscussionListPage(widget.id))
-                                    ),
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DiscussionListPage(widget.id))),
                                   iconSize: 30,
                                   color: Colors.black,
                                   style: ButtonStyle(
@@ -186,7 +196,6 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                           MaterialStateProperty.resolveWith(
                                               (states) =>
                                                   const Color(0xffD7CCCF)))),
-                            
                             ],
                           )
                         ],

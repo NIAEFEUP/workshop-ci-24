@@ -91,7 +91,7 @@ class LoginPageState extends State<LoginPage> {
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
                   const Text(
-                    "Login:",
+                    "Login",
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.white, fontSize: 35),
                   ),

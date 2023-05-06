@@ -21,7 +21,18 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
           final List<Widget> cards = [];
           final Set<String> ids = {};
           if (value.getWatchlist().movies.isEmpty) {
-            return const Text("Your watchlist is empty...");
+            return const SizedBox(
+                height: 500,
+                child: Center(
+                  child: Text(
+                    'Your watchlist is empty',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ));
           }
           int i = 0;
           for (final film in value.getWatchlist().movies) {
@@ -41,10 +52,9 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
 
   @override
   Widget getTitle(BuildContext context) {
-    return const Text(
-      "Your Watchlist",
-      textAlign: TextAlign.left,
-      textScaleFactor: 2.2,
-    );
+    return const Padding(
+        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+        child: Text("Your Watchlist",
+            textAlign: TextAlign.left, textScaleFactor: 2.2));
   }
 }
