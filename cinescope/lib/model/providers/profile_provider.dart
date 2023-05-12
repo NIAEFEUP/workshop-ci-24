@@ -9,7 +9,7 @@ import 'package:logger/logger.dart';
 
 class ProfileProvider extends ChangeNotifier {
   ProfileProvider() {
-    _getProfile();
+    getProfileByUid();
     FirebaseAuth.instance
         .authStateChanges()
         .asBroadcastStream(onListen: _authChange);
@@ -21,11 +21,11 @@ class ProfileProvider extends ChangeNotifier {
   void _authChange(StreamSubscription<User?> subscription) async {
     final user = await subscription.asFuture() as User?;
     if (user != null) {
-      await _getProfile();
+      await getProfileByUid();
     }
   }
 
-  Future<void> _getProfile({String? uid}) async {
+  Future<Profile> getProfileByUid({String? uid}) async {
     final ownProfile = uid == null;
     uid ??= FirebaseAuth.instance.currentUser!.uid;
     final watchlistsRef = FirebaseFirestore.instance
@@ -52,7 +52,13 @@ class ProfileProvider extends ChangeNotifier {
     if (ownProfile) {
       _profile = profile!;
     }
+    return profile!;
+  }
+
+  Future<Profile> getProfileByUidReload({String? uid}) async{
+    final profile = await getProfileByUid(uid: uid);
     notifyListeners();
+    return profile;
   }
 
   Future<void> saveProfile(Profile profile) async {

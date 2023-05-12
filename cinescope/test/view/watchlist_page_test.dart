@@ -1,7 +1,7 @@
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/model/watchlist.dart';
-import 'package:cinescope/view/generic_film_card.dart';
+import 'package:cinescope/view/cards/generic_film_card.dart';
 import 'package:cinescope/view/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

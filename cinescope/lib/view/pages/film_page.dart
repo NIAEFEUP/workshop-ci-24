@@ -2,6 +2,7 @@ import 'package:cinescope/controller/film_details_scraper.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/general_page.dart';
+import 'package:cinescope/view/pages/discussions/discussion_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -168,14 +169,16 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                             (states) =>
                                                 const Color(0xffD7CCCF))),
                               ),
-                              /*
+                              
                               const Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10)),
                               IconButton(
                                   icon:
                                       const FaIcon(FontAwesomeIcons.comment),
-                                  onPressed: () {},
+                                  onPressed: () => Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => DiscussionListPage(widget.id))
+                                    ),
                                   iconSize: 30,
                                   color: Colors.black,
                                   style: ButtonStyle(
@@ -183,7 +186,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                           MaterialStateProperty.resolveWith(
                                               (states) =>
                                                   const Color(0xffD7CCCF)))),
-                            */
+                            
                             ],
                           )
                         ],
