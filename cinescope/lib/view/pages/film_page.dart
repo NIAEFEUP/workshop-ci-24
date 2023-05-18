@@ -1,6 +1,7 @@
 import 'package:cinescope/controller/film_details_scraper.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
+import 'package:cinescope/view/cards/page_message.dart';
 import 'package:cinescope/view/general_page.dart';
 import 'package:cinescope/view/pages/discussions/discussion_list_page.dart';
 import 'package:flutter/material.dart';
@@ -105,18 +106,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
         builder: ((BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null || snapshot.hasError) {
-              return const SizedBox(
-                  height: 500,
-                  child: Center(
-                    child: Text(
-                      'This film has no available data',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ));
+              return const PageMessage('No information available');
             } else {
               final Film film = snapshot.data!;
               return Column(
@@ -188,7 +178,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                   onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              DiscussionListPage(widget.id))),
+                                              DiscussionListPage(widget.id, film.title))),
                                   iconSize: 30,
                                   color: Colors.black,
                                   style: ButtonStyle(

@@ -1,7 +1,5 @@
 import 'package:cinescope/model/film.dart';
 import 'package:http/http.dart' as http;
-import 'package:html/dom.dart';
-import 'package:html/parser.dart' as parser;
 import 'dart:convert';
 
 class SearchResultsFetcher {

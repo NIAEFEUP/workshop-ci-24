@@ -4,7 +4,7 @@ extension DurationStringFormatter on Duration{
 
   String toFormattedString(String singularPhrase, String pluralPhrase, {String term = "{}"}){
     if (!singularPhrase.contains(term) || !pluralPhrase.contains(term)) {
-      throw ArgumentError("singularPhrase or plurarPhrase don't have a string that can be formatted...");
+      throw ArgumentError("singularPhrase or plurarPhrase don't have a string that can be formatted");
     }
     if(inSeconds == 1){
       return singularPhrase.replaceAll(formattingRegExp, "$inSeconds second");

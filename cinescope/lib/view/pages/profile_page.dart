@@ -113,6 +113,7 @@ class ProfilePageState extends GeneralPageState<ProfilePage> {
                                 _isEditing = false;
                                 _nameController.text = profile.name;
                                 _bioController.text = profile.bio;
+                                
                               });
                             },
                             child: const Text(

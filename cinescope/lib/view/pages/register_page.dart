@@ -41,7 +41,7 @@ class RegisterPageState extends State<RegisterPage> {
                 context: context,
                 builder: ((context) => AlertDialog(
                       title: const Text("Register failed"),
-                      content: const Text("Email is already in use..."),
+                      content: const Text("This email is already in use"),
                       actions: [
                         TextButton(
                             onPressed: () {
@@ -56,7 +56,7 @@ class RegisterPageState extends State<RegisterPage> {
                 builder: ((context) => AlertDialog(
                       title: const Text("Register failed"),
                       content: const Text(
-                          "Something went wrong while registring..."),
+                          "Something went wrong while registring"),
                       actions: [
                         TextButton(
                             onPressed: () {
@@ -75,7 +75,7 @@ class RegisterPageState extends State<RegisterPage> {
     if (data != null && data == _textEditingControllerPass.text) {
       return null;
     }
-    return "The passwords must match...";
+    return "The passwords must match";
   }
 
   @override

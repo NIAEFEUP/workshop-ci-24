@@ -1,6 +1,6 @@
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
-import 'package:cinescope/view/pages/discussions/discussion_add_page.dart';
+import 'package:cinescope/view/pages/discussions/add_discussion_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

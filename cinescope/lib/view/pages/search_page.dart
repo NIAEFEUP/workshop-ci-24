@@ -1,9 +1,9 @@
 import 'package:cinescope/view/general_page.dart';
 import 'package:cinescope/view/search_bar/search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/view/cards/generic_film_card.dart';
+import 'package:cinescope/view/cards/page_message.dart';
 
 class SearchPage extends GeneralPage {
   const SearchPage({super.key});
@@ -25,31 +25,21 @@ class SearchPageState extends GeneralPageState<SearchPage> {
   @override
   List<Widget> getBody(BuildContext context) {
     if (films.isEmpty && searchTimes != 0) {
-      return [
-        const SizedBox(
-            height: 500,
-            child: Center(
-              child: Text(
-                'No results found',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ))
-      ];
+      return [const PageMessage("No results found")];
     }
     searchTimes++;
-    return [
-      for (var i = 0; i < films.length; i++)
-        GenericFilmCard(films[i], key: Key("genericFilmCard-$i"))
-    ];
+
+    List<Widget> cards = [];
+    for (var i = 0; i < films.length; i++) {
+      cards.add(const SizedBox(height: 7));
+      cards.add(GenericFilmCard(films[i], key: Key("genericFilmCard-$i")));
+    }
+    return cards;
   }
 
   @override
   Widget getTitle(BuildContext context) {
-    return SearchBar(
+    return AppSearchBar(
       pageState: this,
     );
   }

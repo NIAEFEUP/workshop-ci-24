@@ -10,7 +10,8 @@ import '../../simple_dialog.dart';
 
 class CommentAddPage extends GeneralPage {
   final Discussion _discussion;
-  const CommentAddPage(this._discussion, {super.key});
+  final Widget header;
+  const CommentAddPage(this._discussion, this.header, {super.key});
 
   @override
   State<StatefulWidget> createState() => CommentAddPageState();
@@ -22,15 +23,12 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
   @override
   List<Widget> getBody(BuildContext context) {
     return [
-      const Text(
-        "Comment:",
-        textScaleFactor: 1.5,
-      ),
+      widget.header,
       TextField(
         controller: _editingController,
         maxLines: null,
         decoration: const InputDecoration(
-            border: OutlineInputBorder(), hintText: "Enter your comment..."),
+            border: OutlineInputBorder(), labelText: 'Comment'),
       ),
       const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
       Consumer<DiscussionProvider>(
@@ -43,7 +41,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
                       context: context,
                       builder: (context) {
                         return const GenericDialog(
-                            title: "Error:",
+                            title: "Error",
                             content: "You can't have an empty comment");
                       });
                   return;
@@ -55,7 +53,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
                         FirebaseAuth.instance.currentUser!.uid))
                     .then((value) => Navigator.of(context).pop());
               },
-              child: const Text("Send comment")))
+              child: const Text("Send")))
     ];
   }
 
