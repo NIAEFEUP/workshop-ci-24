@@ -1,10 +1,9 @@
 on: pull_request
 
-
 jobs:
   tests:
     name: Run unit tests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         working-directory: ./cinescope
