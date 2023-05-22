@@ -6,8 +6,8 @@
 import 'dart:async' as _i5;
 import 'dart:ui' as _i6;
 
-import 'package:cinescope/controller/film_details_scraper.dart' as _i7;
 import 'package:cinescope/model/film.dart' as _i3;
+import 'package:cinescope/model/providers/film_provider.dart' as _i7;
 import 'package:cinescope/model/providers/watchlist_provider.dart' as _i4;
 import 'package:cinescope/model/watchlist.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -127,30 +127,67 @@ class MockWatchlistProvider extends _i1.Mock implements _i4.WatchlistProvider {
       );
 }
 
-/// A class which mocks [FilmDetailsScraper].
+/// A class which mocks [FilmProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFilmDetailsScraper extends _i1.Mock
-    implements _i7.FilmDetailsScraper {
+class MockFilmProvider extends _i1.Mock implements _i7.FilmProvider {
   @override
-  _i5.Future<_i3.Film> getFilmDetails(String? filmId) => (super.noSuchMethod(
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i5.Future<_i3.Film> getFilm(String? filmId) => (super.noSuchMethod(
         Invocation.method(
-          #getFilmDetails,
+          #getFilm,
           [filmId],
         ),
         returnValue: _i5.Future<_i3.Film>.value(_FakeFilm_1(
           this,
           Invocation.method(
-            #getFilmDetails,
+            #getFilm,
             [filmId],
           ),
         )),
         returnValueForMissingStub: _i5.Future<_i3.Film>.value(_FakeFilm_1(
           this,
           Invocation.method(
-            #getFilmDetails,
+            #getFilm,
             [filmId],
           ),
         )),
       ) as _i5.Future<_i3.Film>);
+  @override
+  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

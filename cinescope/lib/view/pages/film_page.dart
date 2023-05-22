@@ -1,6 +1,8 @@
-import 'package:cinescope/controller/film_details_scraper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinescope/model/film.dart';
+import 'package:cinescope/model/providers/film_provider.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
+import 'package:cinescope/view/cards/cast_card.dart';
 import 'package:cinescope/view/general_page.dart';
 import 'package:cinescope/view/pages/discussions/discussion_list_page.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,7 @@ import 'package:provider/provider.dart';
 
 class FilmPage extends GeneralPage {
   final String id;
-  late final FilmDetailsScraper _filmDetailsScraper;
-  FilmPage(this.id, {super.key, FilmDetailsScraper? filmDetailsScraper})
-    : _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper();
+  const FilmPage(this.id, {super.key});
 
   @override
   State<StatefulWidget> createState() => FilmPageState();
@@ -22,76 +22,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
     List<Widget> cast = [];
 
     film.cast!.forEach((actor) {
-      cast.add(
-        Card(
-          child: Container(
-            width: 160,
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text(actor['name']),
-                          content: Text(actor['characters'].join(', ')),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('Close'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        actor['name'],
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        actor['characters'].join(', '),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 15),
-                      Center(
-                          child: ClipRect(
-                              child: FadeInImage(
-                        placeholder:
-                            const AssetImage('assets/default-actor-image.png'),
-                        height: 180,
-                        image: actor['imgUrl'].isEmpty
-                            ? const AssetImage('assets/default-actor-image.png')
-                            : Image.network(
-                                actor['imgUrl'],
-                                height: 180,
-                              ).image,
-                        alignment: Alignment.center,
-                        fit: BoxFit.cover,
-                      )))
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
+      cast.add(CastCard(actor: actor));
     });
 
     return cast;
@@ -99,9 +30,10 @@ class FilmPageState extends GeneralPageState<FilmPage> {
 
   @override
   List<Widget> getBody(BuildContext context) {
+    final FilmProvider filmProvider = Provider.of<FilmProvider>(context);
     return [
       FutureBuilder(
-        future: widget._filmDetailsScraper.getFilmDetails(widget.id),
+        future: filmProvider.getFilm(widget.id),
         builder: ((BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null || snapshot.hasError) {
@@ -169,16 +101,15 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                             (states) =>
                                                 const Color(0xffD7CCCF))),
                               ),
-                              
                               const Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10)),
                               IconButton(
-                                  icon:
-                                      const FaIcon(FontAwesomeIcons.comment),
+                                  icon: const FaIcon(FontAwesomeIcons.comment),
                                   onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => DiscussionListPage(widget.id))
-                                    ),
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DiscussionListPage(widget.id))),
                                   iconSize: 30,
                                   color: Colors.black,
                                   style: ButtonStyle(
@@ -186,7 +117,6 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                           MaterialStateProperty.resolveWith(
                                               (states) =>
                                                   const Color(0xffD7CCCF)))),
-                            
                             ],
                           )
                         ],
@@ -194,20 +124,19 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                       const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5)),
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: FadeInImage(
-                          placeholder: const AssetImage(
-                              'assets/default-movie-image.png'),
-                          width: 150,
-                          image: film.imgUrl.isEmpty
-                              ? const AssetImage(
-                                  'assets/default-movie-image.png')
-                              : Image.network(
-                                  film.imgUrl,
-                                  width: 150,
-                                ).image,
-                        ),
-                      ),
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: CachedNetworkImage(
+                            width: 150,
+                            imageUrl: film.imgUrl,
+                            placeholder: (context, _) => const Image(
+                                width: 150,
+                                image: AssetImage(
+                                    'assets/default-movie-image.png')),
+                            errorWidget: (content, _, a) => const Image(
+                                width: 150,
+                                image: AssetImage(
+                                    'assets/default-movie-image.png')),
+                          )),
                     ],
                   ),
                   const Padding(padding: EdgeInsets.all(10)),

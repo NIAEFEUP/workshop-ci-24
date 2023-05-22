@@ -63,6 +63,55 @@ class MockProfileProvider extends _i1.Mock implements _i3.ProfileProvider {
         ),
       ) as _i2.Profile);
   @override
+  _i4.Future<_i2.Profile> getProfileByUid({String? uid}) => (super.noSuchMethod(
+        Invocation.method(
+          #getProfileByUid,
+          [],
+          {#uid: uid},
+        ),
+        returnValue: _i4.Future<_i2.Profile>.value(_FakeProfile_0(
+          this,
+          Invocation.method(
+            #getProfileByUid,
+            [],
+            {#uid: uid},
+          ),
+        )),
+        returnValueForMissingStub: _i4.Future<_i2.Profile>.value(_FakeProfile_0(
+          this,
+          Invocation.method(
+            #getProfileByUid,
+            [],
+            {#uid: uid},
+          ),
+        )),
+      ) as _i4.Future<_i2.Profile>);
+  @override
+  _i4.Future<_i2.Profile> getProfileByUidReload({String? uid}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProfileByUidReload,
+          [],
+          {#uid: uid},
+        ),
+        returnValue: _i4.Future<_i2.Profile>.value(_FakeProfile_0(
+          this,
+          Invocation.method(
+            #getProfileByUidReload,
+            [],
+            {#uid: uid},
+          ),
+        )),
+        returnValueForMissingStub: _i4.Future<_i2.Profile>.value(_FakeProfile_0(
+          this,
+          Invocation.method(
+            #getProfileByUidReload,
+            [],
+            {#uid: uid},
+          ),
+        )),
+      ) as _i4.Future<_i2.Profile>);
+  @override
   _i4.Future<void> saveProfile(_i2.Profile? profile) => (super.noSuchMethod(
         Invocation.method(
           #saveProfile,
