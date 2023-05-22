@@ -63,7 +63,7 @@ void main() {
         ],
         child: MaterialApp(
             home: Scaffold(
-          body: DiscussionListPage("siuuu"),
+          body: DiscussionListPage("siuuu", "titanic"),
         )),
       ));
       

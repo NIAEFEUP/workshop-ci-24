@@ -32,7 +32,7 @@ void main() {
         ],
         child: const MaterialApp(
             home: Scaffold(
-          body: DiscussionAddPage("tt1234"),
+          body: DiscussionAddPage("tt1234", Text("Titanic")),
         )),
       ));
     });
