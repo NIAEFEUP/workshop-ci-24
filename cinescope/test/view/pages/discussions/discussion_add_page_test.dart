@@ -55,13 +55,13 @@ void main() {
           find.byKey(const Key("body-field")), "Test body");
       await widgetTester.tap(find.byType(TextButton));
 
-      final verified = verify(mockDiscussionProvider.addNewDiscussion(any));
+      final verified = verify(mockDiscussionProvider.addNewDiscussion(captureAny));
       verified.called(1);
       for (Discussion discussion in verified.captured) {
         expect(discussion.createdById, "siuuuu");
         expect(discussion.title, "Test title");
         expect(discussion.description, "Test body");
-        expect(discussion.id, "tt12345");
+        expect(discussion.filmId, "tt12345");
       }
     });
 
