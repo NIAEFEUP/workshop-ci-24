@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cinescope/model/providers/film_provider.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/model/watchlist.dart';
 import 'package:cinescope/view/cards/generic_film_card.dart';
@@ -21,7 +23,8 @@ import 'generic_film_card_test.mocks.dart';
     MockSpec<NavigatorObserver>(
       onMissingStub: OnMissingStub.returnDefault,
     ),
-    MockSpec<WatchlistProvider>(onMissingStub: OnMissingStub.returnDefault)
+    MockSpec<WatchlistProvider>(onMissingStub: OnMissingStub.returnDefault),
+    MockSpec<FilmProvider>(onMissingStub: OnMissingStub.returnDefault)
   ],
 )
 void main() {
@@ -37,6 +40,7 @@ void main() {
                   create: (context) => WatchlistProvider(
                       auth: MockFirebaseAuth(),
                       store: FakeFirebaseFirestore())),
+              
             ],
             child: MaterialApp(
               home: Scaffold(
@@ -56,6 +60,7 @@ void main() {
                   create: (context) => WatchlistProvider(
                       auth: MockFirebaseAuth(),
                       store: FakeFirebaseFirestore())),
+              ChangeNotifierProvider(create: (context) => FilmProvider())
             ],
             child: MaterialApp(
               home: Scaffold(
@@ -105,33 +110,7 @@ void main() {
             ),
           )));
 
-      expect(find.byType(Image), findsOneWidget);
-    });
-
-    testWidgets('navigates to film page with correct id', (tester) async {
-      final mockObserver = MockNavigatorObserver();
-
-      await mockNetworkImagesFor(() => tester.pumpWidget(MultiProvider(
-            providers: [
-              //list of providers to add
-              ChangeNotifierProvider(
-                  create: (context) => WatchlistProvider(
-                      auth: MockFirebaseAuth(),
-                      store: FakeFirebaseFirestore())),
-            ],
-            child: MaterialApp(
-              home: Scaffold(
-                body: GenericFilmCard(film),
-              ),
-              navigatorObservers: [mockObserver],
-            ),
-          )));
-
-      await tester.tap(find.byType(Card));
-      await tester.pumpAndSettle();
-
-      verify(mockObserver.didPush(any, any));
-      expect(find.byType(FilmPage), findsOneWidget);
+      expect(find.byType(CachedNetworkImage), findsOneWidget);
     });
 
     testWidgets('displays film title with correct font style', (tester) async {

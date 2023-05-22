@@ -3,13 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
-import 'dart:collection' as _i3;
-import 'dart:ui' as _i7;
+import 'dart:async' as _i5;
+import 'dart:collection' as _i2;
+import 'dart:ui' as _i6;
 
-import 'package:cinescope/model/discussion.dart' as _i5;
-import 'package:cinescope/model/providers/discussion_provider.dart' as _i4;
-import 'package:cinescope/model/providers/profile_provider.dart' as _i2;
+import 'package:cinescope/model/discussion.dart' as _i4;
+import 'package:cinescope/model/providers/discussion_provider.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -23,20 +22,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeProfileProvider_0 extends _i1.SmartFake
-    implements _i2.ProfileProvider {
-  _FakeProfileProvider_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeUnmodifiableSetView_1<E> extends _i1.SmartFake
-    implements _i3.UnmodifiableSetView<E> {
-  _FakeUnmodifiableSetView_1(
+class _FakeUnmodifiableSetView_0<E> extends _i1.SmartFake
+    implements _i2.UnmodifiableSetView<E> {
+  _FakeUnmodifiableSetView_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -49,32 +37,20 @@ class _FakeUnmodifiableSetView_1<E> extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDiscussionProvider extends _i1.Mock
-    implements _i4.DiscussionProvider {
+    implements _i3.DiscussionProvider {
   @override
-  _i2.ProfileProvider get profileProvider => (super.noSuchMethod(
-        Invocation.getter(#profileProvider),
-        returnValue: _FakeProfileProvider_0(
-          this,
-          Invocation.getter(#profileProvider),
-        ),
-        returnValueForMissingStub: _FakeProfileProvider_0(
-          this,
-          Invocation.getter(#profileProvider),
-        ),
-      ) as _i2.ProfileProvider);
-  @override
-  _i3.UnmodifiableSetView<_i5.Discussion> get userDiscussions =>
+  _i2.UnmodifiableSetView<_i4.Discussion> get userDiscussions =>
       (super.noSuchMethod(
         Invocation.getter(#userDiscussions),
-        returnValue: _FakeUnmodifiableSetView_1<_i5.Discussion>(
+        returnValue: _FakeUnmodifiableSetView_0<_i4.Discussion>(
           this,
           Invocation.getter(#userDiscussions),
         ),
-        returnValueForMissingStub: _FakeUnmodifiableSetView_1<_i5.Discussion>(
+        returnValueForMissingStub: _FakeUnmodifiableSetView_0<_i4.Discussion>(
           this,
           Invocation.getter(#userDiscussions),
         ),
-      ) as _i3.UnmodifiableSetView<_i5.Discussion>);
+      ) as _i2.UnmodifiableSetView<_i4.Discussion>);
   @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
@@ -82,15 +58,15 @@ class MockDiscussionProvider extends _i1.Mock
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i6.Future<_i3.UnmodifiableSetView<_i5.Discussion>> getDiscussionsByFilmId(
+  _i5.Future<_i2.UnmodifiableSetView<_i4.Discussion>> getDiscussionsByFilmId(
           String? filmId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDiscussionsByFilmId,
           [filmId],
         ),
-        returnValue: _i6.Future<_i3.UnmodifiableSetView<_i5.Discussion>>.value(
-            _FakeUnmodifiableSetView_1<_i5.Discussion>(
+        returnValue: _i5.Future<_i2.UnmodifiableSetView<_i4.Discussion>>.value(
+            _FakeUnmodifiableSetView_0<_i4.Discussion>(
           this,
           Invocation.method(
             #getDiscussionsByFilmId,
@@ -98,29 +74,29 @@ class MockDiscussionProvider extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i6.Future<_i3.UnmodifiableSetView<_i5.Discussion>>.value(
-                _FakeUnmodifiableSetView_1<_i5.Discussion>(
+            _i5.Future<_i2.UnmodifiableSetView<_i4.Discussion>>.value(
+                _FakeUnmodifiableSetView_0<_i4.Discussion>(
           this,
           Invocation.method(
             #getDiscussionsByFilmId,
             [filmId],
           ),
         )),
-      ) as _i6.Future<_i3.UnmodifiableSetView<_i5.Discussion>>);
+      ) as _i5.Future<_i2.UnmodifiableSetView<_i4.Discussion>>);
   @override
-  _i6.Future<void> addNewDiscussion(_i5.Discussion? newDiscussion) =>
+  _i5.Future<void> addNewDiscussion(_i4.Discussion? newDiscussion) =>
       (super.noSuchMethod(
         Invocation.method(
           #addNewDiscussion,
           [newDiscussion],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
-  _i6.Future<void> addCommentToDiscussion(
-    _i5.Discussion? discussion,
-    _i5.Comment? newComment,
+  _i5.Future<void> addCommentToDiscussion(
+    _i4.Discussion? discussion,
+    _i4.Comment? newComment,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -130,9 +106,9 @@ class MockDiscussionProvider extends _i1.Mock
             newComment,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
   void rerender() => super.noSuchMethod(
         Invocation.method(
@@ -142,7 +118,7 @@ class MockDiscussionProvider extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -150,7 +126,7 @@ class MockDiscussionProvider extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

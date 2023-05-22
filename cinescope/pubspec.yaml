@@ -51,6 +51,8 @@ dependencies:
   firebase_storage: ^11.1.1
   image_picker: ^0.8.7+4
   another_flushbar: ^1.12.29
+  html: ^0.15.3
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   firebase_storage_mocks: ^0.6.1
