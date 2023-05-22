@@ -3,7 +3,6 @@ import 'package:cinescope/view/button/login_button.dart';
 import 'package:cinescope/view/pages/login_page.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:cinescope/view/pages/register_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
@@ -90,7 +89,7 @@ class MainLoginPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
                 LoginButton(
                     pressedFunction: googleButtonHandler(context),
-                    childWidget: Row(children: const [
+                    childWidget: const Row(children: [
                       Padding(
                           padding:
                               EdgeInsetsDirectional.symmetric(horizontal: 5)),
@@ -103,7 +102,7 @@ class MainLoginPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
                 LoginButton(
                     pressedFunction: githubButtonHandler(context),
-                    childWidget: Row(children: const [
+                    childWidget: const Row(children: [
                       Padding(
                           padding:
                               EdgeInsetsDirectional.symmetric(horizontal: 5)),

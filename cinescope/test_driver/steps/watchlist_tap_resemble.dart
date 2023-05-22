@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cinescope/utils/string_captitalize.dart';
 import 'package:flutter_driver/flutter_driver.dart';

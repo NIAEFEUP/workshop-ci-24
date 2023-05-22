@@ -2,7 +2,6 @@
 import 'dart:collection';
 
 import 'package:cinescope/model/discussion.dart';
-import 'package:cinescope/model/providers/profile_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';

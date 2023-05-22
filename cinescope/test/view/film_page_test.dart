@@ -1,4 +1,3 @@
-import 'package:cinescope/controller/film_details_scraper.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/film_provider.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
