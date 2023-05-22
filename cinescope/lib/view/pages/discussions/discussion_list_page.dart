@@ -1,23 +1,21 @@
 import 'dart:collection';
 
 import 'package:cinescope/model/providers/discussion_provider.dart';
-import 'package:cinescope/utils/duration_string_formatter.dart';
 import 'package:cinescope/view/cards/discussion_card.dart';
 import 'package:cinescope/view/general_page.dart';
-import 'package:cinescope/view/pages/discussions/discussion_add_page.dart';
-import 'package:cinescope/view/pages/discussions/discussion_comment_page.dart';
+import 'package:cinescope/view/pages/discussions/add_discussion_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:provider/provider.dart';
-
-import '../../../model/discussion.dart';
+import 'package:cinescope/model/discussion.dart';
+import 'package:cinescope/view/cards/page_message.dart';
+import 'package:cinescope/view/cards/discussion_list_header.dart';
 
 class DiscussionListPage extends GeneralPage {
-  final String filmId;
-  DiscussionListPage(this.filmId, {super.key})
+  final String filmId, filmTitle;
+  DiscussionListPage(this.filmId, this.filmTitle, {super.key})
       : super(
             floatingActionButton: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 15, 15),
@@ -25,7 +23,7 @@ class DiscussionListPage extends GeneralPage {
                   backgroundColor: const Color(0xFFD7CCCF),
                   onPressed: () {
                     navService.push(MaterialPageRoute(
-                        builder: (context) => DiscussionAddPage(filmId)));
+                        builder: (context) => DiscussionAddPage(filmId, DiscussionListHeader(filmTitle))));
                   },
                   child: const FaIcon(
                     FontAwesomeIcons.plus,
@@ -38,11 +36,18 @@ class DiscussionListPage extends GeneralPage {
 }
 
 class DiscussionListPageState extends GeneralPageState<DiscussionListPage> {
-  Widget buildDiscussionCards(
-      BuildContext context, UnmodifiableSetView<Discussion> discussions) {
+
+  Widget buildDiscussionCards(BuildContext context,
+      UnmodifiableSetView<Discussion> discussions, String filmTitle) {
     List<Widget> cards = [];
+    cards.add(DiscussionListHeader(widget.filmTitle));
+
+    if (discussions.isEmpty) {
+      cards.add(const PageMessage("No discussions for this film"));
+    }
 
     for (final discussion in discussions) {
+      cards.add(const SizedBox(height: 7));
       cards.add(DiscussionCard(discussion: discussion));
     }
 
@@ -57,13 +62,15 @@ class DiscussionListPageState extends GeneralPageState<DiscussionListPage> {
                 future: provider.getDiscussionsByFilmId(widget.filmId),
                 builder: ((context, snapshot) {
                   if (snapshot.hasData) {
-                    return buildDiscussionCards(context, snapshot.data!);
+                    return buildDiscussionCards(
+                        context, snapshot.data!, widget.filmTitle);
                   } else if (!snapshot.hasError) {
-                    return const Text("Loading...");
+                    return const SizedBox(
+                        height: 300,
+                        child: Center(child: CircularProgressIndicator()));
                   } else {
                     Logger().e("", snapshot.error);
-                    return const Text(
-                        "Something went wrong while loading discussions...");
+                    return const PageMessage('Error loading discussions');
                   }
                 }),
               )),
@@ -85,6 +92,5 @@ class DiscussionListPageState extends GeneralPageState<DiscussionListPage> {
         textScaleFactor: 2.2,
       ),
     ]);
-    //TODO: add divider
   }
 }

@@ -6,7 +6,7 @@ class Comment {
   final String content;
   final DateTime creationTime;
   final String createdById;
-  late Profile? createdBy;
+  Profile? createdBy;
 
   Comment(this.content, this.creationTime, this.createdById);
 
