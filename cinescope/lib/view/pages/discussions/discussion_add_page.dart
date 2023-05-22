@@ -10,7 +10,9 @@ import 'package:provider/provider.dart';
 
 class DiscussionAddPage extends GeneralPage {
   final String filmId;
-  const DiscussionAddPage(this.filmId, {super.key});
+  final FirebaseAuth _firebaseAuth;
+  DiscussionAddPage(this.filmId, {super.key, FirebaseAuth? authInstance}) 
+    : _firebaseAuth = authInstance ?? FirebaseAuth.instance;
 
   @override
   State<StatefulWidget> createState() => DiscussionAddPageState();
@@ -28,6 +30,7 @@ class DiscussionAddPageState extends GeneralPageState<DiscussionAddPage> {
         textScaleFactor: 1.5,
       ),
       TextField(
+        key: const Key("title-field"),
         controller: _titleController,
         maxLines: 1,
         decoration: const InputDecoration(
@@ -39,6 +42,7 @@ class DiscussionAddPageState extends GeneralPageState<DiscussionAddPage> {
         textScaleFactor: 1.5,
       ),
       TextField(
+        key: const Key("body-field"),
         controller: _bodyController,
         maxLines: null,
         decoration: const InputDecoration(
@@ -69,7 +73,7 @@ class DiscussionAddPageState extends GeneralPageState<DiscussionAddPage> {
                         widget.filmId,
                         _titleController.text,
                         _bodyController.text,
-                        FirebaseAuth.instance.currentUser!.uid,
+                        widget._firebaseAuth.currentUser!.uid,
                         DateTime.now(), []))
                     .then((value) => Navigator.of(context).pop());
               },
