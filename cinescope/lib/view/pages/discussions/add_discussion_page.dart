@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 
 class DiscussionAddPage extends GeneralPage {
   final String filmId;
-  const DiscussionAddPage(this.filmId, {super.key});
+  final Widget header;
+  const DiscussionAddPage(this.filmId, this.header, {super.key});
 
   @override
   State<StatefulWidget> createState() => DiscussionAddPageState();
@@ -23,27 +24,19 @@ class DiscussionAddPageState extends GeneralPageState<DiscussionAddPage> {
   @override
   List<Widget> getBody(BuildContext context) {
     return [
-      const Text(
-        "Title:",
-        textScaleFactor: 1.5,
-      ),
+      widget.header,
       TextField(
         controller: _titleController,
         maxLines: 1,
         decoration: const InputDecoration(
-            border: OutlineInputBorder(), hintText: "Enter your title..."),
+            border: OutlineInputBorder(), labelText: 'Title'),
       ),
       const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-      const Text(
-        "Body:",
-        textScaleFactor: 1.5,
-      ),
       TextField(
         controller: _bodyController,
         maxLines: null,
         decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: "Enter your content here..."),
+            border: OutlineInputBorder(), labelText: 'Body'),
       ),
       const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
       Consumer<DiscussionProvider>(
@@ -51,17 +44,25 @@ class DiscussionAddPageState extends GeneralPageState<DiscussionAddPage> {
               style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(Color(0XFF2C666E))),
               onPressed: () {
-                if(_titleController.text == ''){
-                  showDialog(context: context, builder: (context){
-                    return const GenericDialog(title: "Error:",content: "You can't have an empty title");
-                  });
+                if (_titleController.text == '') {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const GenericDialog(
+                            title: "Error:",
+                            content: "You can't have an empty title");
+                      });
                   return;
                 }
-                if(_bodyController.text == ''){
-                  showDialog(context: context, builder: (context){
-                    return const GenericDialog(title: "Error:",content: "You can't have an empty body");
-                  });
-                  return;     
+                if (_bodyController.text == '') {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const GenericDialog(
+                            title: "Error:",
+                            content: "You can't have an empty body");
+                      });
+                  return;
                 }
                 provider
                     .addNewDiscussion(Discussion(

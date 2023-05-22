@@ -39,7 +39,7 @@ class LoginPageState extends State<LoginPage> {
                 context: context,
                 builder: ((context) => AlertDialog(
                       title: const Text("Login failed"),
-                      content: const Text("Invalid email or not found."),
+                      content: const Text("Invalid email or not found"),
                       actions: [
                         TextButton(
                             onPressed: () {
@@ -91,7 +91,7 @@ class LoginPageState extends State<LoginPage> {
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
                   const Text(
-                    "Login:",
+                    "Login",
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.white, fontSize: 35),
                   ),
