@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cinescope/view/pages/login_page.dart';
+import 'package:cinescope/view/pages/main_login_page.dart';
 
 class ProfilePage extends GeneralPage {
   const ProfilePage({super.key});
@@ -185,6 +185,7 @@ class ProfilePageState extends GeneralPageState<ProfilePage> {
   }
 
   @override
+
   Widget getTitle(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -200,10 +201,34 @@ class ProfilePageState extends GeneralPageState<ProfilePage> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
+              showDialog(
+                context: context,
+                builder: (BuildContext dialogContext) {
+                  return AlertDialog(
+                    title: const Text('Confirm Logout'),
+                    content: const Text('Are you sure you want to logout?'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(dialogContext).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Logout'),
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainLoginPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
               );
             },
           ),
