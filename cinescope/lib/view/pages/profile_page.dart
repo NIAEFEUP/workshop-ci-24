@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cinescope/view/pages/login_page.dart';
 
 class ProfilePage extends GeneralPage {
   const ProfilePage({super.key});
@@ -113,7 +115,6 @@ class ProfilePageState extends GeneralPageState<ProfilePage> {
                                 _isEditing = false;
                                 _nameController.text = profile.name;
                                 _bioController.text = profile.bio;
-                                
                               });
                             },
                             child: const Text(
@@ -185,9 +186,29 @@ class ProfilePageState extends GeneralPageState<ProfilePage> {
 
   @override
   Widget getTitle(BuildContext context) {
-    return const Padding(
-        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-        child: Text("Your Profile",
-            textAlign: TextAlign.left, textScaleFactor: 2.2));
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      child: Row(
+        children: [
+          const Text(
+            "Your Profile",
+            style: TextStyle(
+              fontSize: 30,
+            ),
+          ),
+          const Spacer(),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
