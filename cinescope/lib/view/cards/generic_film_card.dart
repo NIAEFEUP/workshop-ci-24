@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -29,20 +30,17 @@ class GenericFilmCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: FadeInImage(
-                    placeholder:
-                        const AssetImage('assets/default-movie-image.png'),
-                    width: 100,
-                    image: film.imgUrl.isEmpty
-                        ? const AssetImage('assets/default-movie-image.png')
-                        : Image.network(
-                            film.imgUrl,
-                            width: 100,
-                            fit: BoxFit.cover,
-                          ).image,
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: CachedNetworkImage(
+                      width: 100,
+                      imageUrl: film.imgUrl,
+                      placeholder: (context, _) => const Image(
+                          width: 100,
+                          image: AssetImage('assets/default-movie-image.png')),
+                      errorWidget: (content, _, a) => const Image(
+                          width: 100,
+                          image: AssetImage('assets/default-movie-image.png')),
+                    )),
                 const SizedBox(width: 16),
                 Expanded(
                     child: Padding(

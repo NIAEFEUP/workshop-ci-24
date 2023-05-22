@@ -3,7 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/src/widgets/navigator.dart' as _i2;
+import 'dart:async' as _i7;
+import 'dart:collection' as _i2;
+import 'dart:ui' as _i8;
+
+import 'package:cinescope/model/discussion.dart' as _i6;
+import 'package:cinescope/model/profile.dart' as _i3;
+import 'package:cinescope/model/providers/discussion_provider.dart' as _i5;
+import 'package:cinescope/model/providers/profile_provider.dart' as _i9;
+import 'package:flutter/cupertino.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -17,14 +25,35 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeUnmodifiableSetView_0<E> extends _i1.SmartFake
+    implements _i2.UnmodifiableSetView<E> {
+  _FakeUnmodifiableSetView_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeProfile_1 extends _i1.SmartFake implements _i3.Profile {
+  _FakeProfile_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
+class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
   @override
   void didPush(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i4.Route<dynamic>? route,
+    _i4.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -38,8 +67,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didPop(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i4.Route<dynamic>? route,
+    _i4.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -53,8 +82,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didRemove(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i4.Route<dynamic>? route,
+    _i4.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -68,8 +97,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didReplace({
-    _i2.Route<dynamic>? newRoute,
-    _i2.Route<dynamic>? oldRoute,
+    _i4.Route<dynamic>? newRoute,
+    _i4.Route<dynamic>? oldRoute,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -84,8 +113,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didStartUserGesture(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i4.Route<dynamic>? route,
+    _i4.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -101,6 +130,255 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
   void didStopUserGesture() => super.noSuchMethod(
         Invocation.method(
           #didStopUserGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [DiscussionProvider].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDiscussionProvider extends _i1.Mock
+    implements _i5.DiscussionProvider {
+  @override
+  _i2.UnmodifiableSetView<_i6.Discussion> get userDiscussions =>
+      (super.noSuchMethod(
+        Invocation.getter(#userDiscussions),
+        returnValue: _FakeUnmodifiableSetView_0<_i6.Discussion>(
+          this,
+          Invocation.getter(#userDiscussions),
+        ),
+        returnValueForMissingStub: _FakeUnmodifiableSetView_0<_i6.Discussion>(
+          this,
+          Invocation.getter(#userDiscussions),
+        ),
+      ) as _i2.UnmodifiableSetView<_i6.Discussion>);
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>> getDiscussionsByFilmId(
+          String? filmId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDiscussionsByFilmId,
+          [filmId],
+        ),
+        returnValue: _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>>.value(
+            _FakeUnmodifiableSetView_0<_i6.Discussion>(
+          this,
+          Invocation.method(
+            #getDiscussionsByFilmId,
+            [filmId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>>.value(
+                _FakeUnmodifiableSetView_0<_i6.Discussion>(
+          this,
+          Invocation.method(
+            #getDiscussionsByFilmId,
+            [filmId],
+          ),
+        )),
+      ) as _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>>);
+  @override
+  _i7.Future<void> addNewDiscussion(_i6.Discussion? newDiscussion) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addNewDiscussion,
+          [newDiscussion],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> addCommentToDiscussion(
+    _i6.Discussion? discussion,
+    _i6.Comment? newComment,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addCommentToDiscussion,
+          [
+            discussion,
+            newComment,
+          ],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  void rerender() => super.noSuchMethod(
+        Invocation.method(
+          #rerender,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [ProfileProvider].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockProfileProvider extends _i1.Mock implements _i9.ProfileProvider {
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i3.Profile getProfile() => (super.noSuchMethod(
+        Invocation.method(
+          #getProfile,
+          [],
+        ),
+        returnValue: _FakeProfile_1(
+          this,
+          Invocation.method(
+            #getProfile,
+            [],
+          ),
+        ),
+        returnValueForMissingStub: _FakeProfile_1(
+          this,
+          Invocation.method(
+            #getProfile,
+            [],
+          ),
+        ),
+      ) as _i3.Profile);
+  @override
+  _i7.Future<_i3.Profile> getProfileByUid({String? uid}) => (super.noSuchMethod(
+        Invocation.method(
+          #getProfileByUid,
+          [],
+          {#uid: uid},
+        ),
+        returnValue: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+          this,
+          Invocation.method(
+            #getProfileByUid,
+            [],
+            {#uid: uid},
+          ),
+        )),
+        returnValueForMissingStub: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+          this,
+          Invocation.method(
+            #getProfileByUid,
+            [],
+            {#uid: uid},
+          ),
+        )),
+      ) as _i7.Future<_i3.Profile>);
+  @override
+  _i7.Future<_i3.Profile> getProfileByUidReload({String? uid}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProfileByUidReload,
+          [],
+          {#uid: uid},
+        ),
+        returnValue: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+          this,
+          Invocation.method(
+            #getProfileByUidReload,
+            [],
+            {#uid: uid},
+          ),
+        )),
+        returnValueForMissingStub: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+          this,
+          Invocation.method(
+            #getProfileByUidReload,
+            [],
+            {#uid: uid},
+          ),
+        )),
+      ) as _i7.Future<_i3.Profile>);
+  @override
+  _i7.Future<void> saveProfile(_i3.Profile? profile) => (super.noSuchMethod(
+        Invocation.method(
+          #saveProfile,
+          [profile],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  void rerender() => super.noSuchMethod(
+        Invocation.method(
+          #rerender,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
           [],
         ),
         returnValueForMissingStub: null,
