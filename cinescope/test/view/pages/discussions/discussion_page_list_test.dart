@@ -13,7 +13,10 @@ import 'package:provider/provider.dart';
 import 'discussion_page_list_test.mocks.dart';
 
 @GenerateMocks([], customMocks: [
-  MockSpec<DiscussionProvider>(onMissingStub: OnMissingStub.returnDefault)
+  MockSpec<DiscussionProvider>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<NavigatorObserver>(
+      onMissingStub: OnMissingStub.returnDefault,
+  ),
 ])
 void main() {
   final Discussion discussion = Discussion(
@@ -70,6 +73,35 @@ void main() {
       await widgetTester.pumpAndSettle();
       expect(find.byKey(const Key("discussion-card")), findsNWidgets(3));
 
+    });
+
+    testWidgets("Add FAB button navigates to correct page", (widgetTester) async {
+      final mockDiscussionProvider = MockDiscussionProvider();
+      when(mockDiscussionProvider.getDiscussionsByFilmId(any))
+          .thenAnswer((realInvocation) async {
+        final set = {discussion, discussion2, discussion3};
+        return UnmodifiableSetView(set);
+      });
+
+      final mockNavigator = MockNavigatorObserver();
+
+      await widgetTester.pumpWidget(MultiProvider(
+        providers: [
+          ChangeNotifierProvider<DiscussionProvider>(create: ((context) => mockDiscussionProvider))
+        ],
+        child: MaterialApp(
+          navigatorObservers: [mockNavigator],
+            home: Scaffold(
+          body: DiscussionListPage("siuuu",
+            "titanic",
+          ),
+        )),
+      ));
+      
+      await widgetTester.pumpAndSettle();
+      await widgetTester.tap(find.byType(FloatingActionButton));
+
+      verify(mockNavigator.didPush(any, any)).called(1);
     });
   });
 }
