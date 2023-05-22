@@ -1,6 +1,7 @@
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/view/pages/discussions/discussion_add_page.dart';
+import 'package:cinescope/view/simple_dialog.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,11 +26,13 @@ void main() {
       ),
       [Comment("siuu", DateTime.now(), "siuuuuu")]);
   group('Discussion Add Page', () {
-    testWidgets("see if provider is called when submitting with both fields filled",
+    testWidgets(
+        "see if provider is called when submitting with both fields filled",
         (widgetTester) async {
       final mockDiscussionProvider = MockDiscussionProvider();
       final firebaseAuth = MockFirebaseAuth(mockUser: MockUser(uid: "siuuuu"));
-      await firebaseAuth.signInWithEmailAndPassword(email: "test@gmail.com", password: "kekw");
+      await firebaseAuth.signInWithEmailAndPassword(
+          email: "test@gmail.com", password: "kekw");
       await widgetTester.pumpWidget(MultiProvider(
         providers: [
           ChangeNotifierProvider<DiscussionProvider>(
@@ -37,20 +40,95 @@ void main() {
         ],
         child: MaterialApp(
             home: Scaffold(
-          body: DiscussionAddPage("tt12345", authInstance: firebaseAuth,),
+          body: DiscussionAddPage(
+            "tt12345",
+            authInstance: firebaseAuth,
+          ),
         )),
       ));
 
       await widgetTester.pumpAndSettle();
 
-      await widgetTester.enterText(find.byKey(const Key("title-field")), "Test title");
-      await widgetTester.enterText(find.byKey(const Key("body-field")), "Test body");
+      await widgetTester.enterText(
+          find.byKey(const Key("title-field")), "Test title");
+      await widgetTester.enterText(
+          find.byKey(const Key("body-field")), "Test body");
       await widgetTester.tap(find.byType(TextButton));
 
-      verify(mockDiscussionProvider.addNewDiscussion(any)).called(1);
-
+      final verified = verify(mockDiscussionProvider.addNewDiscussion(any));
+      verified.called(1);
+      for (Discussion discussion in verified.captured) {
+        expect(discussion.createdById, "siuuuu");
+        expect(discussion.title, "Test title");
+        expect(discussion.description, "Test body");
+        expect(discussion.id, "tt12345");
+      }
     });
 
+    testWidgets("see if dialog appears when body is empty",
+        (widgetTester) async {
+      final mockDiscussionProvider = MockDiscussionProvider();
+      final firebaseAuth = MockFirebaseAuth(mockUser: MockUser(uid: "siuuuu"));
+      await firebaseAuth.signInWithEmailAndPassword(
+          email: "test@gmail.com", password: "kekw");
+      await widgetTester.pumpWidget(MultiProvider(
+        providers: [
+          ChangeNotifierProvider<DiscussionProvider>(
+              create: ((context) => mockDiscussionProvider))
+        ],
+        child: MaterialApp(
+            home: Scaffold(
+          body: DiscussionAddPage(
+            "tt12345",
+            authInstance: firebaseAuth,
+          ),
+        )),
+      ));
 
+      await widgetTester.pumpAndSettle();
+
+      await widgetTester.enterText(
+          find.byKey(const Key("title-field")), "Test title");
+      await widgetTester.tap(find.byType(TextButton));
+
+      await widgetTester.pumpAndSettle();
+
+      verifyNever(mockDiscussionProvider.addNewDiscussion(any));
+
+      expect(find.byType(GenericDialog), findsOneWidget);
+    });
+
+    testWidgets("see if dialog appears when title is empty",
+        (widgetTester) async {
+      final mockDiscussionProvider = MockDiscussionProvider();
+      final firebaseAuth = MockFirebaseAuth(mockUser: MockUser(uid: "siuuuu"));
+      await firebaseAuth.signInWithEmailAndPassword(
+          email: "test@gmail.com", password: "kekw");
+      await widgetTester.pumpWidget(MultiProvider(
+        providers: [
+          ChangeNotifierProvider<DiscussionProvider>(
+              create: ((context) => mockDiscussionProvider))
+        ],
+        child: MaterialApp(
+            home: Scaffold(
+          body: DiscussionAddPage(
+            "tt12345",
+            authInstance: firebaseAuth,
+          ),
+        )),
+      ));
+
+      await widgetTester.pumpAndSettle();
+
+      await widgetTester.enterText(
+          find.byKey(const Key("body-field")), "Test body");
+      await widgetTester.tap(find.byType(TextButton));
+
+      await widgetTester.pumpAndSettle();
+
+      verifyNever(mockDiscussionProvider.addNewDiscussion(any));
+
+      expect(find.byType(GenericDialog), findsOneWidget);
+    });
   });
 }
