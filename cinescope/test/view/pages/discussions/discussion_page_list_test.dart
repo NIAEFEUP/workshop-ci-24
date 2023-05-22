@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/view/cards/discussion_card.dart';
-import 'package:cinescope/view/pages/discussions/comment_add_page.dart';
 import 'package:cinescope/view/pages/discussions/discussion_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -93,7 +92,9 @@ void main() {
         child: MaterialApp(
           navigatorObservers: [mockNavigator],
             home: Scaffold(
-          body: DiscussionListPage("siuuu"),
+          body: DiscussionListPage("siuuu",
+            "titanic",
+          ),
         )),
       ));
       
