@@ -38,7 +38,6 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
   }
 
   @override
-
   Widget getTitle(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -51,6 +50,8 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
             ),
           ),
           const Spacer(),
+          _isEditing? const SizedBox() :
+          IconButton(onPressed: _startEditing, icon: const Icon(Icons.edit),key:const Key("editProfile")),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
@@ -137,34 +138,29 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                 );
         },
       ),
-      const SizedBox(height: 8),
+      const SizedBox(height: 10),
       Consumer<ProfileProvider>(
         builder: (context, value, _) {
           final profile = value.getProfile();
           return _isEditing
-              ? SizedBox(
-                  height: 220,
-                  child: TextField(
-                    maxLines: null,
-                    controller: _bioController,
-                    style: const TextStyle(fontSize: 16),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Bio",
-                    ),
+              ? TextField(
+                  maxLines: null,
+                  controller: _bioController,
+                  style: const TextStyle(fontSize: 16),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Bio",
                   ),
                 )
-              : SizedBox(
-                  height: 250,
-                  child: Text(
-                    profile.bio.isNotEmpty
-                        ? profile.bio
-                        : "What do you want other people to know about you?",
-                    style: const TextStyle(fontSize: 17),
-                  ),
+              : Text(
+                  profile.bio.isNotEmpty
+                      ? profile.bio
+                      : "What do you want other people to know about you?",
+                  style: const TextStyle(fontSize: 17),
                 );
         },
       ),
+      const SizedBox(height: 25),
       Consumer<ProfileProvider>(
         builder: (context, value, _) {
           final profileProvider =
@@ -208,21 +204,7 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                     ),
                   ],
                 )
-              : TextButton(
-                  key: const Key("editProfile"),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(
-                      const Color(0XFF2C666E),
-                    ),
-                  ),
-                  onPressed: _startEditing,
-                  child: const Text("Edit"),
-                );
+              : const SizedBox();
         },
       ),
     ];
