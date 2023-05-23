@@ -29,8 +29,8 @@ class UserProfileDialog extends StatelessWidget {
         const SizedBox(height: 15),
         Text(
           profile.name,
-          textScaleFactor: 1.2,
-          overflow: TextOverflow.ellipsis,
+          textScaleFactor: 1,
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
       ]),
