@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cinescope/view/general_page.dart';
 import 'package:provider/provider.dart';
+import 'package:cinescope/view/cards/page_message.dart';
 
 class WatchlistPage extends GeneralPage {
   const WatchlistPage({super.key});
@@ -21,18 +22,7 @@ class WatchlistPageState extends GeneralPageState<WatchlistPage> {
           final List<Widget> cards = [];
           final Set<String> ids = {};
           if (value.getWatchlist().movies.isEmpty) {
-            return const SizedBox(
-                height: 500,
-                child: Center(
-                  child: Text(
-                    'Your watchlist is empty',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ));
+            return const PageMessage("Your watchlist is empty");
           }
           int i = 0;
           for (final film in value.getWatchlist().movies) {

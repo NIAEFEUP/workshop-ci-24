@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cinescope/utils/duration_string_formatter.dart';
 import 'package:provider/provider.dart';
+import 'package:cinescope/view/cards/user_profile_dialog.dart';
 
 class CommentCard extends StatelessWidget {
   final Comment comment;
@@ -29,21 +30,29 @@ class CommentCard extends StatelessWidget {
     }
 
     Widget getProfileRow(Profile profile) {
-      return Row(
-        children: [
-          getAvatar(profile),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 7),
-          ),
-          Text(
-            profile.name,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-            textScaleFactor: 1.3,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      );
+      return GestureDetector(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return UserProfileDialog(profile);
+                });
+          },
+          child: Row(
+            children: [
+              getAvatar(profile),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 7),
+              ),
+              Text(
+                profile.name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.3,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ));
     }
 
     return Consumer<ProfileProvider>(builder: (context, provider, _) {
@@ -54,19 +63,7 @@ class CommentCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                (comment.createdBy != null)?
-                getProfileRow(comment.createdBy!):
-                FutureBuilder(builder: (context, AsyncSnapshot<Profile> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.data == null || snapshot.hasError) {
-                      return const Text("Unknown user");
-                    } else {
-                      return getProfileRow(snapshot.data!);
-                    }
-                  } else {
-                    return const Text("Loading...");
-                  }
-                }, future: provider.getProfileByUid(uid: comment.createdById)),
+                getProfileRow(comment.createdBy!),
                 const Padding(
                   padding: EdgeInsets.all(7),
                 ),

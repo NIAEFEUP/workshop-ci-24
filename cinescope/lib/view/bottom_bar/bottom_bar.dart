@@ -7,6 +7,7 @@ import 'package:cinescope/view/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -24,7 +25,8 @@ class BottomBarState extends State<BottomBar> {
     super.initState();
     final keyboardVisibilityController = KeyboardVisibilityController();
 
-    keyboardVisibleSubscription = keyboardVisibilityController.onChange.listen((bool visible) {
+    keyboardVisibleSubscription =
+        keyboardVisibilityController.onChange.listen((bool visible) {
       setState(() {
         _isVisible = !visible;
       });
@@ -32,13 +34,10 @@ class BottomBarState extends State<BottomBar> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     keyboardVisibleSubscription.cancel();
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +50,15 @@ class BottomBarState extends State<BottomBar> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MainPage()));
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  const MainPage(),
+                          transitionDuration: Duration.zero,
+                        ),
+                      );
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.house,
@@ -62,8 +68,15 @@ class BottomBarState extends State<BottomBar> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProfilePage()));
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  const ProfilePage(),
+                          transitionDuration: Duration.zero,
+                        ),
+                      );
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.solidUser,
@@ -73,8 +86,15 @@ class BottomBarState extends State<BottomBar> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const WatchlistPage()));
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  const WatchlistPage(),
+                          transitionDuration: Duration.zero,
+                        ),
+                      );
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.solidHeart,
@@ -84,14 +104,22 @@ class BottomBarState extends State<BottomBar> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: const Color(0xFFD7CCCF),
-                        borderRadius: BorderRadius.circular(20)),
+                      color: const Color(0xFFD7CCCF),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     height: 55,
                     width: 55,
                     child: IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const SearchPage()));
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    const SearchPage(),
+                            transitionDuration: Duration.zero,
+                          ),
+                        );
                       },
                       icon: const FaIcon(
                         FontAwesomeIcons.magnifyingGlass,
