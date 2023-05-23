@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cinescope/view/pages/main_login_page.dart';
 import 'package:cinescope/view/general_page.dart';
 
 class ProfilePage extends GeneralPage {
@@ -35,11 +38,56 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
   }
 
   @override
+
   Widget getTitle(BuildContext context) {
-    return const Padding(
-        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-        child: Text("Your Profile",
-            textAlign: TextAlign.left, textScaleFactor: 2.2));
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      child: Row(
+        children: [
+          const Text(
+            "Your Profile",
+            style: TextStyle(
+              fontSize: 30,
+            ),
+          ),
+          const Spacer(),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext dialogContext) {
+                  return AlertDialog(
+                    title: const Text('Confirm Logout'),
+                    content: const Text('Are you sure you want to logout?'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(dialogContext).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Logout'),
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainLoginPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
