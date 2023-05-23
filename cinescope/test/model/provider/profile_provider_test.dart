@@ -18,10 +18,13 @@ void main() {
 
       MockFirebaseStorage firebaseStorage = MockFirebaseStorage();
 
+
+      TestWidgetsFlutterBinding.ensureInitialized();
       ProfileProvider profileProvider = ProfileProvider(
           firebaseAuth: mockFirebaseAuth,
           firebaseFirestore: firebaseFirestore,
-          firebaseStorage: firebaseStorage);
+          firebaseStorage: firebaseStorage,
+          compressImages: false);
 
       Profile profile = Profile(
           "Cansado", "Sou muito cansado e só gosto de filmes ", "",
@@ -76,10 +79,12 @@ void main() {
       firebaseStorage
           .storedSettableMetadataMap["images/profiles/cansadissimo.png"] = {};
 
+      TestWidgetsFlutterBinding.ensureInitialized();
       ProfileProvider profileProvider = ProfileProvider(
           firebaseAuth: mockFirebaseAuth,
           firebaseFirestore: firebaseFirestore,
-          firebaseStorage: firebaseStorage);
+          firebaseStorage: firebaseStorage,
+          compressImages: false);
 
       Profile testProfile =
           await profileProvider.getProfileByUidReload(uid: "cansadissimo");
@@ -116,10 +121,12 @@ void main() {
       firebaseStorage
           .storedSettableMetadataMap["images/profiles/cansadissimo.png"] = {};
 
+      TestWidgetsFlutterBinding.ensureInitialized();
       ProfileProvider profileProvider = ProfileProvider(
           firebaseAuth: mockFirebaseAuth,
           firebaseFirestore: firebaseFirestore,
-          firebaseStorage: firebaseStorage);
+          firebaseStorage: firebaseStorage,
+          compressImages: false);
 
       await mockFirebaseAuth.signInWithEmailAndPassword(
           email: "kekw@gmail", password: "passwordsupersecreta");
