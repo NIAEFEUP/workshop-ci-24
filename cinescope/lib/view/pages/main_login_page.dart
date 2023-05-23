@@ -67,7 +67,7 @@ class MainLoginPage extends StatelessWidget {
                       child: LoginButton(
                           pressedFunction: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const LoginPage()));
+                                builder: (context) => LoginPage()));
                           },
                           childWidget: const Text("Sign In"),
                           relevant: false,
@@ -77,7 +77,7 @@ class MainLoginPage extends StatelessWidget {
                       child: LoginButton(
                           pressedFunction: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const RegisterPage()));
+                                builder: (context) =>  RegisterPage()));
                           },
                           childWidget: const Text("Sign Up"))),
                 ]),
@@ -89,7 +89,7 @@ class MainLoginPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
                 LoginButton(
                     pressedFunction: googleButtonHandler(context),
-                    childWidget: const Row(children: [
+                    childWidget: Row(children: const [
                       Padding(
                           padding:
                               EdgeInsetsDirectional.symmetric(horizontal: 5)),
@@ -102,7 +102,7 @@ class MainLoginPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
                 LoginButton(
                     pressedFunction: githubButtonHandler(context),
-                    childWidget: const Row(children: [
+                    childWidget: Row(children: const[
                       Padding(
                           padding:
                               EdgeInsetsDirectional.symmetric(horizontal: 5)),
