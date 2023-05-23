@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cinescope/model/discussion.dart';
 
 class DiscussionListHeader extends StatelessWidget {
   final String filmTitle;

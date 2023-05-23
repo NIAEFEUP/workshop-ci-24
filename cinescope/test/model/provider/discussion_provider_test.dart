@@ -1,14 +1,11 @@
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/model/providers/profile_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
-import 'discussion_provider_test.mocks.dart';
 
 @GenerateMocks([], customMocks: [
   MockSpec<ProfileProvider>(onMissingStub: OnMissingStub.returnDefault)

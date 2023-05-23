@@ -1,4 +1,3 @@
-import 'package:cinescope/controller/register_callback.dart';
 import 'package:cinescope/firebase_options.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
 import 'package:cinescope/model/providers/film_provider.dart';
@@ -18,7 +17,7 @@ Future<void> main() async {
 
   Widget startingWidget = MainLoginPage();
   if (FirebaseAuth.instance.currentUser != null) {
-    startingWidget = MainPage();
+    startingWidget = const MainPage();
   }
 
   runApp(MyApp(

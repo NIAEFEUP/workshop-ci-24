@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/film_provider.dart';
-import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/cards/page_message.dart';
 import 'package:cinescope/view/cards/cast_card.dart';
 import 'package:cinescope/view/general_page.dart';
@@ -22,9 +21,9 @@ class FilmPageState extends GeneralPageState<FilmPage> {
   List<Widget> buildCast(Film film) {
     List<Widget> cast = [];
 
-    film.cast!.forEach((actor) {
+    for (var actor in film.cast!) {
       cast.add(CastCard(actor: actor));
-    });
+    }
 
     return cast;
   }
