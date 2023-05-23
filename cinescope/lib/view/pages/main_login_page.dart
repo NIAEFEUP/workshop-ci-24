@@ -67,7 +67,7 @@ class MainLoginPage extends StatelessWidget {
                       child: LoginButton(
                           pressedFunction: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const LoginPage()));
+                                builder: (context) => LoginPage()));
                           },
                           childWidget: const Text("Sign In"),
                           relevant: false,
@@ -77,7 +77,7 @@ class MainLoginPage extends StatelessWidget {
                       child: LoginButton(
                           pressedFunction: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const RegisterPage()));
+                                builder: (context) =>  RegisterPage()));
                           },
                           childWidget: const Text("Sign Up"))),
                 ]),

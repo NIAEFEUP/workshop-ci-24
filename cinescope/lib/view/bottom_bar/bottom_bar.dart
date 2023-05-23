@@ -53,7 +53,7 @@ class BottomBarState extends State<BottomBar> {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MainPage()));
+                          builder: (context) => MainPage()));
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.house,
@@ -82,16 +82,6 @@ class BottomBarState extends State<BottomBar> {
                       color: Colors.black,
                     ),
                     key: const Key("watchlists"),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const InboxPage()));
-                    },
-                    icon: const FaIcon(
-                      FontAwesomeIcons.inbox,
-                      color: Colors.black,
-                    ),
                   ),
                   Container(
                     decoration: BoxDecoration(

@@ -20,14 +20,13 @@ class WatchlistProvider extends ChangeNotifier {
     _getWatchlist();
     _authInstance
         .authStateChanges()
-        .asBroadcastStream(onListen: _authChange);
+        .listen(_authChange);
   }
 
   Watchlist _watchlist = Watchlist([]);
   Watchlist getWatchlist() => _watchlist;
 
-  void _authChange(StreamSubscription<User?> subscription) async {
-    final user = await subscription.asFuture() as User?;
+  void _authChange(User? user) async {
     if (user != null) {
       await _getWatchlist();
     }
@@ -45,7 +44,7 @@ class WatchlistProvider extends ChangeNotifier {
               .doc(_authInstance.currentUser!.uid)
               .get())
           .data()!;
-      await _watchlist.parseFilmsInWatchlist();
+      await _watchlist.parseFilmsInWatchlist(_filmDetailsScraper);
       notifyListeners();
     }
   }

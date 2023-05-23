@@ -14,7 +14,7 @@ import 'discussion_provider_test.mocks.dart';
 void main() {
   group("Discussion Provider", () {
     final Discussion discussion = Discussion(
-        "",
+        "testId",
         "tt1234",
         "Discussion Title",
         "Discussion Description",
@@ -78,7 +78,6 @@ void main() {
           .doc("sus")
           .set(discussion3);
 
-      final profileMock = MockProfileProvider();
       final discussionProvider =
           DiscussionProvider(auth: authMock, store: storageMock);
       final set = await discussionProvider.getDiscussionsByFilmId("tt1234");
@@ -106,8 +105,6 @@ void main() {
           .doc("siuu")
           .set(discussion);
 
-      final profileMock = MockProfileProvider();
-
       final discussionProvider =
           DiscussionProvider(auth: authMock, store: storageMock);
       await discussionProvider.addNewDiscussion(discussion2);
@@ -124,6 +121,42 @@ void main() {
           .get();
       final lastAddedData = lastAdded.docs[1].data();
       expect(lastAddedData.description, discussion2.description);
+    });
+
+    testWidgets("adds new comment correctly", (widgetTester) async {
+      final authMock = MockFirebaseAuth(
+          mockUser: MockUser(uid: "1234-asd", email: "siuuu@gmail.com"),
+          signedIn: true);
+      final storageMock =
+          FakeFirebaseFirestore(authObject: authMock.authForFakeFirestore);
+
+      await storageMock
+          .collection("discussions")
+          .withConverter(
+              fromFirestore: Discussion.fromFirestore,
+              toFirestore: (discussion, _) => discussion.toFirestore())
+          .doc("testId")
+          .set(discussion);
+
+      final discussionProvider =
+          DiscussionProvider(auth: authMock, store: storageMock);
+
+      final comment = Comment("test content", DateTime.now(), "1234-asd");
+
+      await discussionProvider.addCommentToDiscussion(discussion, comment);
+
+
+      final discussionAfter = (await storageMock
+          .collection("discussions")
+          .withConverter(
+              fromFirestore: Discussion.fromFirestore,
+              toFirestore: (discussion, _) => discussion.toFirestore())
+          .doc("testId")
+          .get()).data()!;
+
+      
+      expect(discussionAfter.comments.length, 2);
+      expect(discussionAfter.comments[1].content, comment.content);
     });
   });
 }

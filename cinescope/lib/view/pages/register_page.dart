@@ -1,13 +1,19 @@
 import 'package:cinescope/controller/register_callback.dart';
 import 'package:cinescope/utils/validators.dart';
 import 'package:cinescope/view/pages/main_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../button/login_button.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firebaseFirestore;
+  RegisterPage({super.key, FirebaseAuth? firebaseAuth, FirebaseFirestore? firebaseFirestore})
+      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+       _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
   @override
   State<StatefulWidget> createState() => RegisterPageState();
@@ -25,14 +31,14 @@ class RegisterPageState extends State<RegisterPage> {
   void Function() registerButtonHandler(BuildContext context) {
     return () {
       if (_formKey.currentState!.validate()) {
-        FirebaseAuth.instance
+            widget._firebaseAuth
             .createUserWithEmailAndPassword(
                 email: _textEditingControllerEmail.text,
                 password: _textEditingControllerPass.text)
             .then((value) {
+          registerCallback(widget._firebaseAuth, widget._firebaseFirestore);
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const MainPage()));
-          registerCallback();
         }).onError((error, stackTrace) {
           final err = (error as FirebaseAuthException);
           if (err.code == "email-already-in-use") {
@@ -110,6 +116,7 @@ class RegisterPageState extends State<RegisterPage> {
                           border: OutlineInputBorder(),
                           labelText: 'Email',
                         ),
+                        key: const Key("emailField"),
                         validator: emailValidator,
                       ),
                       const Padding(
@@ -121,7 +128,9 @@ class RegisterPageState extends State<RegisterPage> {
                           focusColor: Colors.white,
                           border: OutlineInputBorder(),
                           labelText: 'Password',
+
                         ),
+                        key: const Key("passwordField"),
                         validator: strongPasswordValidator,
                         obscureText: true,
                       ),
@@ -136,11 +145,13 @@ class RegisterPageState extends State<RegisterPage> {
                         ),
                         validator: samePassword,
                         obscureText: true,
+                        key: const Key("confirmPasswordField"),
                       ),
                     ]),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
+                      key: const Key("registerButton"),
                       pressedFunction: registerButtonHandler(context),
                       childWidget: const Text("Sign up")),
                 ]))));
