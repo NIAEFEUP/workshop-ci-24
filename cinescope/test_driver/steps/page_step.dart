@@ -29,6 +29,6 @@ class WhenChangePageStep extends When1WithWorld<String, FlutterWorld>{
   }
 
   @override
-  Pattern get pattern => RegExp(r"the user goes to the {string} page");
+  Pattern get pattern => RegExp(r"I go to the {string} page");
 
 }
