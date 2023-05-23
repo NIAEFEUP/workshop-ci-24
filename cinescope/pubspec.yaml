@@ -53,6 +53,7 @@ dependencies:
   another_flushbar: ^1.12.29
   html: ^0.15.3
   cached_network_image: ^3.2.3
+  meta: ^1.8.0
 
 dev_dependencies:
   flutter_test:

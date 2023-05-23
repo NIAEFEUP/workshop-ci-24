@@ -6,7 +6,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:cinescope/view/general_page.dart';
 
 class ProfilePage extends GeneralPage {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();

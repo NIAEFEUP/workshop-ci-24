@@ -1,10 +1,9 @@
 import 'package:cinescope/view/general_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 
 class MainPage extends GeneralPage {
-  const MainPage({super.key});
+  const MainPage({super.key}) : super(needsProviders: true);
   @override
   State<StatefulWidget> createState() => MainPageState();
 }

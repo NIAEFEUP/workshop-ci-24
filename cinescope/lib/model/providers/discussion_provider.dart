@@ -2,7 +2,6 @@
 import 'dart:collection';
 
 import 'package:cinescope/model/discussion.dart';
-import 'package:cinescope/model/providers/profile_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +22,6 @@ class DiscussionProvider extends ChangeNotifier{
   DiscussionProvider({FirebaseAuth? auth, FirebaseFirestore? store}) 
     : _authInstance = auth ?? FirebaseAuth.instance, 
       _storeInstance = store ?? FirebaseFirestore.instance;
-
 
   Future<UnmodifiableSetView<Discussion>> getDiscussionsByFilmId(String filmId) async{
     final queryData = await _storeInstance.collection("discussions")

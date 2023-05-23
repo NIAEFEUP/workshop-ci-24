@@ -3,15 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
+import 'dart:async' as _i3;
 import 'dart:collection' as _i2;
 import 'dart:ui' as _i8;
 
-import 'package:cinescope/model/discussion.dart' as _i6;
-import 'package:cinescope/model/profile.dart' as _i3;
-import 'package:cinescope/model/providers/discussion_provider.dart' as _i5;
+import 'package:cinescope/model/discussion.dart' as _i7;
+import 'package:cinescope/model/profile.dart' as _i4;
+import 'package:cinescope/model/providers/discussion_provider.dart' as _i6;
 import 'package:cinescope/model/providers/profile_provider.dart' as _i9;
-import 'package:flutter/cupertino.dart' as _i4;
+import 'package:flutter/cupertino.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -36,8 +36,19 @@ class _FakeUnmodifiableSetView_0<E> extends _i1.SmartFake
         );
 }
 
-class _FakeProfile_1 extends _i1.SmartFake implements _i3.Profile {
-  _FakeProfile_1(
+class _FakeStreamController_1<T> extends _i1.SmartFake
+    implements _i3.StreamController<T> {
+  _FakeStreamController_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeProfile_2 extends _i1.SmartFake implements _i4.Profile {
+  _FakeProfile_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -49,11 +60,11 @@ class _FakeProfile_1 extends _i1.SmartFake implements _i3.Profile {
 /// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
+class MockNavigatorObserver extends _i1.Mock implements _i5.NavigatorObserver {
   @override
   void didPush(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -67,8 +78,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didPop(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -82,8 +93,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didRemove(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -97,8 +108,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didReplace({
-    _i4.Route<dynamic>? newRoute,
-    _i4.Route<dynamic>? oldRoute,
+    _i5.Route<dynamic>? newRoute,
+    _i5.Route<dynamic>? oldRoute,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -113,8 +124,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didStartUserGesture(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -140,20 +151,20 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDiscussionProvider extends _i1.Mock
-    implements _i5.DiscussionProvider {
+    implements _i6.DiscussionProvider {
   @override
-  _i2.UnmodifiableSetView<_i6.Discussion> get userDiscussions =>
+  _i2.UnmodifiableSetView<_i7.Discussion> get userDiscussions =>
       (super.noSuchMethod(
         Invocation.getter(#userDiscussions),
-        returnValue: _FakeUnmodifiableSetView_0<_i6.Discussion>(
+        returnValue: _FakeUnmodifiableSetView_0<_i7.Discussion>(
           this,
           Invocation.getter(#userDiscussions),
         ),
-        returnValueForMissingStub: _FakeUnmodifiableSetView_0<_i6.Discussion>(
+        returnValueForMissingStub: _FakeUnmodifiableSetView_0<_i7.Discussion>(
           this,
           Invocation.getter(#userDiscussions),
         ),
-      ) as _i2.UnmodifiableSetView<_i6.Discussion>);
+      ) as _i2.UnmodifiableSetView<_i7.Discussion>);
   @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
@@ -161,15 +172,15 @@ class MockDiscussionProvider extends _i1.Mock
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>> getDiscussionsByFilmId(
+  _i3.Future<_i2.UnmodifiableSetView<_i7.Discussion>> getDiscussionsByFilmId(
           String? filmId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDiscussionsByFilmId,
           [filmId],
         ),
-        returnValue: _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>>.value(
-            _FakeUnmodifiableSetView_0<_i6.Discussion>(
+        returnValue: _i3.Future<_i2.UnmodifiableSetView<_i7.Discussion>>.value(
+            _FakeUnmodifiableSetView_0<_i7.Discussion>(
           this,
           Invocation.method(
             #getDiscussionsByFilmId,
@@ -177,29 +188,29 @@ class MockDiscussionProvider extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>>.value(
-                _FakeUnmodifiableSetView_0<_i6.Discussion>(
+            _i3.Future<_i2.UnmodifiableSetView<_i7.Discussion>>.value(
+                _FakeUnmodifiableSetView_0<_i7.Discussion>(
           this,
           Invocation.method(
             #getDiscussionsByFilmId,
             [filmId],
           ),
         )),
-      ) as _i7.Future<_i2.UnmodifiableSetView<_i6.Discussion>>);
+      ) as _i3.Future<_i2.UnmodifiableSetView<_i7.Discussion>>);
   @override
-  _i7.Future<void> addNewDiscussion(_i6.Discussion? newDiscussion) =>
+  _i3.Future<void> addNewDiscussion(_i7.Discussion? newDiscussion) =>
       (super.noSuchMethod(
         Invocation.method(
           #addNewDiscussion,
           [newDiscussion],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
-  _i7.Future<void> addCommentToDiscussion(
-    _i6.Discussion? discussion,
-    _i6.Comment? newComment,
+  _i3.Future<void> addCommentToDiscussion(
+    _i7.Discussion? discussion,
+    _i7.Comment? newComment,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -209,9 +220,9 @@ class MockDiscussionProvider extends _i1.Mock
             newComment,
           ],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
   void rerender() => super.noSuchMethod(
         Invocation.method(
@@ -259,40 +270,80 @@ class MockDiscussionProvider extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockProfileProvider extends _i1.Mock implements _i9.ProfileProvider {
   @override
+  _i3.StreamController<bool> get loadedController => (super.noSuchMethod(
+        Invocation.getter(#loadedController),
+        returnValue: _FakeStreamController_1<bool>(
+          this,
+          Invocation.getter(#loadedController),
+        ),
+        returnValueForMissingStub: _FakeStreamController_1<bool>(
+          this,
+          Invocation.getter(#loadedController),
+        ),
+      ) as _i3.StreamController<bool>);
+  @override
+  bool get lastLoaded => (super.noSuchMethod(
+        Invocation.getter(#lastLoaded),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  set lastLoaded(bool? _lastLoaded) => super.noSuchMethod(
+        Invocation.setter(
+          #lastLoaded,
+          _lastLoaded,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i3.Stream<bool> get loaded => (super.noSuchMethod(
+        Invocation.getter(#loaded),
+        returnValue: _i3.Stream<bool>.empty(),
+        returnValueForMissingStub: _i3.Stream<bool>.empty(),
+      ) as _i3.Stream<bool>);
+  @override
+  set loaded(_i3.Stream<bool>? _loaded) => super.noSuchMethod(
+        Invocation.setter(
+          #loaded,
+          _loaded,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i3.Profile getProfile() => (super.noSuchMethod(
+  _i4.Profile getProfile() => (super.noSuchMethod(
         Invocation.method(
           #getProfile,
           [],
         ),
-        returnValue: _FakeProfile_1(
+        returnValue: _FakeProfile_2(
           this,
           Invocation.method(
             #getProfile,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeProfile_1(
+        returnValueForMissingStub: _FakeProfile_2(
           this,
           Invocation.method(
             #getProfile,
             [],
           ),
         ),
-      ) as _i3.Profile);
+      ) as _i4.Profile);
   @override
-  _i7.Future<_i3.Profile> getProfileByUid({String? uid}) => (super.noSuchMethod(
+  _i3.Future<_i4.Profile> getProfileByUid({String? uid}) => (super.noSuchMethod(
         Invocation.method(
           #getProfileByUid,
           [],
           {#uid: uid},
         ),
-        returnValue: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+        returnValue: _i3.Future<_i4.Profile>.value(_FakeProfile_2(
           this,
           Invocation.method(
             #getProfileByUid,
@@ -300,7 +351,7 @@ class MockProfileProvider extends _i1.Mock implements _i9.ProfileProvider {
             {#uid: uid},
           ),
         )),
-        returnValueForMissingStub: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+        returnValueForMissingStub: _i3.Future<_i4.Profile>.value(_FakeProfile_2(
           this,
           Invocation.method(
             #getProfileByUid,
@@ -308,16 +359,16 @@ class MockProfileProvider extends _i1.Mock implements _i9.ProfileProvider {
             {#uid: uid},
           ),
         )),
-      ) as _i7.Future<_i3.Profile>);
+      ) as _i3.Future<_i4.Profile>);
   @override
-  _i7.Future<_i3.Profile> getProfileByUidReload({String? uid}) =>
+  _i3.Future<_i4.Profile> getProfileByUidReload({String? uid}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getProfileByUidReload,
           [],
           {#uid: uid},
         ),
-        returnValue: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+        returnValue: _i3.Future<_i4.Profile>.value(_FakeProfile_2(
           this,
           Invocation.method(
             #getProfileByUidReload,
@@ -325,7 +376,7 @@ class MockProfileProvider extends _i1.Mock implements _i9.ProfileProvider {
             {#uid: uid},
           ),
         )),
-        returnValueForMissingStub: _i7.Future<_i3.Profile>.value(_FakeProfile_1(
+        returnValueForMissingStub: _i3.Future<_i4.Profile>.value(_FakeProfile_2(
           this,
           Invocation.method(
             #getProfileByUidReload,
@@ -333,16 +384,16 @@ class MockProfileProvider extends _i1.Mock implements _i9.ProfileProvider {
             {#uid: uid},
           ),
         )),
-      ) as _i7.Future<_i3.Profile>);
+      ) as _i3.Future<_i4.Profile>);
   @override
-  _i7.Future<void> saveProfile(_i3.Profile? profile) => (super.noSuchMethod(
+  _i3.Future<void> saveProfile(_i4.Profile? profile) => (super.noSuchMethod(
         Invocation.method(
           #saveProfile,
           [profile],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
   void rerender() => super.noSuchMethod(
         Invocation.method(

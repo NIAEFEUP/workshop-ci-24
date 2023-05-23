@@ -3,14 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i2;
 import 'dart:ui' as _i7;
 
-import 'package:cinescope/model/film.dart' as _i3;
+import 'package:cinescope/model/film.dart' as _i4;
 import 'package:cinescope/model/providers/film_provider.dart' as _i8;
-import 'package:cinescope/model/providers/watchlist_provider.dart' as _i5;
-import 'package:cinescope/model/watchlist.dart' as _i2;
-import 'package:flutter/material.dart' as _i4;
+import 'package:cinescope/model/providers/watchlist_provider.dart' as _i6;
+import 'package:cinescope/model/watchlist.dart' as _i3;
+import 'package:flutter/material.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -24,8 +24,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeWatchlist_0 extends _i1.SmartFake implements _i2.Watchlist {
-  _FakeWatchlist_0(
+class _FakeStreamController_0<T> extends _i1.SmartFake
+    implements _i2.StreamController<T> {
+  _FakeStreamController_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -34,8 +35,18 @@ class _FakeWatchlist_0 extends _i1.SmartFake implements _i2.Watchlist {
         );
 }
 
-class _FakeFilm_1 extends _i1.SmartFake implements _i3.Film {
-  _FakeFilm_1(
+class _FakeWatchlist_1 extends _i1.SmartFake implements _i3.Watchlist {
+  _FakeWatchlist_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeFilm_2 extends _i1.SmartFake implements _i4.Film {
+  _FakeFilm_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -47,11 +58,11 @@ class _FakeFilm_1 extends _i1.SmartFake implements _i3.Film {
 /// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
+class MockNavigatorObserver extends _i1.Mock implements _i5.NavigatorObserver {
   @override
   void didPush(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -65,8 +76,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didPop(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -80,8 +91,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didRemove(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -95,8 +106,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didReplace({
-    _i4.Route<dynamic>? newRoute,
-    _i4.Route<dynamic>? oldRoute,
+    _i5.Route<dynamic>? newRoute,
+    _i5.Route<dynamic>? oldRoute,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -111,8 +122,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
       );
   @override
   void didStartUserGesture(
-    _i4.Route<dynamic>? route,
-    _i4.Route<dynamic>? previousRoute,
+    _i5.Route<dynamic>? route,
+    _i5.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -137,7 +148,47 @@ class MockNavigatorObserver extends _i1.Mock implements _i4.NavigatorObserver {
 /// A class which mocks [WatchlistProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWatchlistProvider extends _i1.Mock implements _i5.WatchlistProvider {
+class MockWatchlistProvider extends _i1.Mock implements _i6.WatchlistProvider {
+  @override
+  _i2.StreamController<bool> get loadedController => (super.noSuchMethod(
+        Invocation.getter(#loadedController),
+        returnValue: _FakeStreamController_0<bool>(
+          this,
+          Invocation.getter(#loadedController),
+        ),
+        returnValueForMissingStub: _FakeStreamController_0<bool>(
+          this,
+          Invocation.getter(#loadedController),
+        ),
+      ) as _i2.StreamController<bool>);
+  @override
+  bool get lastLoaded => (super.noSuchMethod(
+        Invocation.getter(#lastLoaded),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  set lastLoaded(bool? _lastLoaded) => super.noSuchMethod(
+        Invocation.setter(
+          #lastLoaded,
+          _lastLoaded,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i2.Stream<bool> get loaded => (super.noSuchMethod(
+        Invocation.getter(#loaded),
+        returnValue: _i2.Stream<bool>.empty(),
+        returnValueForMissingStub: _i2.Stream<bool>.empty(),
+      ) as _i2.Stream<bool>);
+  @override
+  set loaded(_i2.Stream<bool>? _loaded) => super.noSuchMethod(
+        Invocation.setter(
+          #loaded,
+          _loaded,
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
@@ -145,45 +196,45 @@ class MockWatchlistProvider extends _i1.Mock implements _i5.WatchlistProvider {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i2.Watchlist getWatchlist() => (super.noSuchMethod(
+  _i3.Watchlist getWatchlist() => (super.noSuchMethod(
         Invocation.method(
           #getWatchlist,
           [],
         ),
-        returnValue: _FakeWatchlist_0(
+        returnValue: _FakeWatchlist_1(
           this,
           Invocation.method(
             #getWatchlist,
             [],
           ),
         ),
-        returnValueForMissingStub: _FakeWatchlist_0(
+        returnValueForMissingStub: _FakeWatchlist_1(
           this,
           Invocation.method(
             #getWatchlist,
             [],
           ),
         ),
-      ) as _i2.Watchlist);
+      ) as _i3.Watchlist);
   @override
-  _i6.Future<void> addFilmToWatchlist(String? filmId) => (super.noSuchMethod(
+  _i2.Future<void> addFilmToWatchlist(String? filmId) => (super.noSuchMethod(
         Invocation.method(
           #addFilmToWatchlist,
           [filmId],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
   @override
-  _i6.Future<void> removeFilmFromWatchlist(_i3.Film? film) =>
+  _i2.Future<void> removeFilmFromWatchlist(_i4.Film? film) =>
       (super.noSuchMethod(
         Invocation.method(
           #removeFilmFromWatchlist,
           [film],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
   @override
   void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
@@ -229,26 +280,26 @@ class MockFilmProvider extends _i1.Mock implements _i8.FilmProvider {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i6.Future<_i3.Film> getFilm(String? filmId) => (super.noSuchMethod(
+  _i2.Future<_i4.Film> getFilm(String? filmId) => (super.noSuchMethod(
         Invocation.method(
           #getFilm,
           [filmId],
         ),
-        returnValue: _i6.Future<_i3.Film>.value(_FakeFilm_1(
+        returnValue: _i2.Future<_i4.Film>.value(_FakeFilm_2(
           this,
           Invocation.method(
             #getFilm,
             [filmId],
           ),
         )),
-        returnValueForMissingStub: _i6.Future<_i3.Film>.value(_FakeFilm_1(
+        returnValueForMissingStub: _i2.Future<_i4.Film>.value(_FakeFilm_2(
           this,
           Invocation.method(
             #getFilm,
             [filmId],
           ),
         )),
-      ) as _i6.Future<_i3.Film>);
+      ) as _i2.Future<_i4.Film>);
   @override
   void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
