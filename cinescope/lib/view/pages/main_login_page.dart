@@ -102,7 +102,7 @@ class MainLoginPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
                 LoginButton(
                     pressedFunction: githubButtonHandler(context),
-                    childWidget: Row(children: const [
+                    childWidget: Row(children: const[
                       Padding(
                           padding:
                               EdgeInsetsDirectional.symmetric(horizontal: 5)),
