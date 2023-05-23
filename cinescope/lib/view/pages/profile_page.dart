@@ -52,6 +52,7 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
           ),
           const Spacer(),
           IconButton(
+            key: const Key("logout"),
             icon: const Icon(Icons.logout),
             onPressed: () {
               showDialog(
@@ -68,6 +69,7 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                         },
                       ),
                       TextButton(
+                        key: const Key("logoutConfirm"),
                         child: const Text('Logout'),
                         onPressed: () {
                           FirebaseAuth.instance.signOut();

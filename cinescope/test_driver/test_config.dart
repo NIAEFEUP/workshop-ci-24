@@ -4,7 +4,9 @@ import 'package:gherkin/gherkin.dart';
 import 'package:glob/glob.dart';
 
 import 'steps/authenticated_step.dart';
+import 'steps/is_on_main_page.dart';
 import 'steps/list_film_match.dart';
+import 'steps/not_authenticated.dart';
 import 'steps/not_found.dart';
 import 'steps/page_step.dart';
 import 'steps/search_for_film.dart';
@@ -12,7 +14,7 @@ import 'steps/watchlist_tap_resemble.dart';
 
 Future<void> main() {
   final config = FlutterTestConfiguration()
-    ..features = [Glob(r"test_driver/feature/**.feature")]
+    ..features = [Glob(r"test_driver/feature/login.feature")]
     ..reporters = [
       ProgressReporter(),
       TestRunSummaryReporter(),
@@ -25,7 +27,9 @@ Future<void> main() {
       ThenNotFound(),
       WhenWatchlistButtonTapResemble(),
       WhenChangePageStep(),
-      ThenListFilmDoesntMatch()
+      ThenListFilmDoesntMatch(),
+      GivenUserNotAuthenticated(),
+      ThenIsMainPage()
     ]
     ..restartAppBetweenScenarios = true
     ..targetAppPath = "test_driver/app.dart";

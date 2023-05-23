@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_gherkin/flutter_gherkin.dart';
 import 'package:gherkin/gherkin.dart';
@@ -26,11 +28,15 @@ class GivenUserAuthenticated extends GivenWithWorld<FlutterWorld> {
     await FlutterDriverUtils.tap(world.driver, signupButton);
     await FlutterDriverUtils.waitForFlutter(world.driver);
 
-    //maybe it will take a bit of time logging in depending of internet connection
-    await Future.delayed(const Duration(seconds: 5));
+    sleep(const Duration(seconds: 5));
+
 
     expect(await FlutterDriverUtils.isPresent(world.driver, mainPage), true, 
     reason: "Not in main page after login");
+
+    final bottomBar = find.byType("BottomBar");
+    expect(await FlutterDriverUtils.isPresent(world.driver, bottomBar), true, 
+    reason: "Main page still loading");
 
 
 

@@ -7,7 +7,7 @@ Feature: user watchlist
         Given the user is authenticated
         Given the user is on the "search" page
         When the user enters "titanic" in the search bar
-        Then I pause for 2 seconds
+        Then I pause for 5 seconds
         When the user taps the watchlist button on a entry that resembles "titanic" on the card content
         Then I pause for 5 seconds
         When the user goes to the "watchlists" page
