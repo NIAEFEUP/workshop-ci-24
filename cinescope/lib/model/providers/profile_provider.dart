@@ -13,6 +13,8 @@ class ProfileProvider extends RequiredProvider {
   final FirebaseFirestore _firebaseFirestore;
   final FirebaseStorage _firebaseStorage;
 
+  final Map<String, Profile> _profileCache = {};
+
   ProfileProvider(
       {FirebaseAuth? firebaseAuth,
       FirebaseFirestore? firebaseFirestore,
@@ -41,6 +43,9 @@ class ProfileProvider extends RequiredProvider {
   Future<Profile> getProfileByUid({String? uid}) async {
     final ownProfile = uid == null;
     uid ??= _firebaseAuth.currentUser!.uid;
+    if(_profileCache.containsKey(uid)){
+      return _profileCache[uid]!;
+    }
     final watchlistsRef = _firebaseFirestore
         .collection("profiles")
         .withConverter(
@@ -55,10 +60,13 @@ class ProfileProvider extends RequiredProvider {
       profile.imageData = defaultImage;
     } else if (profile != null) {
       try {
-        profile.imageData =
+          profile.imageData =
             await _firebaseStorage.ref(profile.picPath).getData();
+
       } catch (e) {
         Logger().e("exception...", e);
+        Uint8List defaultImage= (await rootBundle.load("assets/profile-placeholder.png")).buffer.asUint8List();
+        profile.imageData = defaultImage;
       }
     } else if(profile == null){
       profile = Profile.empty();
@@ -66,7 +74,7 @@ class ProfileProvider extends RequiredProvider {
       profile.imageData = defaultImage;
     }
 
-
+    _profileCache[uid] = profile;
     if (ownProfile) {
       _profile = profile;
       loadedController.add(true);
