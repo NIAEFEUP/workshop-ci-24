@@ -51,7 +51,7 @@ class DiscussionListPageState extends GeneralPageState<DiscussionListPage> {
       cards.add(DiscussionCard(discussion: discussion));
     }
 
-    return ListView(shrinkWrap: true, children: cards);
+    return Column(children: cards);
   }
 
   @override
