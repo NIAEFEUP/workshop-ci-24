@@ -5,6 +5,7 @@ import 'package:cinescope/model/providers/required_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 
 class ProfileProvider extends RequiredProvider {
@@ -19,7 +20,7 @@ class ProfileProvider extends RequiredProvider {
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
         _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance {
-    if(_firebaseAuth.currentUser != null){
+    if (_firebaseAuth.currentUser != null) {
       getProfileByUid();
     }
     _firebaseAuth.authStateChanges().listen(_authChange);
@@ -87,9 +88,10 @@ class ProfileProvider extends RequiredProvider {
       _profile = profile;
     }
     notifyListeners();
-    await _firebaseStorage
-        .ref(profile.picPath)
-        .putData(profile.imageData!);
+    await _firebaseStorage.ref(profile.picPath).putData(profile.imageData ??
+        (await rootBundle.load("assets/profile-placeholder.png"))
+            .buffer
+            .asUint8List());
     notifyListeners();
   }
 

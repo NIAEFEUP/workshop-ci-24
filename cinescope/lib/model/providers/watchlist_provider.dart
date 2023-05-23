@@ -12,19 +12,17 @@ class WatchlistProvider extends RequiredProvider {
   late final FirebaseFirestore _storeInstance;
   late final FilmDetailsScraper _filmDetailsScraper;
 
-
-  WatchlistProvider({FirebaseAuth? auth, FirebaseFirestore? store, FilmDetailsScraper? filmDetailsScraper}) 
-    : _authInstance = auth ?? FirebaseAuth.instance, 
-      _storeInstance = store ?? FirebaseFirestore.instance,
-      _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper(),
-      super()
-  {
+  WatchlistProvider(
+      {FirebaseAuth? auth,
+      FirebaseFirestore? store,
+      FilmDetailsScraper? filmDetailsScraper})
+      : _authInstance = auth ?? FirebaseAuth.instance,
+        _storeInstance = store ?? FirebaseFirestore.instance,
+        _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper(),
+        super() {
     _getWatchlist();
-    _authInstance
-        .authStateChanges()
-        .listen(_authChange);
+    _authInstance.authStateChanges().listen(_authChange);
   }
-
 
   Watchlist _watchlist = Watchlist([]);
   Watchlist getWatchlist() => _watchlist;
@@ -39,36 +37,35 @@ class WatchlistProvider extends RequiredProvider {
 
   Future<void> _getWatchlist() async {
     if (_authInstance.currentUser != null) {
-      final watchlistsRef = _storeInstance
-          .collection("watchlists")
-          .withConverter(
-              fromFirestore: (snapshot, options) =>
-                  Watchlist.fromFirestore(snapshot, options),
-              toFirestore: (film, _) => film.toFirestore());
-      _watchlist = (await watchlistsRef
-              .doc(_authInstance.currentUser!.uid)
-              .get())
-          .data()!;
-      await _watchlist.parseFilmsInWatchlist(_filmDetailsScraper);
+      try {
+        final watchlistsRef = _storeInstance
+            .collection("watchlists")
+            .withConverter(
+                fromFirestore: (snapshot, options) =>
+                    Watchlist.fromFirestore(snapshot, options),
+                toFirestore: (film, _) => film.toFirestore());
+        _watchlist =
+            (await watchlistsRef.doc(_authInstance.currentUser!.uid).get())
+                .data()!;
+        await _watchlist.parseFilmsInWatchlist(_filmDetailsScraper);
+      } catch (e) {
+        _watchlist = Watchlist([]);
+      }
+
       notifyListeners();
       loadedController.add(true);
-
     }
   }
 
   Future<void> addFilmToWatchlist(String filmId) async {
     if (_watchlist.movieIds.contains(filmId)) return;
     _watchlist.movieIds.add(filmId);
-    final watchlistsRef = _storeInstance
-        .collection("watchlists")
-        .withConverter(
-            fromFirestore: (snapshot, options) =>
-                Watchlist.fromFirestore(snapshot, options),
-            toFirestore: (film, _) => film.toFirestore());
+    final watchlistsRef = _storeInstance.collection("watchlists").withConverter(
+        fromFirestore: (snapshot, options) =>
+            Watchlist.fromFirestore(snapshot, options),
+        toFirestore: (film, _) => film.toFirestore());
     notifyListeners();
-    await watchlistsRef
-        .doc(_authInstance.currentUser!.uid)
-        .set(_watchlist);
+    await watchlistsRef.doc(_authInstance.currentUser!.uid).set(_watchlist);
     _filmDetailsScraper.getFilmDetails(filmId).then((value) {
       _watchlist.movies.add(value);
       notifyListeners();
@@ -81,15 +78,11 @@ class WatchlistProvider extends RequiredProvider {
     _watchlist.movies.remove(film);
 
     notifyListeners();
-    final watchlistsRef = _storeInstance
-        .collection("watchlists")
-        .withConverter(
-            fromFirestore: (snapshot, options) =>
-                Watchlist.fromFirestore(snapshot, options),
-            toFirestore: (film, _) => film.toFirestore());
+    final watchlistsRef = _storeInstance.collection("watchlists").withConverter(
+        fromFirestore: (snapshot, options) =>
+            Watchlist.fromFirestore(snapshot, options),
+        toFirestore: (film, _) => film.toFirestore());
 
-    await watchlistsRef
-        .doc(_authInstance.currentUser!.uid)
-        .set(_watchlist);
+    await watchlistsRef.doc(_authInstance.currentUser!.uid).set(_watchlist);
   }
 }
