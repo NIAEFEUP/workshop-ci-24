@@ -10,6 +10,7 @@ import 'steps/list_film_match.dart';
 import 'steps/not_authenticated.dart';
 import 'steps/not_found.dart';
 import 'steps/page_step.dart';
+import 'steps/profile_state_restorer.dart';
 import 'steps/search_for_film.dart';
 import 'steps/watchlist_tap_resemble.dart';
 
@@ -31,7 +32,9 @@ Future<void> main() {
       ThenListFilmDoesntMatch(),
       GivenUserNotAuthenticated(),
       ThenIsMainPage(),
-      WhenGoesToPage()
+      WhenGoesToPage(),
+      ThenSavesProfileState(),
+      ThenRestoresProfileState()
     ]
     ..restartAppBetweenScenarios = true
     ..targetAppPath = "test_driver/app.dart";

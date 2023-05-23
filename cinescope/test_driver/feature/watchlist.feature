@@ -11,7 +11,7 @@ Feature: user watchlist
         Then I pause for 5 seconds
         When the user taps the watchlist button on a entry that resembles "titanic" on the card content
         Then I pause for 5 seconds
-        When the user goes to the "watchlists" page
+        When I go to the "watchlists" page
         Then it should be displayed a list of film/series cards that roughly match "titanic"
         When the user taps the watchlist button on a entry that resembles "titanic" on the card content
         Then I pause for 5 seconds
@@ -24,7 +24,7 @@ Feature: user watchlist
         Then I pause for 5 seconds
         When I tap the "watchlistButton" button
         Then I pause for 5 seconds
-        When the user goes to the "watchlists" page
+        When I go to the "watchlists" page
         Then it should be displayed a list of film/series cards that roughly match "titanic"
         When the user taps the watchlist button on a entry that resembles "titanic" on the card content
         Then I pause for 5 seconds

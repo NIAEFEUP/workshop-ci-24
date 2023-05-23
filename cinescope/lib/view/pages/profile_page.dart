@@ -132,11 +132,14 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                     border: OutlineInputBorder(),
                     labelText: "Name",
                   ),
+                  key: const Key("name"),
                 )
               : Text(
                   profile.name.isNotEmpty ? profile.name : "What is your name?",
                   style: const TextStyle(
                       fontSize: 27, fontWeight: FontWeight.bold),
+                  key: const Key("name"),
+                  
                 );
         },
       ),
@@ -153,12 +156,14 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                     border: OutlineInputBorder(),
                     labelText: "Bio",
                   ),
+                  key: const Key("bio"),
                 )
               : Text(
                   profile.bio.isNotEmpty
                       ? profile.bio
                       : "What do you want other people to know about you?",
                   style: const TextStyle(fontSize: 17),
+                  key: const Key("bio"),
                 );
         },
       ),
