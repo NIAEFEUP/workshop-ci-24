@@ -29,6 +29,7 @@ class ProfileProvider extends RequiredProvider {
   Profile _profile = Profile.empty();
   Profile getProfile() => _profile;
 
+
   void _authChange(User? user) async {
     if (user != null) {
       _profile = await getProfileByUid();
@@ -50,6 +51,8 @@ class ProfileProvider extends RequiredProvider {
     if (profile == null && ownProfile) {
       profile = Profile.empty();
       profile.id ??= ownProfile ? uid : null;
+      Uint8List defaultImage= (await rootBundle.load("assets/profile-placeholder.png")).buffer.asUint8List();
+      profile.imageData = defaultImage;
     } else if (profile != null) {
       try {
         profile.imageData =
@@ -57,13 +60,18 @@ class ProfileProvider extends RequiredProvider {
       } catch (e) {
         Logger().e("exception...", e);
       }
+    } else if(profile == null){
+      profile = Profile.empty();
+      Uint8List defaultImage= (await rootBundle.load("assets/profile-placeholder.png")).buffer.asUint8List();
+      profile.imageData = defaultImage;
     }
 
+
     if (ownProfile) {
-      _profile = profile!;
+      _profile = profile;
       loadedController.add(true);
     }
-    return profile!;
+    return profile;
   }
 
   Future<Profile> getProfileByUidReload({String? uid}) async {
