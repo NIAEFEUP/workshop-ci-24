@@ -14,7 +14,7 @@ import 'steps/watchlist_tap_resemble.dart';
 
 Future<void> main() {
   final config = FlutterTestConfiguration()
-    ..features = [Glob(r"test_driver/feature/login.feature")]
+    ..features = [Glob(r"test_driver/feature/**.feature")]
     ..reporters = [
       ProgressReporter(),
       TestRunSummaryReporter(),
