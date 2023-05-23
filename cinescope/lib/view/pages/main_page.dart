@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MainPage extends GeneralPage {
-  const MainPage({super.key});
+  const MainPage({super.key}) : super(needsProviders: true);
   @override
   State<StatefulWidget> createState() => MainPageState();
 }

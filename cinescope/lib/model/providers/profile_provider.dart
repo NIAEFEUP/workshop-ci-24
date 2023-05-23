@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:cinescope/model/profile.dart';
+import 'package:cinescope/model/providers/required_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
-class ProfileProvider extends ChangeNotifier {
+class ProfileProvider extends RequiredProvider {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
   final FirebaseStorage _firebaseStorage;
@@ -30,6 +31,8 @@ class ProfileProvider extends ChangeNotifier {
   void _authChange(User? user) async {
     if (user != null) {
       _profile = await getProfileByUid();
+    } else {
+      loadedController.add(false);
     }
   }
 
@@ -51,13 +54,13 @@ class ProfileProvider extends ChangeNotifier {
         profile.imageData =
             await _firebaseStorage.ref(profile.picPath).getData();
       } catch (e) {
-        print("exception...");
-        print(e.toString());
+        Logger().e("exception...", e);
       }
     }
 
     if (ownProfile) {
       _profile = profile!;
+      loadedController.add(true);
     }
     return profile!;
   }

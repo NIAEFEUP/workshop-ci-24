@@ -2,20 +2,22 @@ import 'dart:async';
 
 import 'package:cinescope/controller/film_details_scraper.dart';
 import 'package:cinescope/model/film.dart';
+import 'package:cinescope/model/providers/required_provider.dart';
 import 'package:cinescope/model/watchlist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
-class WatchlistProvider extends ChangeNotifier {
+class WatchlistProvider extends RequiredProvider {
   late final FirebaseAuth _authInstance;
   late final FirebaseFirestore _storeInstance;
   late final FilmDetailsScraper _filmDetailsScraper;
 
+
   WatchlistProvider({FirebaseAuth? auth, FirebaseFirestore? store, FilmDetailsScraper? filmDetailsScraper}) 
     : _authInstance = auth ?? FirebaseAuth.instance, 
       _storeInstance = store ?? FirebaseFirestore.instance,
-      _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper()
+      _filmDetailsScraper = filmDetailsScraper ?? FilmDetailsScraper(),
+      super()
   {
     _getWatchlist();
     _authInstance
@@ -23,11 +25,14 @@ class WatchlistProvider extends ChangeNotifier {
         .listen(_authChange);
   }
 
+
   Watchlist _watchlist = Watchlist([]);
   Watchlist getWatchlist() => _watchlist;
 
   void _authChange(User? user) async {
-    if (user != null) {
+    if (user == null) {
+      loadedController.add(false);
+    } else {
       await _getWatchlist();
     }
   }
@@ -46,6 +51,8 @@ class WatchlistProvider extends ChangeNotifier {
           .data()!;
       await _watchlist.parseFilmsInWatchlist(_filmDetailsScraper);
       notifyListeners();
+      loadedController.add(true);
+
     }
   }
 
