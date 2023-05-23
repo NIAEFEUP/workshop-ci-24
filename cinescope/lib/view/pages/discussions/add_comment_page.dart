@@ -10,8 +10,10 @@ import '../../simple_dialog.dart';
 class CommentAddPage extends GeneralPage {
   final Discussion _discussion;
   final Widget header;
-  const CommentAddPage(this._discussion, this.header, {super.key});
+  final FirebaseAuth _firebaseAuth;
 
+  CommentAddPage(this._discussion, this.header, {super.key, FirebaseAuth? authInstance})
+      : _firebaseAuth = authInstance ?? FirebaseAuth.instance;
   @override
   State<StatefulWidget> createState() => CommentAddPageState();
 }
@@ -24,6 +26,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
     return [
       widget.header,
       TextField(
+        key: const Key("comment-field"),
         controller: _editingController,
         maxLines: null,
         decoration: const InputDecoration(
@@ -49,7 +52,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
                     .addCommentToDiscussion(
                         widget._discussion,
                         Comment(_editingController.text, DateTime.now(),
-                        FirebaseAuth.instance.currentUser!.uid))
+                            widget._firebaseAuth.currentUser!.uid))
                     .then((value) => Navigator.of(context).pop());
               },
               child: const Text("Send")))

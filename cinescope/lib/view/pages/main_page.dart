@@ -1,12 +1,9 @@
 import 'package:cinescope/view/general_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
-import 'package:logger/logger.dart';
 
 class MainPage extends GeneralPage {
-  const MainPage({super.key});
-
+  const MainPage({super.key}) : super(needsProviders: true);
   @override
   State<StatefulWidget> createState() => MainPageState();
 }
@@ -14,7 +11,6 @@ class MainPage extends GeneralPage {
 class MainPageState extends GeneralPageState<MainPage> {
   @override
   List<Widget> getBody(BuildContext context) {
-    Logger().d(FirebaseAuth.instance.currentUser!.email ?? "pog");
     return [
       const Text(
         "Welcome to CineScope!",
@@ -22,7 +18,9 @@ class MainPageState extends GeneralPageState<MainPage> {
         textScaleFactor: 2,
       ),
       //hardcoded page starts here,
-      const Padding(padding: EdgeInsets.all(20),),
+      const Padding(
+        padding: EdgeInsets.all(20),
+      ),
       const Text(
         "Your last watched movies:",
         textAlign: TextAlign.left,

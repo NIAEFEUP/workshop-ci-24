@@ -23,7 +23,6 @@ class DiscussionProvider extends ChangeNotifier{
     : _authInstance = auth ?? FirebaseAuth.instance, 
       _storeInstance = store ?? FirebaseFirestore.instance;
 
-
   Future<UnmodifiableSetView<Discussion>> getDiscussionsByFilmId(String filmId) async{
     final queryData = await _storeInstance.collection("discussions")
       .withConverter(fromFirestore: Discussion.fromFirestore, toFirestore: (discussion, _) => discussion.toFirestore())

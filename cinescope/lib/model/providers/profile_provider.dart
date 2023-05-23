@@ -1,33 +1,46 @@
 import 'dart:async';
 
 import 'package:cinescope/model/profile.dart';
+import 'package:cinescope/model/providers/required_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 
-class ProfileProvider extends ChangeNotifier {
-  ProfileProvider() {
-    getProfileByUid();
-    FirebaseAuth.instance
-        .authStateChanges()
-        .asBroadcastStream(onListen: _authChange);
+class ProfileProvider extends RequiredProvider {
+  final FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseStorage _firebaseStorage;
+
+  ProfileProvider(
+      {FirebaseAuth? firebaseAuth,
+      FirebaseFirestore? firebaseFirestore,
+      FirebaseStorage? firebaseStorage})
+      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+        _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
+        _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance {
+    if (_firebaseAuth.currentUser != null) {
+      getProfileByUid();
+    }
+    _firebaseAuth.authStateChanges().listen(_authChange);
   }
 
   Profile _profile = Profile.empty();
   Profile getProfile() => _profile;
 
-  void _authChange(StreamSubscription<User?> subscription) async {
-    final user = await subscription.asFuture() as User?;
+  void _authChange(User? user) async {
     if (user != null) {
-      await getProfileByUid();
+      _profile = await getProfileByUid();
+    } else {
+      loadedController.add(false);
     }
   }
 
   Future<Profile> getProfileByUid({String? uid}) async {
     final ownProfile = uid == null;
-    uid ??= FirebaseAuth.instance.currentUser!.uid;
-    final watchlistsRef = FirebaseFirestore.instance
+    uid ??= _firebaseAuth.currentUser!.uid;
+    final watchlistsRef = _firebaseFirestore
         .collection("profiles")
         .withConverter(
             fromFirestore: (snapshot, options) =>
@@ -39,31 +52,30 @@ class ProfileProvider extends ChangeNotifier {
       profile.id ??= ownProfile ? uid : null;
     } else if (profile != null) {
       try {
-        print(profile.picPath);
         profile.imageData =
-            await FirebaseStorage.instance.ref(
-            profile.picPath).getData();
+            await _firebaseStorage.ref(profile.picPath).getData();
       } catch (e) {
-        print(e.toString());
+        Logger().e("exception...", e);
       }
     }
 
     if (ownProfile) {
       _profile = profile!;
+      loadedController.add(true);
     }
     return profile!;
   }
 
-  Future<Profile> getProfileByUidReload({String? uid}) async{
+  Future<Profile> getProfileByUidReload({String? uid}) async {
     final profile = await getProfileByUid(uid: uid);
     notifyListeners();
     return profile;
   }
 
   Future<void> saveProfile(Profile profile) async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    FirebaseFirestore firestore = _firebaseFirestore;
 
-    profile.picPath = "images/profiles/${profile.id!}}.png";
+    profile.picPath = "images/profiles/${profile.id!}.png";
     await firestore
         .collection('profiles')
         .withConverter(
@@ -72,13 +84,14 @@ class ProfileProvider extends ChangeNotifier {
             toFirestore: (film, _) => film.toFirestore())
         .doc(profile.id)
         .set(profile);
-    if (profile.id == FirebaseAuth.instance.currentUser!.uid) {
+    if (profile.id == _firebaseAuth.currentUser!.uid) {
       _profile = profile;
     }
     notifyListeners();
-    await FirebaseStorage.instance
-        .ref(profile.picPath)
-        .putData(profile.imageData!);
+    await _firebaseStorage.ref(profile.picPath).putData(profile.imageData ??
+        (await rootBundle.load("assets/profile-placeholder.png"))
+            .buffer
+            .asUint8List());
     notifyListeners();
   }
 

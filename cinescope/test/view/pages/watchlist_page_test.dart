@@ -10,7 +10,8 @@ import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:provider/provider.dart';
 
-import 'generic_film_card_test.mocks.dart';
+import 'watchlist_page_test.mocks.dart';
+
 
 @GenerateMocks(
   [],

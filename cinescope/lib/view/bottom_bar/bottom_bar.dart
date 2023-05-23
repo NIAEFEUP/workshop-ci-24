@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cinescope/view/pages/inbox_page.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:cinescope/view/pages/profile_page.dart';
 import 'package:cinescope/view/pages/search_page.dart';
@@ -82,16 +81,6 @@ class BottomBarState extends State<BottomBar> {
                       color: Colors.black,
                     ),
                     key: const Key("watchlists"),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const InboxPage()));
-                    },
-                    icon: const FaIcon(
-                      FontAwesomeIcons.inbox,
-                      color: Colors.black,
-                    ),
                   ),
                   Container(
                     decoration: BoxDecoration(
