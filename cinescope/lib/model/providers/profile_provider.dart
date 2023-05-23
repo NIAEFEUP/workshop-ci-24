@@ -6,19 +6,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:logger/logger.dart';
 
 class ProfileProvider extends RequiredProvider {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
   final FirebaseStorage _firebaseStorage;
+  final bool compressImages;
 
   final Map<String, Profile> _profileCache = {};
 
   ProfileProvider(
       {FirebaseAuth? firebaseAuth,
       FirebaseFirestore? firebaseFirestore,
-      FirebaseStorage? firebaseStorage})
+      FirebaseStorage? firebaseStorage, this.compressImages = true})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
         _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance {
@@ -31,7 +33,6 @@ class ProfileProvider extends RequiredProvider {
   Profile _profile = Profile.empty();
   Profile getProfile() => _profile;
 
-
   void _authChange(User? user) async {
     if (user != null) {
       _profile = await getProfileByUid();
@@ -43,7 +44,7 @@ class ProfileProvider extends RequiredProvider {
   Future<Profile> getProfileByUid({String? uid}) async {
     final ownProfile = uid == null;
     uid ??= _firebaseAuth.currentUser!.uid;
-    if(_profileCache.containsKey(uid)){
+    if (_profileCache.containsKey(uid)) {
       return _profileCache[uid]!;
     }
     final watchlistsRef = _firebaseFirestore
@@ -56,21 +57,29 @@ class ProfileProvider extends RequiredProvider {
     if (profile == null && ownProfile) {
       profile = Profile.empty();
       profile.id ??= ownProfile ? uid : null;
-      Uint8List defaultImage= (await rootBundle.load("assets/profile-placeholder.png")).buffer.asUint8List();
+      Uint8List defaultImage =
+          (await rootBundle.load("assets/profile-placeholder.png"))
+              .buffer
+              .asUint8List();
       profile.imageData = defaultImage;
     } else if (profile != null) {
       try {
-          profile.imageData =
+        profile.imageData =
             await _firebaseStorage.ref(profile.picPath).getData();
-
       } catch (e) {
         Logger().e("exception...", e);
-        Uint8List defaultImage= (await rootBundle.load("assets/profile-placeholder.png")).buffer.asUint8List();
+        Uint8List defaultImage =
+            (await rootBundle.load("assets/profile-placeholder.png"))
+                .buffer
+                .asUint8List();
         profile.imageData = defaultImage;
       }
-    } else if(profile == null){
+    } else if (profile == null) {
       profile = Profile.empty();
-      Uint8List defaultImage= (await rootBundle.load("assets/profile-placeholder.png")).buffer.asUint8List();
+      Uint8List defaultImage =
+          (await rootBundle.load("assets/profile-placeholder.png"))
+              .buffer
+              .asUint8List();
       profile.imageData = defaultImage;
     }
 
@@ -104,10 +113,17 @@ class ProfileProvider extends RequiredProvider {
       _profile = profile;
     }
     notifyListeners();
-    await _firebaseStorage.ref(profile.picPath).putData(profile.imageData ??
+    Uint8List originalImage = profile.imageData ??
         (await rootBundle.load("assets/profile-placeholder.png"))
             .buffer
-            .asUint8List());
+            .asUint8List();
+    Uint8List compressedImage;
+    if(compressImages){
+       compressedImage = await FlutterImageCompress.compressWithList(originalImage);
+    } else {
+      compressedImage = originalImage;
+    }
+    await _firebaseStorage.ref(profile.picPath).putData(compressedImage);
     notifyListeners();
   }
 
