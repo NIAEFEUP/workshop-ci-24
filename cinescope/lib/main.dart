@@ -17,7 +17,7 @@ Future<void> main() async {
 
   Widget startingWidget = MainLoginPage();
   if (FirebaseAuth.instance.currentUser != null) {
-    startingWidget = MainPage();
+    startingWidget = const MainPage();
   }
 
   runApp(MyApp(

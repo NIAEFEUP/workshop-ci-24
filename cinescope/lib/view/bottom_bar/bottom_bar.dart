@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cinescope/view/pages/inbox_page.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:cinescope/view/pages/profile_page.dart';
 import 'package:cinescope/view/pages/search_page.dart';
@@ -53,7 +52,7 @@ class BottomBarState extends State<BottomBar> {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => MainPage()));
+                          builder: (context) => const MainPage()));
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.house,

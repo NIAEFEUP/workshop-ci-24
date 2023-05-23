@@ -3,7 +3,6 @@ import 'package:cinescope/utils/validators.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../button/login_button.dart';
