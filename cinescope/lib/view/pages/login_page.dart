@@ -9,7 +9,9 @@ import '../button/login_button.dart';
 
 class LoginPage extends StatefulWidget {
   final String? email;
-  const LoginPage({super.key, this.email});
+  final FirebaseAuth _auth;
+  LoginPage({super.key, this.email, FirebaseAuth? authInstance})
+      : _auth = authInstance ?? FirebaseAuth.instance;
 
   @override
   State<StatefulWidget> createState() => LoginPageState();
@@ -26,7 +28,7 @@ class LoginPageState extends State<LoginPage> {
   void Function() loginButtonHandler(BuildContext context) {
     return () {
       if (_formKey.currentState!.validate()) {
-        FirebaseAuth.instance
+        widget._auth
             .signInWithEmailAndPassword(
                 email: _textEditingControllerEmail.text,
                 password: _textEditingControllerPassword.text)
@@ -109,7 +111,6 @@ class LoginPageState extends State<LoginPage> {
                         ),
                         validator: emailValidator,
                         key: const Key("emailField"),
-
                       ),
                       const Padding(
                           padding: EdgeInsets.symmetric(vertical: 10)),
@@ -129,7 +130,7 @@ class LoginPageState extends State<LoginPage> {
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
                       pressedFunction: loginButtonHandler(context),
-                      childWidget: const Text("Sign in"), 
+                      childWidget: const Text("Sign in"),
                       key: const Key("loginButton")),
                 ]))));
   }

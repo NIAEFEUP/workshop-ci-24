@@ -53,7 +53,7 @@ class BottomBarState extends State<BottomBar> {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MainPage()));
+                          builder: (context) => MainPage()));
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.house,
