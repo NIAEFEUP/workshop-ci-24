@@ -27,7 +27,8 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
   }
 
   Future<void> _loadProfileData() async {
-    final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+    final profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
     final profile = profileProvider.getProfile();
     _nameController.text = profile.name;
     _bioController.text = profile.bio;
@@ -45,25 +46,26 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
   List<Widget> getBody(BuildContext context) {
     return [
       const SizedBox(height: 16),
-      GestureDetector(
-        onTap: _isEditing ? _selectImage : null,
-        child: Consumer<ProfileProvider>(
-          builder: (context, value, _) {
-            final profile = value.getProfile();
-            Widget avatar = profile.imageData != null
+      Consumer<ProfileProvider>(
+        builder: (context, value, _) {
+          final profile = value.getProfile();
+          return GestureDetector(
+            onTap: _isEditing ? _selectImage(value) : null,
+            child: profile.imageData != null
                 ? CircleAvatar(
+                    key: const Key("profileImage"),
                     radius: 115,
                     backgroundImage: MemoryImage(profile.imageData!),
                   )
                 : const CircleAvatar(
+                    key: Key("profileImage"),
                     radius: 115,
                     backgroundImage: AssetImage(
                       "assets/profile-placeholder.png",
                     ),
-                  );
-            return avatar;
-          },
-        ),
+                  ),
+          );
+        },
       ),
       const SizedBox(height: 25),
       Consumer<ProfileProvider>(
@@ -117,7 +119,8 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
       ),
       Consumer<ProfileProvider>(
         builder: (context, value, _) {
-          final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+          final profileProvider =
+              Provider.of<ProfileProvider>(context, listen: false);
           return _isEditing
               ? Row(
                   children: [
@@ -140,6 +143,7 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: TextButton(
+                        key: const Key("saveChanges"),
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
@@ -157,6 +161,7 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                   ],
                 )
               : TextButton(
+                  key: const Key("editProfile"),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
@@ -175,16 +180,17 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
     ];
   }
 
-  Future<void> _selectImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage == null) return;
+  _selectImage(ProfileProvider profileProvider) {
+    return () async {
+      final picker = ImagePicker();
+      final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+      if (pickedImage == null) return;
 
-    final profileProvider = Provider.of<ProfileProvider>(context, listen: false);
-    final profile = profileProvider.getProfile();
-    final imageData = await pickedImage.readAsBytes();
-    profile.imageData = imageData;
-    profileProvider.rerender();
+      final profile = profileProvider.getProfile();
+      final imageData = await pickedImage.readAsBytes();
+      profile.imageData = imageData;
+      profileProvider.rerender();
+    };
   }
 
   void _startEditing() {
