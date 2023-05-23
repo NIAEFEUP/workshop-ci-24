@@ -26,6 +26,9 @@ class GivenUserAuthenticated extends GivenWithWorld<FlutterWorld> {
     await FlutterDriverUtils.tap(world.driver, signupButton);
     await FlutterDriverUtils.waitForFlutter(world.driver);
 
+    //maybe it will take a bit of time logging in depending of internet connection
+    await Future.delayed(const Duration(seconds: 5));
+
     expect(await FlutterDriverUtils.isPresent(world.driver, mainPage), true, 
     reason: "Not in main page after login");
 

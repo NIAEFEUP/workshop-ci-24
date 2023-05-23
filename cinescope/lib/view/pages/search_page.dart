@@ -25,7 +25,7 @@ class SearchPageState extends GeneralPageState<SearchPage> {
   @override
   List<Widget> getBody(BuildContext context) {
     if (films.isEmpty && searchTimes != 0) {
-      return [const PageMessage("No results found")];
+      return [const PageMessage("No results found", key: Key("errorNotFound"),)];
     }
     searchTimes++;
 
