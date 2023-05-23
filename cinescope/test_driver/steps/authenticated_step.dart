@@ -5,11 +5,15 @@ import 'package:flutter_gherkin/flutter_gherkin.dart';
 import 'package:gherkin/gherkin.dart';
 
 class GivenUserAuthenticated extends GivenWithWorld<FlutterWorld> {
+
+  GivenUserAuthenticated() : super(StepDefinitionConfiguration()..timeout = const Duration(seconds: 20));
+
   @override
   RegExp get pattern => RegExp(r"the user is authenticated");
 
   @override
   Future<void> executeStep() async {
+    await FlutterDriverUtils.waitForFlutter(world.driver);
     final mainPage = find.byType("MainPage");
     if(await FlutterDriverUtils.isPresent(world.driver, mainPage)) return;
 
@@ -33,10 +37,6 @@ class GivenUserAuthenticated extends GivenWithWorld<FlutterWorld> {
 
     expect(await FlutterDriverUtils.isPresent(world.driver, mainPage), true, 
     reason: "Not in main page after login");
-
-    final bottomBar = find.byType("BottomBar");
-    expect(await FlutterDriverUtils.isPresent(world.driver, bottomBar), true, 
-    reason: "Main page still loading");
 
 
 

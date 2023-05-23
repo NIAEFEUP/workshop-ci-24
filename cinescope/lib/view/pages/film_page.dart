@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/film_provider.dart';
+import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/cards/page_message.dart';
 import 'package:cinescope/view/cards/cast_card.dart';
 import 'package:cinescope/view/general_page.dart';
@@ -62,23 +63,22 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                             softWrap: true,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
+                            key: const Key("filmTitle"),
                           ),
                           const SizedBox(height: 10),
-                          Text(
-                            "${film.type}  •  ${film.year}",
-                            textAlign: TextAlign.left,
-                            textScaleFactor: 1.2,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          if (film.duration!.isNotEmpty)
-                            Text(
-                              'Duration: ${film.duration}',
+                          Text("${film.type}  •  ${film.year}",
                               textAlign: TextAlign.left,
                               textScaleFactor: 1.2,
-                            ),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              key: const Key("filmTypeAndYear")),
+                          const SizedBox(height: 10),
+                          if (film.duration!.isNotEmpty)
+                            Text('Duration: ${film.duration}',
+                                textAlign: TextAlign.left,
+                                textScaleFactor: 1.2,
+                                key: const Key("filmDuration")),
                           const SizedBox(height: 10),
                           if (film.rating != -1)
                             Text(
@@ -90,17 +90,35 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              IconButton(
-                                icon: const FaIcon(FontAwesomeIcons.heart),
-                                onPressed: () {},
-                                iconSize: 30,
-                                color: Colors.black,
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.resolveWith(
-                                            (states) =>
-                                                const Color(0xffD7CCCF))),
-                              ),
+                              Consumer<WatchlistProvider>(
+                                  builder: (context, value, child) =>
+                                      IconButton(
+                                        key: const Key("watchlistButton"),
+                                        icon: FaIcon(value
+                                                .getWatchlist()
+                                                .movieIds
+                                                .contains(film.id)
+                                            ? FontAwesomeIcons.solidHeart
+                                            : FontAwesomeIcons.heart),
+                                        onPressed: () {
+                                          if (value
+                                              .getWatchlist()
+                                              .movieIds
+                                              .contains(film.id)) {
+                                            value.removeFilmFromWatchlist(film);
+                                          } else {
+                                            value.addFilmToWatchlist(film.id);
+                                          }
+                                        },
+                                        iconSize: 30,
+                                        color: Colors.black,
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty
+                                                    .resolveWith((states) =>
+                                                        const Color(
+                                                            0xffD7CCCF))),
+                                      )),
                               const Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10)),
@@ -109,7 +127,8 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                   onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              DiscussionListPage(widget.id, film.title))),
+                                              DiscussionListPage(
+                                                  widget.id, film.title))),
                                   iconSize: 30,
                                   color: Colors.black,
                                   style: ButtonStyle(
@@ -144,6 +163,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                     film.description!,
                     textAlign: TextAlign.justify,
                     textScaleFactor: 1.2,
+                    key: const Key("filmDescription"),
                   ),
                   const SizedBox(height: 15),
                   const Text(

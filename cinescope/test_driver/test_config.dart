@@ -4,6 +4,7 @@ import 'package:gherkin/gherkin.dart';
 import 'package:glob/glob.dart';
 
 import 'steps/authenticated_step.dart';
+import 'steps/goes_to_film_page.dart';
 import 'steps/is_on_main_page.dart';
 import 'steps/list_film_match.dart';
 import 'steps/not_authenticated.dart';
@@ -29,7 +30,8 @@ Future<void> main() {
       WhenChangePageStep(),
       ThenListFilmDoesntMatch(),
       GivenUserNotAuthenticated(),
-      ThenIsMainPage()
+      ThenIsMainPage(),
+      WhenGoesToPage()
     ]
     ..restartAppBetweenScenarios = true
     ..targetAppPath = "test_driver/app.dart";
