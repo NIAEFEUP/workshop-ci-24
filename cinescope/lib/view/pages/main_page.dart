@@ -56,7 +56,9 @@ class MainPageState extends GeneralPageState<MainPage> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                width: 350,
+                width: MediaQuery.of(context)
+                    .size
+                    .width - 70,
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Color(0XFFC4C4C4),
