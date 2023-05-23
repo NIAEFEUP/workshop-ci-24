@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/model/providers/film_provider.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
+import 'package:cinescope/view/cards/page_message.dart';
 import 'package:cinescope/view/cards/cast_card.dart';
 import 'package:cinescope/view/general_page.dart';
 import 'package:cinescope/view/pages/discussions/discussion_list_page.dart';
@@ -37,7 +38,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
         builder: ((BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null || snapshot.hasError) {
-              return const Text('Error: Failed to load film data');
+              return const PageMessage('No information available');
             } else {
               final Film film = snapshot.data!;
               return Column(
@@ -109,7 +110,7 @@ class FilmPageState extends GeneralPageState<FilmPage> {
                                   onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              DiscussionListPage(widget.id))),
+                                              DiscussionListPage(widget.id, film.title))),
                                   iconSize: 30,
                                   color: Colors.black,
                                   style: ButtonStyle(

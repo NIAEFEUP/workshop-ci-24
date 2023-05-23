@@ -1,11 +1,9 @@
-
-
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/utils/duration_string_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../pages/discussions/discussion_comment_page.dart';
+import 'package:cinescope/view/pages/discussions/discussion_comments_page.dart';
 
 class DiscussionCard extends StatelessWidget{
   final Discussion discussion;
@@ -26,22 +24,22 @@ class DiscussionCard extends StatelessWidget{
                   children: [
                     Text(
                       discussion.title,
-                      textScaleFactor: 2,
-                      maxLines: 1,
+                      textScaleFactor: 1.5,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const Padding(
-                      padding: EdgeInsets.all(2),
+                      padding: EdgeInsets.all(3),
                     ),
                     Text(
                       discussion.description,
                       maxLines: 4,
                       textScaleFactor: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Color(0xFFD7CCCF)),
                     ),
                     const Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(10),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,

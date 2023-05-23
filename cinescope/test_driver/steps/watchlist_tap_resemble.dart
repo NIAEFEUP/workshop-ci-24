@@ -33,6 +33,6 @@ class WhenWatchlistButtonTapResemble
       id++;
       genericFilmCard = find.byValueKey("genericFilmCard-$id");
     }
-    expect(false, true, reason: "Couldn't find any films with that name...");
+    expect(false, true, reason: "Couldn't find any films with that name");
   }
 }

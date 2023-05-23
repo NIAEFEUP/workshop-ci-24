@@ -1,8 +1,8 @@
 import 'package:cinescope/model/discussion.dart';
 import 'package:cinescope/model/providers/discussion_provider.dart';
-import 'package:cinescope/view/pages/discussions/discussion_add_page.dart';
 import 'package:cinescope/view/simple_dialog.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
+import 'package:cinescope/view/pages/discussions/add_discussion_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -42,6 +42,7 @@ void main() {
             home: Scaffold(
           body: DiscussionAddPage(
             "tt12345",
+            const Text("titanic"),
             authInstance: firebaseAuth,
           ),
         )),
@@ -80,6 +81,7 @@ void main() {
             home: Scaffold(
           body: DiscussionAddPage(
             "tt12345",
+            const Text("titanic"),
             authInstance: firebaseAuth,
           ),
         )),
@@ -113,6 +115,7 @@ void main() {
             home: Scaffold(
           body: DiscussionAddPage(
             "tt12345",
+            const Text("titanic"),
             authInstance: firebaseAuth,
           ),
         )),

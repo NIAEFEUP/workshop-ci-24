@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cinescope/model/film.dart';
 import 'package:cinescope/view/pages/film_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class GenericFilmCard extends StatelessWidget {

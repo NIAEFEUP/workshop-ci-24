@@ -10,11 +10,11 @@ import '../../simple_dialog.dart';
 
 class CommentAddPage extends GeneralPage {
   final Discussion _discussion;
+  final Widget header;
   final FirebaseAuth _firebaseAuth;
 
-  CommentAddPage(this._discussion, {super.key, FirebaseAuth? authInstance})
+  CommentAddPage(this._discussion, this.header, {super.key, FirebaseAuth? authInstance})
       : _firebaseAuth = authInstance ?? FirebaseAuth.instance;
-
   @override
   State<StatefulWidget> createState() => CommentAddPageState();
 }
@@ -25,16 +25,13 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
   @override
   List<Widget> getBody(BuildContext context) {
     return [
-      const Text(
-        "Comment:",
-        textScaleFactor: 1.5,
-      ),
+      widget.header,
       TextField(
         key: const Key("comment-field"),
         controller: _editingController,
         maxLines: null,
         decoration: const InputDecoration(
-            border: OutlineInputBorder(), hintText: "Enter your comment..."),
+            border: OutlineInputBorder(), labelText: 'Comment'),
       ),
       const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
       Consumer<DiscussionProvider>(
@@ -47,7 +44,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
                       context: context,
                       builder: (context) {
                         return const GenericDialog(
-                            title: "Error:",
+                            title: "Error",
                             content: "You can't have an empty comment");
                       });
                   return;
@@ -59,7 +56,7 @@ class CommentAddPageState extends GeneralPageState<CommentAddPage> {
                             widget._firebaseAuth.currentUser!.uid))
                     .then((value) => Navigator.of(context).pop());
               },
-              child: const Text("Send comment")))
+              child: const Text("Send")))
     ];
   }
 
