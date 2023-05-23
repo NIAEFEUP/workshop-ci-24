@@ -51,7 +51,7 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
           ),
           const Spacer(),
           _isEditing? const SizedBox() :
-          IconButton(onPressed: _startEditing, icon: const Icon(Icons.edit)),
+          IconButton(onPressed: _startEditing, icon: const Icon(Icons.edit),key:const Key("editProfile")),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
