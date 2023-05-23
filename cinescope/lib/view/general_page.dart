@@ -45,7 +45,7 @@ abstract class GeneralPageState<T extends GeneralPage> extends State<T> {
             color: const Color(0XFF07393C),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Padding(padding: EdgeInsets.fromLTRB(0, 50, 0, 0)),
+              const Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
               getTitle(context),
               Expanded(
                   child: Stack(

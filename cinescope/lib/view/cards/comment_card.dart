@@ -63,23 +63,7 @@ class CommentCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                (comment.createdBy != null)
-                    ? getProfileRow(comment.createdBy!)
-                    : FutureBuilder(
-                        builder: (context, AsyncSnapshot<Profile> snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            if (snapshot.data == null || snapshot.hasError) {
-                              return const Text("Unknown user");
-                            } else {
-                              return getProfileRow(snapshot.data!);
-                            }
-                          } else {
-                            return const Text("Loading...");
-                          }
-                        },
-                        future:
-                            provider.getProfileByUid(uid: comment.createdById)),
+                getProfileRow(comment.createdBy!),
                 const Padding(
                   padding: EdgeInsets.all(7),
                 ),
