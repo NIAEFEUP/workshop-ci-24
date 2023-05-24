@@ -29,30 +29,40 @@ class CommentCard extends StatelessWidget {
                   )));
     }
 
-    Widget getProfileRow(Profile profile) {
-      return GestureDetector(
-          onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return UserProfileDialog(profile);
-                });
-          },
-          child: Row(
-            children: [
-              getAvatar(profile),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 7),
-              ),
-              Text(
-                profile.name,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 1.3,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ));
+    Widget getProfileRow(BuildContext context, String uid) {
+      return FutureBuilder(
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return UserProfileDialog(snapshot.data!);
+                      });
+                },
+                child: Row(
+                  children: [
+                    getAvatar(snapshot.data!),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 7),
+                    ),
+                    Text(
+                      snapshot.data!.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      textScaleFactor: 1.3,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ));
+          } else {
+            return Container();
+          }
+        },
+        future: Provider.of<ProfileProvider>(context, listen: false)
+            .getProfileByUid(uid: uid),
+      );
     }
 
     return Consumer<ProfileProvider>(builder: (context, provider, _) {
@@ -63,7 +73,7 @@ class CommentCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                getProfileRow(comment.createdBy!),
+                getProfileRow(context, comment.createdById),
                 const Padding(
                   padding: EdgeInsets.all(7),
                 ),
