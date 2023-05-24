@@ -39,7 +39,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.4.0
   http_parser: ^4.0.2
   http: ^0.13.4
-  flutter_html: ^2.2.1
+  flutter_html: ^3.0.0-alpha.6
   firebase_auth: ^4.3.0
   google_sign_in: ^6.0.2
   firebase_core: ^2.8.0
@@ -47,6 +47,7 @@ dependencies:
   cloud_firestore: ^4.5.1
   provider: ^6.0.5
   build_runner: ^2.3.3
+  flutter_native_splash: ^2.1.6
   no_context_navigation: ^2.1.2
   firebase_storage: ^11.1.1
   image_picker: ^0.8.7+4
@@ -56,6 +57,7 @@ dependencies:
   meta: ^1.8.0
   flutter_image_compress: ^2.0.3
   page_transition: ^2.0.9
+  flutter_svg: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +67,9 @@ dev_dependencies:
   flutter_gherkin: ^2.0.0
   gherkin: ^2.0.2
   glob: ^2.1.1
+  flutter_launcher_icons: "^0.13.1"
+
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -77,6 +82,8 @@ dev_dependencies:
   mockito: ^5.4.0
   firebase_storage_mocks: ^0.6.1
   mock_exceptions: ^0.8.2
+
+
 
 
 
