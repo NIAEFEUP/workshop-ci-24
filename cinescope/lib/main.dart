@@ -1,5 +1,6 @@
-import 'package:cinescope/controller/register_callback.dart';
 import 'package:cinescope/firebase_options.dart';
+import 'package:cinescope/model/providers/discussion_provider.dart';
+import 'package:cinescope/model/providers/film_provider.dart';
 import 'package:cinescope/model/providers/profile_provider.dart';
 import 'package:cinescope/model/providers/watchlist_provider.dart';
 import 'package:cinescope/view/pages/main_login_page.dart';
@@ -7,6 +8,7 @@ import 'package:cinescope/view/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -34,10 +36,16 @@ class MyApp extends StatelessWidget {
         providers: [
           //list of providers to add
           ChangeNotifierProvider(create: (context) => WatchlistProvider()),
-          ChangeNotifierProvider(create: (context) => ProfileProvider())
+          ChangeNotifierProvider(create: (context) => ProfileProvider()),
+          ChangeNotifierProvider<DiscussionProvider>(
+            create: (context) =>
+                DiscussionProvider(),
+          ),
+          ChangeNotifierProvider<FilmProvider>(create: (context) => FilmProvider())
         ],
         child: MaterialApp(
           title: 'CineScope',
+          navigatorKey: NavigationService.navigationKey,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               useMaterial3: true,

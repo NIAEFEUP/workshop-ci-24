@@ -18,7 +18,7 @@ You can find here details about our mini-app, from a high-level vision to low-le
 * [Implementation]
 * [Test]
 * [Configuration and change management]
-* [Project management](https://github.com/FEUP-LEIC-ES-2022-23/templates/blob/main/docs/ProjectManagement.md)
+* [Project management](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC13T5/blob/main/docs/ProjectManagement.md)
 
 So far, contributions are exclusively made by the initial team, but we hope to open them to the community, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 

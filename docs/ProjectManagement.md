@@ -75,3 +75,16 @@ Documentation:
 ## Planning
 ![Planning of iteration 3](https://user-images.githubusercontent.com/24589619/233449278-16225b64-3557-4386-adb5-31d0718d4155.png)
 
+## Final board status
+![Final board status of iteration 3](![image](https://user-images.githubusercontent.com/24589619/236285796-aa115b00-b31c-4b63-8f71-b4854010f006.png)
+
+## Retrospective
+
+Application:
+ - We implemented almost all features, due to some errors with flutter dependencies, but all other issues went smoothly
+ - We still need to improve test coverage
+ 
+# Iteration 4
+
+## Planning
+![Planning of iteration 4](![image](https://user-images.githubusercontent.com/24589619/236285796-aa115b00-b31c-4b63-8f71-b4854010f006.png)

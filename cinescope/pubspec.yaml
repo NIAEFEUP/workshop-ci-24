@@ -48,11 +48,17 @@ dependencies:
   provider: ^6.0.5
   build_runner: ^2.3.3
   flutter_native_splash: ^2.1.6
+  no_context_navigation: ^2.1.2
   firebase_storage: ^11.1.1
   image_picker: ^0.8.7+4
+  another_flushbar: ^1.12.29
+  html: ^0.15.3
+  cached_network_image: ^3.2.3
+  meta: ^1.8.0
+  flutter_image_compress: ^2.0.3
+  page_transition: ^2.0.9
 
 dev_dependencies:
-  firebase_storage_mocks: ^0.6.1
   flutter_test:
     sdk: flutter
   flutter_driver:
@@ -73,6 +79,8 @@ dev_dependencies:
   firebase_auth_mocks: ^0.11.0
   fake_cloud_firestore: ^2.4.1+1
   mockito: ^5.4.0
+  firebase_storage_mocks: ^0.6.1
+  mock_exceptions: ^0.8.2
 
 
 

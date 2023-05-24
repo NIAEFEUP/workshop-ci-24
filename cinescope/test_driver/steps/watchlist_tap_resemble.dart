@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cinescope/utils/string_captitalize.dart';
 import 'package:flutter_driver/flutter_driver.dart';
@@ -33,6 +32,6 @@ class WhenWatchlistButtonTapResemble
       id++;
       genericFilmCard = find.byValueKey("genericFilmCard-$id");
     }
-    expect(false, true, reason: "Couldn't find any films with that name...");
+    expect(false, true, reason: "Couldn't find any films with that name");
   }
 }

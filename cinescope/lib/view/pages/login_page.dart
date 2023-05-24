@@ -1,15 +1,15 @@
 import 'package:cinescope/utils/validators.dart';
 import 'package:cinescope/view/pages/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 import '../button/login_button.dart';
 
 class LoginPage extends StatefulWidget {
   final String? email;
-  const LoginPage({super.key, this.email});
+  final FirebaseAuth _auth;
+  LoginPage({super.key, this.email, FirebaseAuth? authInstance})
+      : _auth = authInstance ?? FirebaseAuth.instance;
 
   @override
   State<StatefulWidget> createState() => LoginPageState();
@@ -26,7 +26,7 @@ class LoginPageState extends State<LoginPage> {
   void Function() loginButtonHandler(BuildContext context) {
     return () {
       if (_formKey.currentState!.validate()) {
-        FirebaseAuth.instance
+        widget._auth
             .signInWithEmailAndPassword(
                 email: _textEditingControllerEmail.text,
                 password: _textEditingControllerPassword.text)
@@ -39,7 +39,7 @@ class LoginPageState extends State<LoginPage> {
                 context: context,
                 builder: ((context) => AlertDialog(
                       title: const Text("Login failed"),
-                      content: const Text("Invalid email or not found."),
+                      content: const Text("Invalid email or not found", key:Key("content")),
                       actions: [
                         TextButton(
                             onPressed: () {
@@ -57,6 +57,7 @@ class LoginPageState extends State<LoginPage> {
                       content: const Text(
                         "Invalid password",
                         textScaleFactor: 1.2,
+                        key: Key("content"),
                       ),
                       actions: [
                         TextButton(
@@ -91,7 +92,7 @@ class LoginPageState extends State<LoginPage> {
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
                   const Text(
-                    "Login:",
+                    "Login",
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.white, fontSize: 35),
                   ),
@@ -109,7 +110,6 @@ class LoginPageState extends State<LoginPage> {
                         ),
                         validator: emailValidator,
                         key: const Key("emailField"),
-
                       ),
                       const Padding(
                           padding: EdgeInsets.symmetric(vertical: 10)),
@@ -129,7 +129,7 @@ class LoginPageState extends State<LoginPage> {
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   LoginButton(
                       pressedFunction: loginButtonHandler(context),
-                      childWidget: const Text("Sign in"), 
+                      childWidget: const Text("Sign in"),
                       key: const Key("loginButton")),
                 ]))));
   }

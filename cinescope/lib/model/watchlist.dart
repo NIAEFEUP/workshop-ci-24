@@ -26,10 +26,10 @@ class Watchlist {
 
   Map<String, dynamic> toFirestore() => {"movies": movieIds};
 
-  Future<void> parseFilmsInWatchlist() async{
+  Future<void> parseFilmsInWatchlist(FilmDetailsScraper filmDetailsScraper) async{
     movies.clear();
     for(String filmId in movieIds){
-      movies.add(await FilmDetailsScraper().getFilmDetails(filmId));
+      movies.add(await filmDetailsScraper.getFilmDetails(filmId));
     }
   }
 }

@@ -2,18 +2,17 @@ import 'package:cinescope/view/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cinescope/controller/search_results_fetcher.dart';
-import 'package:cinescope/model/film.dart';
 
-class SearchBar extends StatefulWidget {
+class AppSearchBar extends StatefulWidget {
   final SearchPageState pageState;
 
-  const SearchBar({super.key, required this.pageState});
+  const AppSearchBar({super.key, required this.pageState});
 
   @override
-  State<StatefulWidget> createState() => SearchBarState();
+  State<StatefulWidget> createState() => AppSearchBarState();
 }
 
-class SearchBarState extends State<SearchBar> {
+class AppSearchBarState extends State<AppSearchBar> {
   TextEditingController _textEditingController = TextEditingController();
 
   @override
