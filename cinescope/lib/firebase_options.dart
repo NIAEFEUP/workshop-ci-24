@@ -66,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '95221063243',
     projectId: 'cinescope-9d8c0',
     storageBucket: 'cinescope-9d8c0.appspot.com',
-    iosClientId: '95221063243-rlbhvp20bonson8op66efqgc33ssbv1s.apps.googleusercontent.com',
+    iosClientId:
+        '95221063243-rlbhvp20bonson8op66efqgc33ssbv1s.apps.googleusercontent.com',
     iosBundleId: 'com.example.cinescope',
   );
 
@@ -76,7 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '95221063243',
     projectId: 'cinescope-9d8c0',
     storageBucket: 'cinescope-9d8c0.appspot.com',
-    iosClientId: '95221063243-rlbhvp20bonson8op66efqgc33ssbv1s.apps.googleusercontent.com',
+    iosClientId:
+        '95221063243-rlbhvp20bonson8op66efqgc33ssbv1s.apps.googleusercontent.com',
     iosBundleId: 'com.example.cinescope',
   );
 }

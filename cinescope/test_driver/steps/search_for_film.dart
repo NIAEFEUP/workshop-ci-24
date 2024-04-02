@@ -1,11 +1,8 @@
-
-
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_gherkin/flutter_gherkin.dart';
 import 'package:gherkin/gherkin.dart';
 
-class WhenSearchFilm extends When1WithWorld<String, FlutterWorld>{
-
+class WhenSearchFilm extends When1WithWorld<String, FlutterWorld> {
   @override
   Pattern get pattern => RegExp(r"the user enters {string} in the search bar");
 
@@ -16,7 +13,5 @@ class WhenSearchFilm extends When1WithWorld<String, FlutterWorld>{
     await FlutterDriverUtils.tap(world.driver, searchField);
     await FlutterDriverUtils.enterText(world.driver, searchField, input1);
     await FlutterDriverUtils.waitForFlutter(world.driver);
-
   }
-
 }

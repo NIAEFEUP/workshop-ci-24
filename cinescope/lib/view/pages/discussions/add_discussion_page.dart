@@ -10,8 +10,9 @@ class DiscussionAddPage extends GeneralPage {
   final String filmId;
   final FirebaseAuth _firebaseAuth;
   final Widget header;
-  DiscussionAddPage(this.filmId, this.header, {super.key, FirebaseAuth? authInstance}) 
-    : _firebaseAuth = authInstance ?? FirebaseAuth.instance;
+  DiscussionAddPage(this.filmId, this.header,
+      {super.key, FirebaseAuth? authInstance})
+      : _firebaseAuth = authInstance ?? FirebaseAuth.instance;
 
   @override
   State<StatefulWidget> createState() => DiscussionAddPageState();

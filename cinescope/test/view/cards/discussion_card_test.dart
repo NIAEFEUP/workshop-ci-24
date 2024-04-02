@@ -52,14 +52,14 @@ void main() {
       final mockObserver = MockNavigatorObserver();
       DiscussionProvider discussionProvider = MockDiscussionProvider();
       ProfileProvider profileProvider = MockProfileProvider();
-      when(profileProvider.getProfileByUid(uid: "siuuuuuuu")).thenAnswer((realInvocation) async{
+      when(profileProvider.getProfileByUid(uid: "siuuuuuuu"))
+          .thenAnswer((realInvocation) async {
         return profile;
       });
       await widgetTester.pumpWidget(MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => discussionProvider),
           ChangeNotifierProvider(create: (context) => profileProvider)
-
         ],
         child: MaterialApp(
             navigatorObservers: [mockObserver],

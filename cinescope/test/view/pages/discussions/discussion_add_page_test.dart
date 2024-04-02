@@ -15,6 +15,7 @@ import 'discussion_add_page_test.mocks.dart';
   MockSpec<DiscussionProvider>(onMissingStub: OnMissingStub.returnDefault)
 ])
 void main() {
+  // ignore: unused_local_variable
   final Discussion discussion = Discussion(
       "",
       "tt1234",
@@ -56,7 +57,8 @@ void main() {
           find.byKey(const Key("body-field")), "Test body");
       await widgetTester.tap(find.byType(TextButton));
 
-      final verified = verify(mockDiscussionProvider.addNewDiscussion(captureAny));
+      final verified =
+          verify(mockDiscussionProvider.addNewDiscussion(captureAny));
       verified.called(1);
       for (Discussion discussion in verified.captured) {
         expect(discussion.createdById, "siuuuu");

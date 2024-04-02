@@ -12,8 +12,7 @@ class PageMessage extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(
-                fontSize: 20, color: Colors.white),
+            style: const TextStyle(fontSize: 20, color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ));

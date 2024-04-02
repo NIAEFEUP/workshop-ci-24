@@ -22,8 +22,8 @@ class DiscussionCommentPage extends GeneralPage {
                   backgroundColor: const Color(0xFFD7CCCF),
                   onPressed: () {
                     navService.push(MaterialPageRoute(
-                        builder: (context) =>
-                            CommentAddPage(_currentDiscussion, DiscussionCommentsHeader(_currentDiscussion))));
+                        builder: (context) => CommentAddPage(_currentDiscussion,
+                            DiscussionCommentsHeader(_currentDiscussion))));
                   },
                   child: const FaIcon(
                     FontAwesomeIcons.plus,

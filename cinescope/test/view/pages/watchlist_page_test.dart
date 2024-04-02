@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 
 import 'watchlist_page_test.mocks.dart';
 
-
 @GenerateMocks(
   [],
   customMocks: [
@@ -25,8 +24,8 @@ void main() {
         "1", 'Inception', 'Movie', 2010, 'https://via.placeholder.com/150');
     final filmteste = Film(
         "teste", 'Test film', 'Movie', 2069, 'https://via.placeholder.com/150');
-    final filmteste2 = Film(
-        "teste2", 'Bee Movie', 'Movie', 2010, 'https://via.placeholder.com/150');
+    final filmteste2 = Film("teste2", 'Bee Movie', 'Movie', 2010,
+        'https://via.placeholder.com/150');
     testWidgets("renders correctly all films on watchlist", (tester) async {
       Watchlist watchlist = Watchlist(["1", "teste", "teste2"]);
       watchlist.movies.add(film);
@@ -49,7 +48,6 @@ void main() {
       expect(find.text("Inception"), findsOneWidget);
       expect(find.text("Test film"), findsOneWidget);
       expect(find.text("Bee Movie"), findsOneWidget);
-
     });
   });
 }

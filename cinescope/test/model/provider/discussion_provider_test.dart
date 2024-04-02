@@ -6,7 +6,6 @@ import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 
-
 @GenerateMocks([], customMocks: [
   MockSpec<ProfileProvider>(onMissingStub: OnMissingStub.returnDefault)
 ])
@@ -144,16 +143,15 @@ void main() {
 
       await discussionProvider.addCommentToDiscussion(discussion, comment);
 
-
       final discussionAfter = (await storageMock
-          .collection("discussions")
-          .withConverter(
-              fromFirestore: Discussion.fromFirestore,
-              toFirestore: (discussion, _) => discussion.toFirestore())
-          .doc("testId")
-          .get()).data()!;
+              .collection("discussions")
+              .withConverter(
+                  fromFirestore: Discussion.fromFirestore,
+                  toFirestore: (discussion, _) => discussion.toFirestore())
+              .doc("testId")
+              .get())
+          .data()!;
 
-      
       expect(discussionAfter.comments.length, 2);
       expect(discussionAfter.comments[1].content, comment.content);
     });

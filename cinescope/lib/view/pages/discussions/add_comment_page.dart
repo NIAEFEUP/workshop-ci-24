@@ -12,7 +12,8 @@ class CommentAddPage extends GeneralPage {
   final Widget header;
   final FirebaseAuth _firebaseAuth;
 
-  CommentAddPage(this._discussion, this.header, {super.key, FirebaseAuth? authInstance})
+  CommentAddPage(this._discussion, this.header,
+      {super.key, FirebaseAuth? authInstance})
       : _firebaseAuth = authInstance ?? FirebaseAuth.instance;
   @override
   State<StatefulWidget> createState() => CommentAddPageState();

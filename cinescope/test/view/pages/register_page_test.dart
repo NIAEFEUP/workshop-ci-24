@@ -30,24 +30,25 @@ void main() {
       when(mockWatchlistProvider.lastLoaded).thenReturn(true);
 
       WatchlistProvider watchlistProvider = mockWatchlistProvider;
-      
+
       MockProfileProvider mockProfileProvider = MockProfileProvider();
 
       when(mockProfileProvider.lastLoaded).thenReturn(true);
 
       ProfileProvider profileProvider = mockProfileProvider;
 
-      await widgetTester.pumpWidget(MultiProvider(providers:[
-        ChangeNotifierProvider(create: (context) => watchlistProvider),
-        ChangeNotifierProvider(create: (context) => profileProvider),
-
-      ], child:MaterialApp(
-        home: Scaffold(
-            body: RegisterPage(
-          firebaseAuth: mockFirebaseAuth,
-          firebaseFirestore: fakeFirebaseFirestore,
-        )),
-      )));
+      await widgetTester.pumpWidget(MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => watchlistProvider),
+            ChangeNotifierProvider(create: (context) => profileProvider),
+          ],
+          child: MaterialApp(
+            home: Scaffold(
+                body: RegisterPage(
+              firebaseAuth: mockFirebaseAuth,
+              firebaseFirestore: fakeFirebaseFirestore,
+            )),
+          )));
 
       await widgetTester.enterText(
           find.byKey(const Key("emailField")), "grelha@sirze.pt");

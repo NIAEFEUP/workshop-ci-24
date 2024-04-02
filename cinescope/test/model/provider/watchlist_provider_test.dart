@@ -226,11 +226,10 @@ void main() {
           store: firebaseFirestore,
           filmDetailsScraper: mockFilmDetailsScraper);
 
-      await mockFirebaseAuth.signInWithEmailAndPassword(email: "email@email.com", password: "password");
-
+      await mockFirebaseAuth.signInWithEmailAndPassword(
+          email: "email@email.com", password: "password");
 
       await Future.delayed(const Duration(seconds: 5));
-
 
       Watchlist testWatchlist = (await firebaseFirestore
               .collection("watchlists")
@@ -241,7 +240,7 @@ void main() {
               .doc("test-uid")
               .get())
           .data()!;
-      expect(testWatchlist.movieIds, ["1", "2", "3"]); 
+      expect(testWatchlist.movieIds, ["1", "2", "3"]);
       expect(watchlistProvider.getWatchlist().movies.length, 3);
     });
   });

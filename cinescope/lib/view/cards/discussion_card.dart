@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:cinescope/view/pages/discussions/discussion_comments_page.dart';
 
-class DiscussionCard extends StatelessWidget{
+class DiscussionCard extends StatelessWidget {
   final Discussion discussion;
   const DiscussionCard({super.key, required this.discussion});
 
@@ -77,5 +77,4 @@ class DiscussionCard extends StatelessWidget{
                   ],
                 ))),
       );
-
 }

@@ -27,9 +27,7 @@ class AppSearchBarState extends State<AppSearchBar> {
     super.dispose();
   }
 
-  void _submitEvent(String value) {
-    print(value);
-  }
+  void _submitEvent(String value) {}
 
   void _submitEventButton() {
     _submitEvent(_textEditingController.text);
@@ -37,9 +35,7 @@ class AppSearchBarState extends State<AppSearchBar> {
 
   Future<void> _search(String value) async {
     if (value.length < 3) return;
-    print("****** SEARCHING FOR: $value");
     var results = await SearchResultsFetcher.getSearchResults(value);
-    print("****** RESULTS: $results");
     widget.pageState.setState(() {
       widget.pageState.films = results;
     });

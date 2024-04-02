@@ -34,8 +34,9 @@ class UserProfileDialog extends StatelessWidget {
         ),
         const SizedBox(height: 10),
       ]),
-      content: 
-          Text(profile.bio, style: const TextStyle(fontSize: 16),
+      content: Text(
+        profile.bio,
+        style: const TextStyle(fontSize: 16),
       ),
       actions: [
         TextButton(

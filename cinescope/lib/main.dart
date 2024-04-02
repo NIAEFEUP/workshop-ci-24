@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => WatchlistProvider()),
           ChangeNotifierProvider(create: (context) => ProfileProvider()),
           ChangeNotifierProvider<DiscussionProvider>(
-            create: (context) =>
-                DiscussionProvider(),
+            create: (context) => DiscussionProvider(),
           ),
-          ChangeNotifierProvider<FilmProvider>(create: (context) => FilmProvider())
+          ChangeNotifierProvider<FilmProvider>(
+              create: (context) => FilmProvider())
         ],
         child: MaterialApp(
           title: 'CineScope',

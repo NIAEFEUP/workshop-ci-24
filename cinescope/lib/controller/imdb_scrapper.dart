@@ -55,7 +55,6 @@ class ImdbScraper {
       cast.add(result);
     }
 
-
     String title = base["aboveTheFoldData"]["titleText"]["text"];
     int year = base["aboveTheFoldData"]["releaseYear"]["year"];
     String imgUrl = base["aboveTheFoldData"]["primaryImage"]["url"] ?? '';

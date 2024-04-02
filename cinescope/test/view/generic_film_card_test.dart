@@ -39,7 +39,6 @@ void main() {
                   create: (context) => WatchlistProvider(
                       auth: MockFirebaseAuth(),
                       store: FakeFirebaseFirestore())),
-              
             ],
             child: MaterialApp(
               home: Scaffold(
@@ -161,7 +160,8 @@ void main() {
     testWidgets('tries to add film to watchlist', (tester) async {
       WatchlistProvider mockProvider = MockWatchlistProvider();
       when(mockProvider.getWatchlist()).thenReturn(Watchlist([]));
-      when(mockProvider.addFilmToWatchlist(film.id)).thenAnswer((realInvocation) async {
+      when(mockProvider.addFilmToWatchlist(film.id))
+          .thenAnswer((realInvocation) async {
         when(mockProvider.getWatchlist()).thenReturn(Watchlist([film.id]));
       });
       await mockNetworkImagesFor(() => tester.pumpWidget(MultiProvider(
@@ -181,13 +181,13 @@ void main() {
       await tester.pumpAndSettle();
       verify(mockProvider.addFilmToWatchlist(film.id)).called(1);
       verifyNever(mockProvider.removeFilmFromWatchlist(film));
-
     });
 
     testWidgets('tries to remove film to watchlist', (tester) async {
       WatchlistProvider mockProvider = MockWatchlistProvider();
       when(mockProvider.getWatchlist()).thenReturn(Watchlist([film.id]));
-      when(mockProvider.removeFilmFromWatchlist(film)).thenAnswer((realInvocation) async {
+      when(mockProvider.removeFilmFromWatchlist(film))
+          .thenAnswer((realInvocation) async {
         when(mockProvider.getWatchlist()).thenReturn(Watchlist([]));
       });
       await mockNetworkImagesFor(() => tester.pumpWidget(MultiProvider(
@@ -207,6 +207,5 @@ void main() {
       verify(mockProvider.removeFilmFromWatchlist(film)).called(1);
       verifyNever(mockProvider.addFilmToWatchlist(film.id));
     });
-
-    });
+  });
 }

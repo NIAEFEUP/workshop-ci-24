@@ -10,6 +10,7 @@ import 'package:logger/logger.dart';
 class MainLoginPage extends StatelessWidget {
   MainLoginPage({super.key});
 
+  // ignore: unused_field
   final TextEditingController _textEditingController = TextEditingController();
 
   void Function() googleButtonHandler(BuildContext context) {
@@ -65,19 +66,22 @@ class MainLoginPage extends StatelessWidget {
                 Row(children: [
                   Expanded(
                       child: LoginButton(
-                          pressedFunction: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPage()));
-                          },
-                          childWidget: const Text("Sign In"),
-                          relevant: false,
-                          key: const Key("signinButton"),)),
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 10),),
+                    pressedFunction: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    },
+                    childWidget: const Text("Sign In"),
+                    relevant: false,
+                    key: const Key("signinButton"),
+                  )),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                  ),
                   Expanded(
                       child: LoginButton(
                           pressedFunction: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>  RegisterPage()));
+                                builder: (context) => RegisterPage()));
                           },
                           childWidget: const Text("Sign Up"))),
                 ]),
@@ -89,7 +93,7 @@ class MainLoginPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
                 LoginButton(
                     pressedFunction: googleButtonHandler(context),
-                    childWidget: Row(children: const [
+                    childWidget: const Row(children: [
                       Padding(
                           padding:
                               EdgeInsetsDirectional.symmetric(horizontal: 5)),
@@ -102,7 +106,7 @@ class MainLoginPage extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
                 LoginButton(
                     pressedFunction: githubButtonHandler(context),
-                    childWidget: Row(children: const[
+                    childWidget: const Row(children: [
                       Padding(
                           padding:
                               EdgeInsetsDirectional.symmetric(horizontal: 5)),

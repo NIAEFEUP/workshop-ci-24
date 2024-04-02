@@ -23,7 +23,8 @@ class DiscussionListPage extends GeneralPage {
                   backgroundColor: const Color(0xFFD7CCCF),
                   onPressed: () {
                     navService.push(MaterialPageRoute(
-                        builder: (context) => DiscussionAddPage(filmId, DiscussionListHeader(filmTitle))));
+                        builder: (context) => DiscussionAddPage(
+                            filmId, DiscussionListHeader(filmTitle))));
                   },
                   child: const FaIcon(
                     FontAwesomeIcons.plus,
@@ -36,7 +37,6 @@ class DiscussionListPage extends GeneralPage {
 }
 
 class DiscussionListPageState extends GeneralPageState<DiscussionListPage> {
-
   Widget buildDiscussionCards(BuildContext context,
       UnmodifiableSetView<Discussion> discussions, String filmTitle) {
     List<Widget> cards = [];

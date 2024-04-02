@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cinescope/view/pages/main_login_page.dart';
 import 'package:cinescope/view/general_page.dart';
 
 class ProfilePage extends GeneralPage {
-  const ProfilePage({Key? key});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -50,8 +49,12 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
             ),
           ),
           const Spacer(),
-          _isEditing? const SizedBox() :
-          IconButton(onPressed: _startEditing, icon: const Icon(Icons.edit),key:const Key("editProfile")),
+          _isEditing
+              ? const SizedBox()
+              : IconButton(
+                  onPressed: _startEditing,
+                  icon: const Icon(Icons.edit),
+                  key: const Key("editProfile")),
           IconButton(
             key: const Key("logout"),
             icon: const Icon(Icons.logout),
@@ -139,7 +142,6 @@ class _ProfilePageState extends GeneralPageState<ProfilePage> {
                   style: const TextStyle(
                       fontSize: 27, fontWeight: FontWeight.bold),
                   key: const Key("name"),
-                  
                 );
         },
       ),

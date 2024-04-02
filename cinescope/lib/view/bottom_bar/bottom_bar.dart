@@ -7,7 +7,6 @@ import 'package:cinescope/view/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});

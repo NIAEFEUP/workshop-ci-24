@@ -21,12 +21,12 @@ import 'film_page_test.mocks.dart';
 )
 void main() {
   group("FilmPage", () {
-    final film =
-        Film("1", 'Inception', 'Movie', 2010, 'https://via.placeholder.com/150',
-            description: "Very nice movie",
-            cast: [],
-            duration: "200 hours",
-            rating: 10);
+    final film = Film(
+        "1", 'Inception', 'Movie', 2010, 'https://via.placeholder.com/150',
+        description: "Very nice movie",
+        cast: [],
+        duration: "200 hours",
+        rating: 10);
     testWidgets("renders correctly", (tester) async {
       WatchlistProvider mockProvider = MockWatchlistProvider();
       when(mockProvider.getWatchlist()).thenReturn(Watchlist([]));

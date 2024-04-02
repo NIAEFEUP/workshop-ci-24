@@ -1,6 +1,5 @@
 import 'package:cinescope/view/general_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MainPage extends GeneralPage {
@@ -56,9 +55,7 @@ class MainPageState extends GeneralPageState<MainPage> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                width: MediaQuery.of(context)
-                    .size
-                    .width - 70,
+                width: MediaQuery.of(context).size.width - 70,
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Color(0XFFC4C4C4),

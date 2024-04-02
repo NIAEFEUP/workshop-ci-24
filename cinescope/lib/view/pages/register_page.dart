@@ -10,9 +10,12 @@ import '../button/login_button.dart';
 class RegisterPage extends StatefulWidget {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firebaseFirestore;
-  RegisterPage({super.key, FirebaseAuth? firebaseAuth, FirebaseFirestore? firebaseFirestore})
+  RegisterPage(
+      {super.key,
+      FirebaseAuth? firebaseAuth,
+      FirebaseFirestore? firebaseFirestore})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-       _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
+        _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
   @override
   State<StatefulWidget> createState() => RegisterPageState();
@@ -30,7 +33,7 @@ class RegisterPageState extends State<RegisterPage> {
   void Function() registerButtonHandler(BuildContext context) {
     return () {
       if (_formKey.currentState!.validate()) {
-            widget._firebaseAuth
+        widget._firebaseAuth
             .createUserWithEmailAndPassword(
                 email: _textEditingControllerEmail.text,
                 password: _textEditingControllerPass.text)
@@ -59,8 +62,8 @@ class RegisterPageState extends State<RegisterPage> {
                 context: context,
                 builder: ((context) => AlertDialog(
                       title: const Text("Register failed"),
-                      content: const Text(
-                          "Something went wrong while registring"),
+                      content:
+                          const Text("Something went wrong while registring"),
                       actions: [
                         TextButton(
                             onPressed: () {
@@ -127,7 +130,6 @@ class RegisterPageState extends State<RegisterPage> {
                           focusColor: Colors.white,
                           border: OutlineInputBorder(),
                           labelText: 'Password',
-
                         ),
                         key: const Key("passwordField"),
                         validator: strongPasswordValidator,

@@ -25,5 +25,3 @@ Future<UserCredential> signInWithGitHub() async {
 
   return await FirebaseAuth.instance.signInWithProvider(githubProvider);
 }
-
-

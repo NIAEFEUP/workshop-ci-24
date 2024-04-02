@@ -8,8 +8,8 @@ class GenericDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title:  Text(title),
-      content:  Text(
+      title: Text(title),
+      content: Text(
         content,
         textScaleFactor: 1.2,
       ),

@@ -28,11 +28,10 @@ void main() {
       when(mockWatchlistProvider.lastLoaded).thenReturn(true);
 
       WatchlistProvider watchlistProvider = mockWatchlistProvider;
-      
+
       MockProfileProvider mockProfileProvider = MockProfileProvider();
 
       when(mockProfileProvider.lastLoaded).thenReturn(true);
-
 
       ProfileProvider profileProvider = mockProfileProvider;
 

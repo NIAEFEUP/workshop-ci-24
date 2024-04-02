@@ -20,7 +20,8 @@ class ProfileProvider extends RequiredProvider {
   ProfileProvider(
       {FirebaseAuth? firebaseAuth,
       FirebaseFirestore? firebaseFirestore,
-      FirebaseStorage? firebaseStorage, this.compressImages = true})
+      FirebaseStorage? firebaseStorage,
+      this.compressImages = true})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
         _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance {
@@ -118,8 +119,9 @@ class ProfileProvider extends RequiredProvider {
             .buffer
             .asUint8List();
     Uint8List compressedImage;
-    if(compressImages){
-       compressedImage = await FlutterImageCompress.compressWithList(originalImage);
+    if (compressImages) {
+      compressedImage =
+          await FlutterImageCompress.compressWithList(originalImage);
     } else {
       compressedImage = originalImage;
     }

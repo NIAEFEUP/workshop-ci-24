@@ -20,10 +20,13 @@ class GivenUserNotAuthenticated extends GivenWithWorld<FlutterWorld> {
       await FlutterDriverUtils.tap(world.driver, find.byValueKey("logout"));
       await FlutterDriverUtils.waitForFlutter(world.driver);
 
-      await FlutterDriverUtils.tap(world.driver, find.byValueKey("logoutConfirm"));
+      await FlutterDriverUtils.tap(
+          world.driver, find.byValueKey("logoutConfirm"));
       await FlutterDriverUtils.waitForFlutter(world.driver);
     } else {
-      expect(await FlutterDriverUtils.isPresent(world.driver, find.byType("MainLoginPage")),
+      expect(
+          await FlutterDriverUtils.isPresent(
+              world.driver, find.byType("MainLoginPage")),
           true,
           reason: " not in MainLoginPage");
     }

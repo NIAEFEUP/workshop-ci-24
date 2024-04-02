@@ -1,3 +1,5 @@
+// ignore_for_file: hash_and_equals
+
 class Film {
   final String id, title, type, imgUrl;
   final String? duration, description;
@@ -26,6 +28,15 @@ class Film {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Film && other.id == id && other.title == title && other.type == type && other.year == year && other.imgUrl == imgUrl && other.duration == duration && other.description == description && other.rating == rating && other.cast == cast;
+    return other is Film &&
+        other.id == id &&
+        other.title == title &&
+        other.type == type &&
+        other.year == year &&
+        other.imgUrl == imgUrl &&
+        other.duration == duration &&
+        other.description == description &&
+        other.rating == rating &&
+        other.cast == cast;
   }
 }

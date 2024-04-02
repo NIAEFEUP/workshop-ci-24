@@ -18,7 +18,6 @@ void main() {
 
       MockFirebaseStorage firebaseStorage = MockFirebaseStorage();
 
-
       TestWidgetsFlutterBinding.ensureInitialized();
       ProfileProvider profileProvider = ProfileProvider(
           firebaseAuth: mockFirebaseAuth,

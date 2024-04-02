@@ -44,7 +44,8 @@ void main() {
 
       expect(find.byType(TextField), findsNothing);
 
-      final circleAvatar = widgetTester.widget<CircleAvatar>(find.byKey(const Key("profileImage")));
+      final circleAvatar = widgetTester
+          .widget<CircleAvatar>(find.byKey(const Key("profileImage")));
 
       expect((circleAvatar.backgroundImage as MemoryImage).bytes, profileImage);
       expect(find.text(profile.name), findsOneWidget);
@@ -71,8 +72,6 @@ void main() {
 
       await widgetTester.tap(find.byKey(const Key("editProfile")));
       await widgetTester.pumpAndSettle();
-
-
     });
   });
 }

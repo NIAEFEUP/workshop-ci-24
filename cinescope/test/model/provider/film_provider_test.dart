@@ -12,21 +12,22 @@ import 'film_provider_test.mocks.dart';
 ])
 void main() {
   group("FilmProvider", () {
-
-    final film =
-        Film("1", 'Inception', 'Movie', 2010, 'https://via.placeholder.com/150',
-            description: "Very nice movie",
-            cast: [],
-            duration: "200 hours",
-            rating: 10);
+    final film = Film(
+        "1", 'Inception', 'Movie', 2010, 'https://via.placeholder.com/150',
+        description: "Very nice movie",
+        cast: [],
+        duration: "200 hours",
+        rating: 10);
     test("caches film correctly", () async {
       MockFilmDetailsScraper filmDetailsScraper = MockFilmDetailsScraper();
 
-      when(filmDetailsScraper.getFilmDetails(any)).thenAnswer((realInvocation) async {
+      when(filmDetailsScraper.getFilmDetails(any))
+          .thenAnswer((realInvocation) async {
         return film;
       });
 
-      FilmProvider filmProvider = FilmProvider(filmDetailsScraper: filmDetailsScraper);
+      FilmProvider filmProvider =
+          FilmProvider(filmDetailsScraper: filmDetailsScraper);
 
       Film receivedFilm = await filmProvider.getFilm("1");
       expect(receivedFilm.title, film.title);
@@ -35,8 +36,6 @@ void main() {
       expect(receivedFilm.title, film.title);
 
       verify(filmDetailsScraper.getFilmDetails(any)).called(1);
-
-
     });
   });
 }
